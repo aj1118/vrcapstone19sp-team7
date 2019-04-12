@@ -1,7 +1,7 @@
-## Team 7 Website
+# Weecome to Our Website!
 
-[Project Proposal](#Project-Proposal)
-[Blog](#Blog)
+* [Project Proposal](#Project-Proposal)
+* [Blog](#Blog)
 
 ## Project Proposal
 
