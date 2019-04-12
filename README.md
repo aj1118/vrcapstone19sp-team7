@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Team 7 Website
 
 You can use the [editor on GitHub](https://github.com/UWRealityLab/vrcapstone19sp-team7/edit/gh-pages/README.md) to maintain and preview the content for your website in Markdown files.
 
