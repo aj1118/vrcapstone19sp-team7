@@ -21,6 +21,8 @@ Our project is a game in which the player navigates a 3d space trying to tap blo
 
 One characteristic of the game is that the puzzles should be tailored to VR, in that they utilize the fact that the player is fully mobile within a 3d space, forcing the player to think about the ways they are moving around to hit all the objects. Another characteristic of the game is that there is no explicit tutorial, players will learn the mechanics intuitively as they progress through the game through trial and error, and then haveto remember what action will cause the different objects to dissappear.
 
+[More Detailed Description](https://docs.google.com/document/d/1Jo3nvmuVI_duQIhXEHqUwL5SbqTdinQtaDjaakaY4SA/edit?usp=sharing) Feedback is greatly appreciated! 
+
 ## Hardware Preferences
 
 1. Oculus Quest. Since our game will invovle a lot of moving around (potentially quickly or in non-traditional ways), the quest is our first choice because it is wireless so there is no danger of the player getting wrapped up in the cable.
