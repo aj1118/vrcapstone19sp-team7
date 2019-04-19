@@ -1,6 +1,7 @@
 # Welcome to Our Website!
 
 * [Project Proposal](#Project-Proposal)
+* [PRD](#PRD)
 * [Blog](#Blog)
 
 # Project Proposal
@@ -27,6 +28,9 @@ One characteristic of the game is that the puzzles should be tailored to VR, in 
 
 1. Oculus Quest. Since our game will invovle a lot of moving around (potentially quickly or in non-traditional ways), the quest is our first choice because it is wireless so there is no danger of the player getting wrapped up in the cable.
 2. Vive (other VR headset)
+
+# PRD
+Our PRD can be found [here](https://docs.google.com/document/d/122QkSjIWo0ORuT68aMuipd6LAAxZwBrRgFNYhNKyHvQ/edit?usp=sharing)
 
 # Blog
 
