@@ -9,6 +9,9 @@ public class Level : MonoBehaviour
 
     private List<PObject> allPObjects = new List<PObject>();
 
+    void Awake() {
+        gameObject.SetActive(false);
+    }
     void Start()
     {
     }
@@ -34,7 +37,8 @@ public class Level : MonoBehaviour
     public PObject AddObject() {
         // Instantiat
         PObject pObj = Instantiate(pObjectPrefab, transform.position, Quaternion.identity);
-        // pObjectPrefab.transform.parent = this.transform;
+        pObj.transform.parent = this.transform;
+        
         allPObjects.Add(pObj);
         return pObj;
     }

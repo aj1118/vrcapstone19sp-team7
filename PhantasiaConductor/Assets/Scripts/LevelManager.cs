@@ -12,8 +12,9 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         Level firstLevel = AddLevel();
-        firstLevel.AddObject().ScheduleSpawn(2);
+        firstLevel.AddObject().ScheduleSpawn(10);
         
+        firstLevel.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -32,15 +33,14 @@ public class LevelManager : MonoBehaviour
     }
 
     Level AddLevel() {
+        Debug.Log("level created");
         Level level = Instantiate(levelPrefab, transform.position, Quaternion.identity);
         level.gameObject.SetActive(false);
-        // level.transform.parent = this.transform;
+        Debug.Log("level inactive");
+        level.transform.parent = this.transform;
         return level;
     }
-
-    Level AdvanceLevel() {
-        return null;
-    }
+    
 
     public Level CurrentLevel {
         get {

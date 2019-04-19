@@ -14,4 +14,8 @@ to a component of that gameobject depending on generics
 
 objects can be disabled, enabled but not alive, or enabled and alive
 
+objects start disabled
+levelmanager enables a particular level
+PObjects can become live from certain actions
+
 consider PObjectComponent Base class

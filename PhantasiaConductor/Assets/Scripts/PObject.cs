@@ -7,10 +7,14 @@ public class PObject : MonoBehaviour
 
     public GameObject shape;
     // Start is called before the first frame update
+    bool alive;
     void Start()
     {
         shape = GameObject.CreatePrimitive(PrimitiveType.Cube);
         shape.transform.SetParent(gameObject.transform, false);
+
+        // PObjects start off dead
+        Dead();
     }
 
     // Update is called once per frame
@@ -31,10 +35,12 @@ public class PObject : MonoBehaviour
 
     public void Alive() {
         shape.GetComponent<Renderer>().enabled = true;
+        alive = true;
     }
 
     public void Dead() {
         shape.GetComponent<Renderer>().enabled = false;
+        alive = false;
     }
 
     public void ScheduleSpawn(float t) {
