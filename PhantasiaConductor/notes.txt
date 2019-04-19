@@ -1,0 +1,17 @@
+
+look into special effects in the asset store
+
+
+Listen/Broadcast events 
+
+SpawnConditions
+
+PObjects need a spawn condition, a destroy condition, visual component,
+and many will have an interactable component
+
+instantiate always instantiates a gameobject, but then it can return a reference
+to a component of that gameobject depending on generics
+
+objects can be disabled, enabled but not alive, or enabled and alive
+
+consider PObjectComponent Base class
