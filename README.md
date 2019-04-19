@@ -1,4 +1,4 @@
-# Weecome to Our Website!
+# Welcome to Our Website!
 
 * [Project Proposal](#Project-Proposal)
 * [Blog](#Blog)
