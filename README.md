@@ -34,6 +34,35 @@ Our PRD can be found [here](https://docs.google.com/document/d/122QkSjIWo0ORuT68
 
 # Blog
 
+# Week 2
+
+April 19, 2019
+
+## What Everyone Did
+This week, as a collective team we further developed our idea for creating a Psychedlelic Symphony experience in VR by creating a rough outline of gameplay, setting, possible interactions, and possible visual designs.
+We gathered these ideas into a narrative and explanation for Tuesday's pitch to the class, accompanied by a colorful slide deck proposing our awesome project.
+On Thursday, we all contributed to writing up our PRD, established milestones for the rest of the quarter, and set up initial individual roles within the team to address different project aspects. All of this was [listed in the PRD](https://docs.google.com/document/d/122QkSjIWo0ORuT68aMuipd6LAAxZwBrRgFNYhNKyHvQ/edit?usp=sharing), along with the specific assets we already picked out. 
+AJ found a simple, yet elegant concert hall as the setting for our game, while Hannah and Ben explored additional assets and discussed game mechanics.
+
+## Code Update
+Team members continued to individually work on and looked at Unity/Steam tutorials to prepare for future project work. 
+PJ set up the [basicc repo](https://github.com/UWRealityLab/vrcapstone19sp-team7/tree/master/PhantasiaConductor) for the project and began work on the first puzzle implementation.
+
+## Idea Update
+At the end of last week, we decided on creating an interactive, rich symphony experience, similar to Fantasia 2000, but with minigame puzzles to explore rhythms and melodies in the various orchestral sections of a song.
+The project is currently titled "Psychedelic Symphony"
+
+## Plan for Next Week
+* Flesh out details on the mechanics, structure, and other features of the puzzles
+* Select a song and start working on syncing audio snippets to objects/motions
+* Begin coding the first puzzle for the rhythm section
+* Set up basic environment and layout with boxes to mark objects to interact with
+* Pick out initial basic assets and explore the physics effects on shapes
+
+## Blocking Issues
+Determining the right song and brainstorming puzzles to work in the context of the melody and rhythm will require much creativity.
+It is currently unknown how difficult it will be to coordinate the audio, motions/interactions, and visuals at the minimal/most basic level, but it could require quite a bit of debugging and coding directed at precision of timing.
+
 # Week 1
 
 April 12, 2019
