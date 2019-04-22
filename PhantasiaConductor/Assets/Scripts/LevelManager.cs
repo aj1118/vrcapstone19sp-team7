@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,13 +9,26 @@ public class LevelManager : MonoBehaviour
     // private List<Level> levels;
 
     private Level currentLevel;
+
+    void Awake() {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Level firstLevel = AddLevel();
-        firstLevel.AddObject().ScheduleSpawn(10);
+        // Level firstLevel = AddLevel();
+        // firstLevel.AddObject().ScheduleSpawn(10);
+        SceneManager.LoadScene("PercussionScene", LoadSceneMode.Single);
+        Invoke("SwitchScene", 3);
+    }
+
+    void SwitchScene() {
         
-        firstLevel.gameObject.SetActive(true);
+        Debug.Log(SceneManager.GetActiveScene().name);
+        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        // go = Instantiate(go, transform.position, Quaternion.identity);
+        // go.transform.SetParent(null);
     }
 
     // Update is called once per frame

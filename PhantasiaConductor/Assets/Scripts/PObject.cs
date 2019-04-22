@@ -5,13 +5,20 @@ using UnityEngine;
 public class PObject : MonoBehaviour
 {
 
-    public GameObject shape;
+    // public GameObject shape;
     // Start is called before the first frame update
-    bool alive;
+    private bool alive;
     void Start()
     {
-        shape = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        shape.transform.SetParent(gameObject.transform, false);
+        // shape = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        // shape.transform.SetParent(gameObject.transform, false);
+
+        // Hittable hit = shape.AddComponent<Hittable>();
+        // hit.hitsBeforeBroadcast = 3;
+        
+        // Material mat = shape.GetComponent<Renderer>().material;
+        // mat.shader.
+        gameObject.layer = 1 << 2;
 
         // PObjects start off dead
         Dead();
@@ -24,9 +31,6 @@ public class PObject : MonoBehaviour
     }
 
     public void BeginLevel() {
-        if (GetComponent<ScheduledSpawn>() != null) {
-
-        }
     }
 
     public void EndLevel() {
@@ -34,21 +38,28 @@ public class PObject : MonoBehaviour
     }
 
     public void Alive() {
-        shape.GetComponent<Renderer>().enabled = true;
+        GetComponent<Renderer>().enabled = true;
+        // shape.GetComponent<Renderer>().enabled = true;
         alive = true;
+
+        SendMessage("OnAlive", SendMessageOptions.DontRequireReceiver);
     }
 
     public void Dead() {
-        shape.GetComponent<Renderer>().enabled = false;
+        // shape.GetComponent<Renderer>().enabled = false;
+        GetComponent<Renderer>().enabled = false;
         alive = false;
+
+        SendMessage("OnDead", SendMessageOptions.DontRequireReceiver);
     }
 
-    public void ScheduleSpawn(float t) {
-        if (GetComponent<ScheduledSpawn>() == null) {
-            ScheduledSpawn comp = gameObject.AddComponent<ScheduledSpawn>();
-            comp.creationTime = t;
-        } else {
-            GetComponent<ScheduledSpawn>().creationTime = t;
-        }
+    public bool IsAlive() {
+        return alive;
     }
+
+    public void OnSceneActive() {
+        Debug.Log("broadcast received");
+    }
+
+
 }

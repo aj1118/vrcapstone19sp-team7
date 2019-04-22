@@ -19,3 +19,36 @@ levelmanager enables a particular level
 PObjects can become live from certain actions
 
 consider PObjectComponent Base class
+
+
+Components
+
+ScheduledSpawn
+- time
+
+ScheduledDestroy
+- time
+
+Blink
+- rate
+
+Track AudioClip?
+"contains the track, does not play it"
+- track
+
+TrackControl
+"decides when to play"
+- play rate
+
+HitComponent
+"broadcasts message when it is hit"
+- private hitCounter
+- hitsBeforeBroadcast
+disable/enable
+
+
+TimerComponent
+"broadcast at certain scheduled times"
+
+Opacity
+- opacity
