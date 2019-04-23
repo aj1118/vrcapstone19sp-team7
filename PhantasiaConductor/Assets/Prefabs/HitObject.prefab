@@ -112,7 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4deabe986a78c42880ae0c185a1fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinkTime: 2
+  blinkOnTime: 1
+  blinkOffTime: 1
 --- !u!114 &5453616291278403647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,7 +136,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5453616291278403646}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
