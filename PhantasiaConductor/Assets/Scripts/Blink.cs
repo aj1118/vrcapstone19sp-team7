@@ -6,7 +6,10 @@ public class Blink : MonoBehaviour
 {
 
     // public float blinkTime;
+    
+    // time before blinking on
     public float blinkOnTime = 1;
+    // time before blinking off
     public float blinkOffTime = 1;
     // Start is called before the first frame update
 
