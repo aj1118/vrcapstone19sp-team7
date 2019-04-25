@@ -54,3 +54,6 @@ Opacity
 - opacity
 
 Open VR
+
+components can be referenced as objects from the scene or as components of a game object,
+but in the latter case we cannot change their names
