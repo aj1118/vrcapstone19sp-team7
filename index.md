@@ -1,5 +1,6 @@
 ---
 title: Welcome!
+feature_text: <h2> Psychedelic Symphony </h2>
 image: /assets/subdued-music.png
 ---
 
