@@ -62,7 +62,8 @@ encoding: utf-8 # Make sure the encoding is right
 lang: en-GB # Set the site language
 title: "Psychedelic Symphony" # Site name or title, also used in jekyll-seo-tag
 description: "Combining music, color, and VR in a new and exciting way" # Site description and default description, also used in jekyll-seo-tag
-baseurl: ""
+url: https://uwrealitylab.github.io"
+baseurl: "vrcapstone19sp-team7/"
 # service_worker: false # Will turn off the service worker if set to false
 css_inline: true # Will insert all styles into a single <style> block in the <head> element and remove the style <link> reference
 
