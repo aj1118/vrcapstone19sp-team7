@@ -1,5 +1,6 @@
 ---
 title: Welcome!
+feature_tex: 
 feature_image: "https://github.com/UWRealityLab/vrcapstone19sp-team7/blob/gh-pages/assets/subdued-music.png?raw=true"
 ---
 
