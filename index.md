@@ -1,6 +1,5 @@
 ---
 title: Welcome!
-feature_text: <h2> Psychedelic Symphony </h2>
 feature_image: "https://photos.app.goo.gl/RQwAbikqN2aVRV186"
 ---
 
