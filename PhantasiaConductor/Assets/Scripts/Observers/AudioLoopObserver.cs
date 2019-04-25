@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class AudioLoopObserver : PObserver
 {
-    public AudioSource source;
+    public AudioSourceLoop source;
 
     public void Start() {
-        source.loop = true;
     }
 
     public override void Run(string e) {
-        source.Play();
+        source.PlayLooping();
     }
 }
