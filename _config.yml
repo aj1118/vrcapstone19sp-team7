@@ -52,7 +52,7 @@ collections:
   posts:
     title: Blog # Needed for Siteleaf
     output: true
-    feature_image: '/assets/colorful-music.PNG'
+    feature_image: "https://github.com/UWRealityLab/vrcapstone19sp-team7/blob/gh-pages/assets/colorful-music.png?raw=true"
 
 # 6. Jekyll collections settings
 defaults:
