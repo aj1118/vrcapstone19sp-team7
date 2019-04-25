@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hittable : MonoBehaviour
 {
+    public SubscriberList notifyList;
 
     public uint hitsBeforeBroadcast;
     private uint hitCount;
@@ -26,8 +27,11 @@ public class Hittable : MonoBehaviour
             if (hitCount % hitsBeforeBroadcast == 0)
             {
                 BroadcastMessage("ObjectHit", SendMessageOptions.DontRequireReceiver);
+
+                if (notifyList != null) {
+                    notifyList.NotifyAll("ObjectHit");
+                }
             }
-            Debug.Log("i was hit " + hitCount + " times");
         }
 
     }
