@@ -56,32 +56,18 @@ collections:
 
 # 6. Jekyll collections settings
 defaults:
-  -
-    scope:
-      path: ""
-    values:
-      image: "/assets/default-social-image.png" # Default image for sharing
 
 # 7. Site settings
 encoding: utf-8 # Make sure the encoding is right
 lang: en-GB # Set the site language
 title: "Psychedelic Symphony" # Site name or title, also used in jekyll-seo-tag
-logo: "/assets/logos/logo.svg" # Site logo, also used in jekyll-seo-tag
 description: "Combining music, color, and VR in a new and exciting way" # Site description and default description, also used in jekyll-seo-tag
 baseurl: ""
 # service_worker: false # Will turn off the service worker if set to false
 css_inline: true # Will insert all styles into a single <style> block in the <head> element and remove the style <link> reference
 
 # 8. Site favicons & manifest icons
-favicons: # Favicons are also used in the manifest file. Syntax is 'size: path'
-  16: '/assets/logos/logo@16px.png'
-  32: '/assets/logos/logo@32px.png'
-  96: '/assets/logos/logo@96px.png'
-  120: '/assets/logos/logo@120px.png'
-  144: '/assets/logos/logo@144px.png'
-  180: '/assets/logos/logo@180px.png'
-  512: '/assets/logos/logo@512px.png'
-  1024: '/assets/logos/logo@1024px.png'
+
 
 # 9. Site navigation
 navigation_header:
@@ -91,4 +77,4 @@ navigation_header:
   Team: /members/
 
 navigation_footer:
-  View our Github repo at https://github.com/UWRealityLab/vrcapstone19sp-team7/tree/master
+  Github repo: https://github.com/UWRealityLab/vrcapstone19sp-team7/tree/master
