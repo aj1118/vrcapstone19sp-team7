@@ -1,0 +1,26 @@
+---
+title: Week 3
+---
+
+## What Everyone Did
+To meet our goals for this week's milestones, we developed more concrete roles and specific tasks for each team member to implement. AJ researched existing projects, code repositories, and assets for various aspects of the project, which she began compiling
+a [master asset list](https://docs.google.com/document/d/1_3IYWaWWG4hmq9tFfhHMzJMrd16TxXhU1g3Dy5EdnlQ). Ben created a midi audio file demo with Ableton software that plays various percussion/beat instruments on a loop. He also explored methods for audio synchronization and Unity integration for puzzle game mechanics.
+PJ worked on building event and class systems for customizable timing and interactions to implement the first percussion-themed puzzle section of the game. Hannah researched ways to teleport and transport the player between sections and also put great effort into organizing and beautifying the team website.
+As a team, we brainstormed percussion puzzle mechanics, object and class code frameworks, and overall environment layout.
+
+## Code Update
+Team members continued to individually work on and looked at Unity/Steam tutorials to prepare for future project work. 
+
+## Idea Update
+
+
+## Plan for Next Week
+* Flesh out details on the mechanics and structure of the percussion puzzle to build a working demo
+* Continue working on syncing audio snippets to objects/motions
+* Keep coding the first puzzle for the rhythm section
+* Set up basic environment and layout with boxes to mark objects to interact with based on AJ's sketch
+* Continue to research assets and existing projects
+
+## Blocking Issues
+Figuring out how to synchronize all objects (puzzle shapes) and events with audio and with player actions at the same time is proving to be a complex issue.
+It will be crucial for us to build an organized code hierarchy for this to make seamless puzzles.
