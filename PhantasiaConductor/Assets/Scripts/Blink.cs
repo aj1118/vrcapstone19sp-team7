@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Blink : MonoBehaviour
 {
-    
-    // time before blinking on
-    public float blinkOnTime = 1;
+
+    // time before blinking on, if negative, then it will not automatically blink
+    public float blinkOnTime = -1;
     // time before blinking off
-    public float blinkOffTime = 1;
+    public float blinkOffTime = -1;
 
     public SubscriberList onSubscribers;
     public SubscriberList offSubscribers;
@@ -19,34 +19,54 @@ public class Blink : MonoBehaviour
 
     private const string onEventName = "OnBlinkOn";
     private const string offEventName = "OnBlinkOff";
-    void BlinkOn() {
-        blinkState = true;
-        
+    void BlinkOn()
+    {
         Invoke("BlinkOff", blinkOffTime);
+        BlinkOnOnce();
+    }
+
+    void BlinkOff()
+    {
+        Invoke("BlinkOn", blinkOnTime);
+        BlinkOffOnce();
+    }
+
+    public void BlinkOnOnce()
+    {
+        blinkState = true;
+
         PObject pObj = gameObject.GetComponent<PObject>();
         pObj.Alive();
         pObj.SendMessage(onEventName, SendMessageOptions.DontRequireReceiver);
 
-        if (onSubscribers != null) {
+        if (onSubscribers != null)
+        {
             onSubscribers.NotifyAll(onEventName);
         }
     }
 
-    void BlinkOff() {
+    public void BlinkOffOnce()
+    {
         blinkState = false;
-        
-        Invoke("BlinkOn", blinkOnTime);
+
         PObject pObj = gameObject.GetComponent<PObject>();
         pObj.Dead();
         pObj.SendMessage(offEventName, SendMessageOptions.DontRequireReceiver);
 
-        if (offSubscribers != null) {
+        if (offSubscribers != null)
+        {
             offSubscribers.NotifyAll(offEventName);
         }
+
     }
 
     void OnEnable()
     {
-        Invoke("BlinkOn", blinkOnTime);
+        if (blinkOnTime >= 0)
+        {
+            Invoke("BlinkOn", blinkOnTime);
+        }
     }
+
+
 }

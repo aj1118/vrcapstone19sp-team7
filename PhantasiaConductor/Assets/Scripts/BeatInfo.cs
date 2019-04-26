@@ -11,6 +11,6 @@ public class BeatInfo : MonoBehaviour
 
     public float timePerBeat = 1f;
 
-    public bool[] bitArray = {true, false, true, false, false, false, true, true};
+    public bool[] bitArray = {true, false, true, false, false, false, true, false};
 
 }
