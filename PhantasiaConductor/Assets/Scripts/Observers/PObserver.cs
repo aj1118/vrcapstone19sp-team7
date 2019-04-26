@@ -14,11 +14,7 @@ public abstract class PObserver : MonoBehaviour
             subscribers.Add(g);
         }
     }
-
-    public void TriggerObserver(string e)
-    {
-        Debug.Log("triggered " + e);
-    }
+    
 
     public abstract void Run(string e); 
 }

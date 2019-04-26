@@ -5,6 +5,7 @@ using UnityEngine;
 public class Hittable : MonoBehaviour
 {
     public SubscriberList notifyList;
+    public SubscriberList hitOnceNotifyList;
 
     public uint hitsBeforeBroadcast;
     private uint hitCount;
@@ -14,7 +15,8 @@ public class Hittable : MonoBehaviour
 
     void Start()
     {
-        if (GetComponent<PObject>() != null) {
+        if (GetComponent<PObject>() != null)
+        {
             canHit = GetComponent<PObject>().IsAlive();
         }
     }
@@ -28,9 +30,15 @@ public class Hittable : MonoBehaviour
             {
                 BroadcastMessage("ObjectHit", SendMessageOptions.DontRequireReceiver);
 
-                if (notifyList != null) {
+                if (notifyList != null)
+                {
                     notifyList.NotifyAll("ObjectHit");
                 }
+            }
+
+            if (hitOnceNotifyList != null)
+            {
+                hitOnceNotifyList.NotifyAll("ObjectHitOnce");
             }
         }
 
