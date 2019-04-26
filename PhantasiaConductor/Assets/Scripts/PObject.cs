@@ -10,12 +10,6 @@ public class PObject : MonoBehaviour
     private bool alive;
     void Start()
     {
-        // shape = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        // shape.transform.SetParent(gameObject.transform, false);
-
-        // Hittable hit = shape.AddComponent<Hittable>();
-        // hit.hitsBeforeBroadcast = 3;
-        
         // Material mat = shape.GetComponent<Renderer>().material;
         // mat.shader.
         gameObject.layer = 1 << 2;
