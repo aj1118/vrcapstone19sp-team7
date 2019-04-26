@@ -34,6 +34,35 @@ Our PRD can be found [here](https://docs.google.com/document/d/122QkSjIWo0ORuT68
 
 # Blog
 
+
+# Week 3
+
+April 26, 2019
+
+## What Everyone Did
+To meet our goals for this week's milestones, we developed more concrete roles and specific tasks for each team member to implement. AJ researched existing projects, code repositories, and assets for various aspects of the project, which she began compiling
+a [master asset list](https://docs.google.com/document/d/1_3IYWaWWG4hmq9tFfhHMzJMrd16TxXhU1g3Dy5EdnlQ). Ben created a midi audio file demo with Ableton software that plays various percussion/beat instruments on a loop. He also explored methods for audio synchronization and Unity integration for puzzle game mechanics.
+PJ worked on building event and class systems for customizable timing and interactions to implement the first percussion-themed puzzle section of the game. Hannah researched ways to teleport and transport the player between sections and also put great effort into organizing and beautifying the team website.
+As a team, we brainstormed percussion puzzle mechanics, object and class code frameworks, and overall environment layout.
+
+## Code Update
+PJ wrote up a basic interaction demo with sphere objects and an event framework coordinated by subscriber-like scripts. Hannah prototyped and tested a teleportation methods for players to shift between puzzles/environment spots. The team as a whole is actively testing various object interaction and animation effects for the percussion puzzle and basic environmental layout that we organized/iterated on via git version control. 
+
+## Idea Update
+We realized while starting to build the project base that custom midi-built rhythm files sounded good with many existing melodies/popular songs overlaid, which enables us to customize rhythms to our percussion puzzle mechanic based around hitting interactable/moving shapes. Moving forward, we plan to leverage this control for more creative puzzle movements and iterative/connected interactions that build on each other as the player progresses through the song (and puzzles). 
+
+## Plan for Next Week
+* Finalize details of the percussion puzzle mechanics to build a working demo
+* Continue working on syncing audio snippets to objects/motions, get a smooth system working for a basic percussion demo
+* Establish a good code framework/class hierarchy for the start of game and first puzzle
+* Set up basic environment and layout with boxes to mark objects to interact with based on AJ's sketch
+* Continue to research assets and existing projects for code tips and other inspiration
+
+## Blocking Issues
+Figuring out how to synchronize all objects (puzzle shapes) and events with audio and with player actions at the same time is proving to be a complex issue.
+It will be crucial for us to build an organized code hierarchy for this to make seamless puzzles.
+
+
 # Week 2
 
 April 19, 2019
