@@ -11,6 +11,16 @@ public class AudioSourceLoop : MonoBehaviour
 
     public bool isPlaying;
 
+    public bool playOnStart;
+
+    void Start()
+    {
+        if (playOnStart)
+        {
+            PlayLooping();
+        }
+    }
+
     public void PlayOnce()
     {
         source.Play();
@@ -18,25 +28,44 @@ public class AudioSourceLoop : MonoBehaviour
 
     public void PlayLooping()
     {
+        isPlaying = true;
         InvokeRepeating("PlayOnce", 0, delay);
     }
 
     public void StopLooping()
     {
+        isPlaying = false;
         CancelInvoke();
     }
 
-    public float Delay {
-        get {
+    public float Delay
+    {
+        get
+        {
             return delay;
         }
 
-        set {
-            if (isPlaying) {
+        set
+        {
+            if (isPlaying)
+            {
                 StopLooping();
                 delay = value;
                 PlayLooping();
             }
+        }
+    }
+
+    public float volume
+    {
+        get
+        {
+            return source.volume;
+        }
+
+        set
+        {
+            source.volume = value;
         }
     }
 }

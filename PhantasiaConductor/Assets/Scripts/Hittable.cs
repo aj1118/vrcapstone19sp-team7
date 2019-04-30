@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Hittable : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class Hittable : MonoBehaviour
     public SubscriberList hitOnceNotifyList;
 
     public uint hitsBeforeBroadcast;
+
+    public UnityEvent onHitOnce;
+    public UnityEvent onHitMultiple;
+    
     private uint hitCount;
 
     public bool broadcastUp = false;
@@ -28,18 +33,21 @@ public class Hittable : MonoBehaviour
             hitCount++;
             if (hitCount % hitsBeforeBroadcast == 0)
             {
-                BroadcastMessage("ObjectHit", SendMessageOptions.DontRequireReceiver);
+                // BroadcastMessage("ObjectHit", SendMessageOptions.DontRequireReceiver);
 
-                if (notifyList != null)
-                {
-                    notifyList.NotifyAll("ObjectHit");
-                }
+                // if (notifyList != null)
+                // {
+                //     notifyList.NotifyAll("ObjectHit");
+                // }
+                onHitMultiple.Invoke();
             }
 
-            if (hitOnceNotifyList != null)
-            {
-                hitOnceNotifyList.NotifyAll("ObjectHitOnce");
-            }
+            // if (hitOnceNotifyList != null)
+            // {
+            //     hitOnceNotifyList.NotifyAll("ObjectHitOnce");
+            // }
+
+            onHitOnce.Invoke();
         }
 
     }
