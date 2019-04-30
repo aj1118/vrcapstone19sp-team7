@@ -76,7 +76,7 @@ public class Hittable : MonoBehaviour
         }
         set
         {
-            Debug.Log("set?");
+            // Debug.Log("set?");
             canHit = value;
         }
     }
