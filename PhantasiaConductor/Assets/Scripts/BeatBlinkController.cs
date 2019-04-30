@@ -8,12 +8,13 @@ public class BeatBlinkController : MonoBehaviour
     private Blink blink;
     public BeatInfo beatInfo;
 
+    public bool wrapAround = true;
+
     private int beatCount = 0;
 
     void Awake()
     {
         blink = GetComponent<Blink>();
-        Debug.Log(blink);
     }
 
     void OnEnable()
@@ -30,7 +31,6 @@ public class BeatBlinkController : MonoBehaviour
     void RunBeat()
     {
         bool bitValue = beatInfo.bitArray[beatCount];
-        Debug.Log(bitValue);
 
         if (bitValue)
         {
@@ -42,6 +42,10 @@ public class BeatBlinkController : MonoBehaviour
         }
 
         beatCount++;
+
+        if (wrapAround) {
+            beatCount = beatCount % beatInfo.bitArray.Length;
+        }
 
         if (beatCount < beatInfo.bitArray.Length)
         {

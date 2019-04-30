@@ -1,23 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Hittable : MonoBehaviour
 {
-    public SubscriberList notifyList;
-    public SubscriberList hitOnceNotifyList;
-
     public uint hitsBeforeBroadcast;
-    private uint hitCount;
+
+    public UnityEvent onHitOnce;
+    public UnityEvent onHitMultiple;
+
+    public bool canHit;
 
     public bool broadcastUp = false;
-    private bool canHit = true;
+
+    private uint hitCount;
+
 
     void Start()
     {
         if (GetComponent<PObject>() != null)
         {
-            canHit = GetComponent<PObject>().IsAlive();
+            // canHit = GetComponent<PObject>().IsAlive();
         }
     }
 
@@ -25,32 +29,55 @@ public class Hittable : MonoBehaviour
     {
         if (canHit)
         {
+
             hitCount++;
             if (hitCount % hitsBeforeBroadcast == 0)
             {
-                BroadcastMessage("ObjectHit", SendMessageOptions.DontRequireReceiver);
+                // BroadcastMessage("ObjectHit", SendMessageOptions.DontRequireReceiver);
 
-                if (notifyList != null)
-                {
-                    notifyList.NotifyAll("ObjectHit");
-                }
+                // if (notifyList != null)
+                // {
+                //     notifyList.NotifyAll("ObjectHit");
+                // }
+                onHitMultiple.Invoke();
             }
 
-            if (hitOnceNotifyList != null)
-            {
-                hitOnceNotifyList.NotifyAll("ObjectHitOnce");
-            }
+            // if (hitOnceNotifyList != null)
+            // {
+            //     hitOnceNotifyList.NotifyAll("ObjectHitOnce");
+            // }
+
+            onHitOnce.Invoke();
         }
 
     }
 
     void OnAlive()
     {
-        canHit = true;
+        // CanHit = true;
     }
 
     void OnDead()
     {
+        // CanHit = false;
+    }
+
+    public void StopHit()
+    {
         canHit = false;
+    }
+
+    public bool CanHit
+    {
+
+        get
+        {
+            return canHit;
+        }
+        set
+        {
+            Debug.Log("set?");
+            canHit = value;
+        }
     }
 }
