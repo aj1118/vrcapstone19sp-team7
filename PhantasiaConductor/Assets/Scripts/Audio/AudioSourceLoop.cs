@@ -6,10 +6,22 @@ public class AudioSourceLoop : MonoBehaviour
 {
     public AudioSource source;
 
-    public float delay = 0;
-    // Start is called before the first frame update
+    public float delay = 1;
+    public float startDelay = 0f;
+
 
     public bool isPlaying;
+
+    public bool playOnStart;
+
+    
+    void Start()
+    {
+        if (playOnStart)
+        {
+            Invoke("PlayLooping", startDelay);
+        }
+    }
 
     public void PlayOnce()
     {
@@ -18,25 +30,44 @@ public class AudioSourceLoop : MonoBehaviour
 
     public void PlayLooping()
     {
+        isPlaying = true;
         InvokeRepeating("PlayOnce", 0, delay);
     }
 
     public void StopLooping()
     {
+        isPlaying = false;
         CancelInvoke();
     }
 
-    public float Delay {
-        get {
+    public float Delay
+    {
+        get
+        {
             return delay;
         }
 
-        set {
-            if (isPlaying) {
+        set
+        {
+            if (isPlaying)
+            {
                 StopLooping();
                 delay = value;
                 PlayLooping();
             }
+        }
+    }
+
+    public float volume
+    {
+        get
+        {
+            return source.volume;
+        }
+
+        set
+        {
+            source.volume = value;
         }
     }
 }
