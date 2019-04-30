@@ -5,18 +5,17 @@ using UnityEngine.Events;
 
 public class Hittable : MonoBehaviour
 {
-    public SubscriberList notifyList;
-    public SubscriberList hitOnceNotifyList;
-
     public uint hitsBeforeBroadcast;
 
     public UnityEvent onHitOnce;
     public UnityEvent onHitMultiple;
-    
-    private uint hitCount;
+
+    public bool canHit;
 
     public bool broadcastUp = false;
-    private bool canHit = true;
+
+    private uint hitCount;
+
 
     void Start()
     {
@@ -28,8 +27,10 @@ public class Hittable : MonoBehaviour
 
     void OnHit()
     {
+        Debug.Log(canHit);
         if (canHit)
         {
+
             hitCount++;
             if (hitCount % hitsBeforeBroadcast == 0)
             {
@@ -60,5 +61,24 @@ public class Hittable : MonoBehaviour
     void OnDead()
     {
         canHit = false;
+    }
+
+    public void StopHit()
+    {
+        Debug.Log("INVOKED");
+        canHit = false;
+
+    }
+
+    public bool CanHit {
+        
+        get {
+            return canHit;
+        }
+
+        set {
+            Debug.Log("SET TO " + value);
+            canHit = value;
+        }
     }
 }
