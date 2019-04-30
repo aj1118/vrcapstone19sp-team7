@@ -178,20 +178,55 @@ PrefabInstance:
       propertyPath: m_Name
       value: PercussionObject
       objectReference: {fileID: 0}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1691954643}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitMultiple.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1152528746}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitMultiple.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_volume
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_CanHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7415198}
     - target: {fileID: 2650772616342878899, guid: a83f6222010a0c3448d5733675e060c1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.78
+      value: 1.84
       objectReference: {fileID: 0}
     - target: {fileID: 2650772616342878899, guid: a83f6222010a0c3448d5733675e060c1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.487
+      value: -0.71
       objectReference: {fileID: 0}
     - target: {fileID: 2650772616342878899, guid: a83f6222010a0c3448d5733675e060c1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.317
+      value: 1.63
       objectReference: {fileID: 0}
     - target: {fileID: 2650772616342878899, guid: a83f6222010a0c3448d5733675e060c1,
         type: 3}
@@ -232,26 +267,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
-        type: 3}
-      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1691954643}
-    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
-        type: 3}
-      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
-        type: 3}
-      propertyPath: onHitMultiple.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1152528746}
-    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
-        type: 3}
-      propertyPath: onHitMultiple.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_volume
       objectReference: {fileID: 0}
     - target: {fileID: 2650772616342878898, guid: a83f6222010a0c3448d5733675e060c1,
         type: 3}
@@ -1220,6 +1235,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: HitObject
       objectReference: {fileID: 0}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2020205498}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitMultiple.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1041707259}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 735220046}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_CanHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
+        type: 3}
+      propertyPath: canHit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2650772616342878899, guid: a83f6222010a0c3448d5733675e060c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1228,12 +1273,12 @@ PrefabInstance:
     - target: {fileID: 2650772616342878899, guid: a83f6222010a0c3448d5733675e060c1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.09
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 2650772616342878899, guid: a83f6222010a0c3448d5733675e060c1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.48
+      value: 1.66
       objectReference: {fileID: 0}
     - target: {fileID: 2650772616342878899, guid: a83f6222010a0c3448d5733675e060c1,
         type: 3}
@@ -1274,36 +1319,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
-        type: 3}
-      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2020205498}
-    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
-        type: 3}
-      propertyPath: onHitMultiple.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1041707259}
-    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
-        type: 3}
-      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 735220046}
-    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
-        type: 3}
-      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: set_CanHit
-      objectReference: {fileID: 0}
-    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
-        type: 3}
-      propertyPath: onHitOnce.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2650772616342878893, guid: a83f6222010a0c3448d5733675e060c1,
-        type: 3}
-      propertyPath: canHit
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2650772616342878898, guid: a83f6222010a0c3448d5733675e060c1,
         type: 3}
