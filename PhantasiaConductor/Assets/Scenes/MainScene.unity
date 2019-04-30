@@ -865,5 +865,5 @@ MonoBehaviour:
   rightHand: {fileID: 847042251}
   playerCamera: {fileID: 860388451}
   speed: 2
-  fadeDuration: 2
+  fadeDuration: 1
   teleportEnabled: 1
