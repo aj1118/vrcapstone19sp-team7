@@ -6,18 +6,20 @@ public class AudioSourceLoop : MonoBehaviour
 {
     public AudioSource source;
 
-    public float delay = 0;
-    // Start is called before the first frame update
+    public float delay = 1;
+    public float startDelay = 0f;
+
 
     public bool isPlaying;
 
     public bool playOnStart;
 
+    
     void Start()
     {
         if (playOnStart)
         {
-            PlayLooping();
+            Invoke("PlayLooping", startDelay);
         }
     }
 

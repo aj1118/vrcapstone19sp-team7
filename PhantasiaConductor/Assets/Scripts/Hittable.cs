@@ -21,13 +21,12 @@ public class Hittable : MonoBehaviour
     {
         if (GetComponent<PObject>() != null)
         {
-            canHit = GetComponent<PObject>().IsAlive();
+            // canHit = GetComponent<PObject>().IsAlive();
         }
     }
 
     void OnHit()
     {
-        Debug.Log(canHit);
         if (canHit)
         {
 
@@ -55,29 +54,29 @@ public class Hittable : MonoBehaviour
 
     void OnAlive()
     {
-        canHit = true;
+        // CanHit = true;
     }
 
     void OnDead()
     {
-        canHit = false;
+        // CanHit = false;
     }
 
     public void StopHit()
     {
-        Debug.Log("INVOKED");
         canHit = false;
-
     }
 
-    public bool CanHit {
-        
-        get {
+    public bool CanHit
+    {
+
+        get
+        {
             return canHit;
         }
-
-        set {
-            Debug.Log("SET TO " + value);
+        set
+        {
+            Debug.Log("set?");
             canHit = value;
         }
     }
