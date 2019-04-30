@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Blink : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class Blink : MonoBehaviour
 
     public SubscriberList onSubscribers;
     public SubscriberList offSubscribers;
+
+    public UnityEvent onBlinkOn;
+    public UnityEvent onBlinkOff;
+    
     // Start is called before the first frame update
 
     // true is on, false is off
