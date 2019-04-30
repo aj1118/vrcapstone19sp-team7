@@ -11,12 +11,8 @@ public class Blink : MonoBehaviour
     // time before blinking off
     public float blinkOffTime = -1;
 
-    public SubscriberList onSubscribers;
-    public SubscriberList offSubscribers;
-
     public UnityEvent onBlinkOn;
     public UnityEvent onBlinkOff;
-    
     // Start is called before the first frame update
 
     // true is on, false is off
@@ -42,12 +38,9 @@ public class Blink : MonoBehaviour
 
         PObject pObj = gameObject.GetComponent<PObject>();
         pObj.Alive();
-        pObj.SendMessage(onEventName, SendMessageOptions.DontRequireReceiver);
+        onBlinkOn.Invoke();
+        // pObj.SendMessage(onEventName, SendMessageOptions.DontRequireReceiver);
 
-        if (onSubscribers != null)
-        {
-            onSubscribers.NotifyAll(onEventName);
-        }
     }
 
     public void BlinkOffOnce()
@@ -56,13 +49,8 @@ public class Blink : MonoBehaviour
 
         PObject pObj = gameObject.GetComponent<PObject>();
         pObj.Dead();
-        pObj.SendMessage(offEventName, SendMessageOptions.DontRequireReceiver);
-
-        if (offSubscribers != null)
-        {
-            offSubscribers.NotifyAll(offEventName);
-        }
-
+        onBlinkOff.Invoke();
+        // pObj.SendMessage(offEventName, SendMessageOptions.DontRequireReceiver);
     }
 
     void OnEnable()
