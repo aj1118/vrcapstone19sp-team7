@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioSourceLoop : MonoBehaviour
 {
     public AudioSource source;
+    public BeatInfo beatInfo;
 
     public float delay = 1;
     public float startDelay = 0f;
@@ -14,7 +15,8 @@ public class AudioSourceLoop : MonoBehaviour
 
     public bool playOnStart;
 
-    
+    private int beatIndex = 0;
+
     void Start()
     {
         if (playOnStart)
@@ -31,7 +33,20 @@ public class AudioSourceLoop : MonoBehaviour
     public void PlayLooping()
     {
         isPlaying = true;
-        InvokeRepeating("PlayOnce", 0, delay);
+
+        if (beatInfo == null)
+        {
+            InvokeRepeating("PlayOnce", 0, delay);
+        }
+        else
+        {
+            bool shouldPlay = beatInfo.bitArray[beatIndex];
+            if (shouldPlay) {
+                PlayOnce();
+            }
+            beatIndex = (beatIndex + 1) % beatInfo.numBeats;
+            Invoke("PlayLooping", beatInfo.timePerBeat);
+        }
     }
 
     public void StopLooping()

@@ -28,7 +28,7 @@ public class ScheduledSpawn : MonoBehaviour
     }
 
     void OnEnable() {
-        Debug.Log("scheduled spawn enabled");
+        // Debug.Log("scheduled spawn enabled");
     }
 
 
