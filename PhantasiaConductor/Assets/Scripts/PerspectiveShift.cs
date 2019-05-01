@@ -62,11 +62,12 @@ namespace Valve.VR.InteractionSystem
             RaycastHit hit;
             Ray ray = new Ray(hand.transform.position, hand.transform.rotation * transform.forward);
 
-            if (hand.noSteamVRFallbackCamera == null)
+            if (hand.noSteamVRFallbackCamera != null)
             {
                 ray = playerCamera.ScreenPointToRay(Input.mousePosition);
             }
-
+            
+            Debug.Log(Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 2)));
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 2))) {
                 if (string.Equals(hit.collider.tag, "teleportDest"))
                 {
@@ -101,7 +102,7 @@ namespace Valve.VR.InteractionSystem
 
         private bool WasTeleportButtonReleased(Hand hand)
         {
-            if (hand.noSteamVRFallbackCamera == null)
+            if (hand.noSteamVRFallbackCamera != null)
             {
                 return Input.GetKeyUp(KeyCode.T);
             }
