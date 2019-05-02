@@ -13,10 +13,18 @@ public class Blink : MonoBehaviour
 
     public UnityEvent onBlinkOn;
     public UnityEvent onBlinkOff;
-    // Start is called before the first frame update
+    
+    // when blink change change state on/off
+    public UnityEvent onBlinkOnToOff;
+    public UnityEvent onBlinkOffToOn;
+
+    // invoked every blink tick
+    public UnityEvent onBlinkTick;
+
+    
 
     // true is on, false is off
-    private bool blinkState;
+    private bool blinkState = true;
 
     private const string onEventName = "OnBlinkOn";
     private const string offEventName = "OnBlinkOff";
@@ -34,6 +42,9 @@ public class Blink : MonoBehaviour
 
     public void BlinkOnOnce()
     {
+        if (!blinkState) {
+            onBlinkOffToOn.Invoke();
+        }
         blinkState = true;
 
         PObject pObj = gameObject.GetComponent<PObject>();
@@ -45,6 +56,9 @@ public class Blink : MonoBehaviour
 
     public void BlinkOffOnce()
     {
+        if (blinkState) {
+            onBlinkOnToOff.Invoke();
+        }
         blinkState = false;
 
         PObject pObj = gameObject.GetComponent<PObject>();
