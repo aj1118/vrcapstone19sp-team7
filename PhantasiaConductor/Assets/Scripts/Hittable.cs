@@ -14,7 +14,12 @@ public class Hittable : MonoBehaviour
 
     public bool broadcastUp = false;
 
+    // keep track of hit counts
     private uint hitCount;
+
+    // use hit flag to keep track of hits
+    private bool hitFlag;
+
 
 
     void Start()
@@ -29,27 +34,17 @@ public class Hittable : MonoBehaviour
     {
         if (canHit)
         {
-
             hitCount++;
             if (hitCount % hitsBeforeBroadcast == 0)
             {
                 // BroadcastMessage("ObjectHit", SendMessageOptions.DontRequireReceiver);
-
-                // if (notifyList != null)
-                // {
-                //     notifyList.NotifyAll("ObjectHit");
-                // }
                 onHitMultiple.Invoke();
             }
 
-            // if (hitOnceNotifyList != null)
-            // {
-            //     hitOnceNotifyList.NotifyAll("ObjectHitOnce");
-            // }
-
             onHitOnce.Invoke();
+            
+            HitFlag = true;
         }
-
     }
 
     void OnAlive()
@@ -78,6 +73,36 @@ public class Hittable : MonoBehaviour
         {
             // Debug.Log("set?");
             canHit = value;
+        }
+    }
+
+    // Resets the hit count if the hitflag is not set
+    public void ResetIfHitFlagNotSet() {
+        if (!HitFlag) {
+            HitCount = 0;
+        }
+    }
+
+    public bool HitFlag
+    {
+        get
+        {
+            return hitFlag;
+        }
+
+        set
+        {
+            hitFlag = value;
+        }
+    }
+
+    public uint HitCount {
+        get {
+            return hitCount;
+        }
+
+        set {
+            hitCount = value;
         }
     }
 }
