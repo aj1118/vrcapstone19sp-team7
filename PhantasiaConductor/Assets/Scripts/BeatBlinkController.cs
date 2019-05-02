@@ -14,12 +14,11 @@ public class BeatBlinkController : MonoBehaviour
 
     void Awake()
     {
-        
+        blink = GetComponent<Blink>();
     }
 
     void OnEnable()
     {
-        blink = GetComponent<Blink>();
         RunBeat();
     }
 

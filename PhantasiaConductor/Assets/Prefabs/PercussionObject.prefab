@@ -19,7 +19,10 @@ GameObject:
   - component: {fileID: 2650772616180529047}
   - component: {fileID: 2650772616180529045}
   - component: {fileID: 2650772616180529044}
+<<<<<<< HEAD
   - component: {fileID: 8073996765972161886}
+=======
+>>>>>>> 795ce6dfb4008dd641bf1a6707fb7058f68cb171
   m_Layer: 0
   m_Name: PercussionObject
   m_TagString: Untagged
@@ -37,9 +40,13 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.09, z: 4.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
+<<<<<<< HEAD
   m_Children:
   - {fileID: 6796974583503482460}
   - {fileID: 1319927343066351249}
+=======
+  m_Children: []
+>>>>>>> 795ce6dfb4008dd641bf1a6707fb7058f68cb171
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -186,6 +193,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+<<<<<<< HEAD
   onBlinkOnToOff:
     m_PersistentCalls:
       m_Calls: []
@@ -201,6 +209,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+=======
+>>>>>>> 795ce6dfb4008dd641bf1a6707fb7058f68cb171
 --- !u!114 &2650772616342878894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyDelay: 0
+<<<<<<< HEAD
 --- !u!114 &8073996765972161886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,3 +553,5 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+=======
+>>>>>>> 795ce6dfb4008dd641bf1a6707fb7058f68cb171
