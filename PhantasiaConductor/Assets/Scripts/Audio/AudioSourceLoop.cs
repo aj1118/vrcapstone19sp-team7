@@ -36,11 +36,14 @@ public class AudioSourceLoop : MonoBehaviour
 
         if (beatInfo == null)
         {
+            Debug.Log("beat info does not exists");
             InvokeRepeating("PlayOnce", 0, delay);
         }
         else
         {
+            Debug.Log("beat info exists");
             bool shouldPlay = beatInfo.bitArray[beatIndex];
+            Debug.Log(shouldPlay);
             if (shouldPlay) {
                 PlayOnce();
             }
