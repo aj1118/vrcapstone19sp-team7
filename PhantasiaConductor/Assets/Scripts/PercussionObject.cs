@@ -9,11 +9,11 @@ public class PercussionObject : MonoBehaviour
 
     private BeatBlinkController beatBlinkController;
 
-    private AudioSource audioSource;
+    private AudioSource hitSource;
 
-    private AudioSource audioSourceLoop;
+    private AudioSource loopSource;
 
-    private AudioSourceLoop audioLoop;
+    private AudioSourceLoop audioSourceLoop;
 
     private Hittable hittable;
 
@@ -23,18 +23,18 @@ public class PercussionObject : MonoBehaviour
     {
         beatBlinkController = GetComponent<BeatBlinkController>();
     
-        audioSource = transform.parent.transform.Find("AudioSource").GetComponent<AudioSource>();
-        audioSourceLoop = transform.parent.transform.Find("AudioSourceLoop").GetComponent<AudioSource>();
-        audioLoop = transform.parent.transform.Find("AudioLoop").GetComponent<AudioSourceLoop>();
+        hitSource = transform.parent.transform.Find("HitSource").GetComponent<AudioSource>();
+        audioSourceLoop = transform.parent.transform.Find("AudioSourceLoop").GetComponent<AudioSourceLoop>();
+        loopSource = transform.parent.transform.Find("LoopSource").GetComponent<AudioSource>();
 
-        audioSource.clip = audioClip;
-        audioSourceLoop.clip = audioClip;
+        hitSource.clip = audioClip;
+        loopSource.clip = audioClip;
 
         hittable = GetComponent<Hittable>();
         beatInfo = transform.parent.transform.Find("BeatInfo").GetComponent<BeatInfo>();
 
-        audioLoop.beatInfo = beatInfo;
-        audioLoop.source = audioSourceLoop;
+        audioSourceLoop.beatInfo = beatInfo;
+        audioSourceLoop.source = loopSource;
 
         beatBlinkController.beatInfo = beatInfo;
     }
