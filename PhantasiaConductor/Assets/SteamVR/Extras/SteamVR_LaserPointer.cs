@@ -11,7 +11,7 @@ namespace Valve.VR.Extras
         //public SteamVR_Action_Boolean interactWithUI = SteamVR_Input.__actions_default_in_InteractUI;
         public SteamVR_Action_Boolean interactWithUI = SteamVR_Input.GetBooleanAction("InteractUI");
 
-        public bool active = true;
+        public bool active;
         public Color color;
         public float thickness = 0.002f;
         public Color clickColor = Color.green;
@@ -91,10 +91,16 @@ namespace Valve.VR.Extras
         
         private void Update()
         {
+            if (active != isActive)
+            {
+                isActive = active;
+                this.transform.GetChild(0).gameObject.SetActive(isActive);
+                pointer.SetActive(isActive);
+            }
+
             if (!isActive)
             {
-                isActive = true;
-                this.transform.GetChild(0).gameObject.SetActive(true);
+                return;
             }
 
             float dist = 100f;

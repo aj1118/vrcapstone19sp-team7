@@ -47,13 +47,16 @@ namespace Valve.VR.InteractionSystem
                 }
             }
 
-            else if (teleportEnabled && WasTeleportButtonReleased(leftHand))
+            else if (teleportEnabled)
             {
-                teleport(leftHand);
-            }
-            else if (teleportEnabled && WasTeleportButtonReleased(rightHand))
-            {
-                teleport(rightHand);
+                if (WasTeleportButtonReleased(leftHand))
+                {
+                    teleport(leftHand);
+                }
+                else if (WasTeleportButtonReleased(rightHand))
+                {
+                    teleport(rightHand);
+                }
             }
         }
 
@@ -66,15 +69,16 @@ namespace Valve.VR.InteractionSystem
             {
                 ray = playerCamera.ScreenPointToRay(Input.mousePosition);
             }
-            
-            Debug.Log(Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 2)));
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 2))) {
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 2)))
+            {
                 if (string.Equals(hit.collider.tag, "teleportDest"))
                 {
                     Debug.Log("hit");
 
                     teleporting = true;
                     target = hit.collider.gameObject;
+                    Debug.Log(hit.collider.gameObject.name);
 
                     float step = speed * Time.deltaTime;
                     transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
@@ -109,18 +113,6 @@ namespace Valve.VR.InteractionSystem
             else
             {
                 return teleportAction.GetStateUp(hand.handType);
-            }
-        }
-
-        private bool IsTeleportButtonDown(Hand hand)
-        {
-            if (hand.noSteamVRFallbackCamera != null)
-            {
-                return Input.GetKey(KeyCode.T);
-            }
-            else
-            {
-                return teleportAction.GetState(hand.handType);
             }
         }
     }
