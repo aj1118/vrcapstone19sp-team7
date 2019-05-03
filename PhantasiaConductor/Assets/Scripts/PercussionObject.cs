@@ -22,16 +22,16 @@ public class PercussionObject : MonoBehaviour
     void Awake()
     {
         beatBlinkController = GetComponent<BeatBlinkController>();
-
-        audioSource = transform.Find("AudioSource").GetComponent<AudioSource>();
-        audioSourceLoop = transform.Find("AudioSourceLoop").GetComponent<AudioSource>();
-        audioLoop = transform.Find("AudioLoop").GetComponent<AudioSourceLoop>();
+    
+        audioSource = transform.parent.transform.Find("AudioSource").GetComponent<AudioSource>();
+        audioSourceLoop = transform.parent.transform.Find("AudioSourceLoop").GetComponent<AudioSource>();
+        audioLoop = transform.parent.transform.Find("AudioLoop").GetComponent<AudioSourceLoop>();
 
         audioSource.clip = audioClip;
         audioSourceLoop.clip = audioClip;
 
         hittable = GetComponent<Hittable>();
-        beatInfo = GetComponent<BeatInfo>();
+        beatInfo = transform.parent.transform.Find("BeatInfo").GetComponent<BeatInfo>();
 
         audioLoop.beatInfo = beatInfo;
         audioLoop.source = audioSourceLoop;
