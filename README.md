@@ -41,12 +41,12 @@ April 26, 2019
 
 ## What Everyone Did
 To meet our goals for this week's milestones, we developed more concrete roles and specific tasks for each team member to implement. AJ researched existing projects, code repositories, and assets for various aspects of the project, which she began compiling
-a [master asset list](https://docs.google.com/document/d/1_3IYWaWWG4hmq9tFfhHMzJMrd16TxXhU1g3Dy5EdnlQ). Ben created a midi audio file demo with Ableton software that plays various percussion/beat instruments on a loop. He also explored methods for audio synchronization and Unity integration for puzzle game mechanics.
+a [master asset list](https://docs.google.com/document/d/1_3IYWaWWG4hmq9tFfhHMzJMrd16TxXhU1g3Dy5EdnlQ). Ben created a midi audio file demo with Ableton software that plays various percussion/beat instruments on a loop (https://drive.google.com/drive/folders/1QHs407v-NYH_wAqhVDwVMt2hlqjtu7EC). He also explored methods for audio synchronization and worked on object animation.
 PJ worked on building event and class systems for customizable timing and interactions to implement the first percussion-themed puzzle section of the game. Hannah researched ways to teleport and transport the player between sections and also put great effort into organizing and beautifying the team website.
 As a team, we brainstormed percussion puzzle mechanics, object and class code frameworks, and overall environment layout.
 
 ## Code Update
-PJ wrote up a basic interaction demo with sphere objects and an event framework coordinated by subscriber-like scripts. Hannah prototyped and tested a teleportation methods for players to shift between puzzles/environment spots. The team as a whole is actively testing various object interaction and animation effects for the percussion puzzle and basic environmental layout that we organized/iterated on via git version control. 
+PJ wrote up a basic interaction demo with sphere objects and an event framework coordinated by subscriber-like scripts. Hannah prototyped and tested a teleportation methods for players to shift between puzzles/environment spots. Ben wrote a basic system to test synchronizing looping audio between multiple components, with adjustable speed and methods for enabling/disabling multiple tracks.  The team as a whole is actively testing various object interaction and animation effects for the percussion puzzle and basic environmental layout that we organized/iterated on via git version control. 
 
 ## Idea Update
 We realized while starting to build the project base that custom midi-built rhythm files sounded good with many existing melodies/popular songs overlaid, which enables us to customize rhythms to our percussion puzzle mechanic based around hitting interactable/moving shapes. Moving forward, we plan to leverage this control for more creative puzzle movements and iterative/connected interactions that build on each other as the player progresses through the song (and puzzles). 
