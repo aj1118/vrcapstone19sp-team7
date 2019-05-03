@@ -27,7 +27,7 @@ public class Flock : MonoBehaviour
 
     public float spawnRadius = 10;
 
-    public float neighborRadius = 2;
+    public float neighborRadius = 3;
 
     public float velocityVariation = 0.5f;
 
