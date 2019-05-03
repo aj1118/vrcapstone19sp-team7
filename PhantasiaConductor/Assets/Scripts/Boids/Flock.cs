@@ -18,9 +18,12 @@ public class Flock : MonoBehaviour
     public GameObject chasee;
 
     public Vector3 flockCenter;
+    public Vector3 flockAlignment;
 
     // public Vector3 flockVelocity;
-    public float flockVelocity = 6.0f;
+    // public float flockVelocity = 6.0f;
+
+    public float flockSpeed = 6.0f;
 
     public float spawnRadius = 10;
 
@@ -33,6 +36,8 @@ public class Flock : MonoBehaviour
     public LayerMask searchLayer;
 
     private List<Boid> boids = new List<Boid>();
+
+    private Vector3 targetAlignment;
 
 
 
@@ -59,19 +64,28 @@ public class Flock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Vector3 center = Vector3.zero;
+
+        Vector3 center = Vector3.zero;
+        Vector3 alignment = Vector3.zero;
         // Vector3 velocity = Vector3.zero;
 
-        // foreach (Boid boid in boids)
-        // {
-        //     center += boid.transform.localPosition;
-        //     velocity += boid.rigidBody.velocity;
-        // }
+        // update center of mass
+        foreach (Boid boid in boids)
+        {
+            // center += boid.transform.localPosition;
+            center += boid.transform.position;
+            alignment += boid.transform.forward;
+            // velocity += boid.rigidBody.velocity;
+        }
 
-        // center /= flockSize;
+        var avg = 1.0f / flockSize;
+        center /= flockSize;
+        alignment /= flockSize;
         // velocity /= flockSize;
 
-        // flockCenter = center;
+        flockCenter = center;
+        flockAlignment = alignment;
         // flockVelocity = velocity;
+        // transform.localPosition = flockCenter;
     }
 }
