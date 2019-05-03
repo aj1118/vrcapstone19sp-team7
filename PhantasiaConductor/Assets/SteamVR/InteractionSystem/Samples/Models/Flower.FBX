@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ; FBX 7.3.0 project file
 ; Copyright (C) 1997-2010 Autodesk Inc. and/or its licensors.
 ; All rights reserved.
@@ -410,3 +411,8 @@ Takes:  {
 		ReferenceTime: 0,153953860000
 	}
 }
+=======
+version https://git-lfs.github.com/spec/v1
+oid sha256:4e07b943d892787aa16ba770c2b81041fc1cd13725bda91d977029893da5be7d
+size 104471
+>>>>>>> 795ce6dfb4008dd641bf1a6707fb7058f68cb171
