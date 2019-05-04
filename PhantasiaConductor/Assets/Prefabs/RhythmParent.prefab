@@ -74,7 +74,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2421413794154763841}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.599, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1714766202605959495}
@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2421413794170871678}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.599, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1714766202605959495}
@@ -319,10 +319,10 @@ GameObject:
   - component: {fileID: 908537772269869812}
   - component: {fileID: 3783139912800977422}
   - component: {fileID: 810776213317901262}
-  - component: {fileID: 6482425669591580586}
   - component: {fileID: 8666481540026569008}
   - component: {fileID: 8511594085099991550}
   - component: {fileID: 5605145439435445707}
+  - component: {fileID: 1301661783}
   m_Layer: 0
   m_Name: RhythmObject
   m_TagString: Untagged
@@ -338,7 +338,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5605145439435445703}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.599, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1714766202605959495}
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675f1f4fd68e8354fb787896c4b5bd73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 042549e34d2f3df4cac27fb7c43e5cd7, type: 3}
+  audioClip: {fileID: 8300000, guid: 4be81b0018f96384a93838c307d62a56, type: 3}
 --- !u!114 &5605145439435445701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +424,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  anim: {fileID: 0}
   canHit: 0
   broadcastUp: 0
 --- !u!23 &7793390075119463934
@@ -510,20 +511,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   creationTime: 0
   elapsedTime: 0
---- !u!114 &6482425669591580586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5605145439435445703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 173911f675552604b86fdfff53361525, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beatInfo: {fileID: 8615102722194774919}
-  wrapAround: 1
 --- !u!114 &8666481540026569008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,6 +621,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beatInfo: {fileID: 8615102722194774919}
   wrapAround: 1
+--- !u!95 &1301661783
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5605145439435445703}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f163dd7591521d649b61563d6016037e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7728000566945804249
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +665,7 @@ Transform:
   m_GameObject: {fileID: 7728000566945804249}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.519, y: 0.15899998, z: 4.48}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4026090742114099901}
   - {fileID: 2421413794154763840}
@@ -715,6 +721,6 @@ MonoBehaviour:
   numBeats: 8
   hittableWindowBefore: 0
   hittableWindowAfter: 0
-  timePerBeat: 1
-  bitArray: 0100010001000100
+  timePerBeat: 0.5
+  bitArray: 0101010101010101
   noteArray: 0100000000000000010000000000000000000000000000000100000000000000
