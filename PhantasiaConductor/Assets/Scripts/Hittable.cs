@@ -9,6 +9,7 @@ public class Hittable : MonoBehaviour
 
     public UnityEvent onHitOnce;
     public UnityEvent onHitMultiple;
+    public Animator anim;
 
     public bool canHit;
 
@@ -24,6 +25,7 @@ public class Hittable : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         if (GetComponent<PObject>() != null)
         {
             // canHit = GetComponent<PObject>().IsAlive();
@@ -32,6 +34,7 @@ public class Hittable : MonoBehaviour
 
     void OnHit()
     {
+        anim.Play("Bounce");
         if (canHit)
         {
             hitCount++;
