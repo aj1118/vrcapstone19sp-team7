@@ -50,7 +50,7 @@ public class Flock : MonoBehaviour
         }
     }
 
-    void SpawnBoid()
+    Boid SpawnBoid()
     {
         Vector3 pos = transform.position + Random.insideUnitSphere * 10;
         Quaternion rot = Quaternion.Slerp(transform.rotation, Random.rotation, 0.3f);
@@ -59,6 +59,8 @@ public class Flock : MonoBehaviour
         boid.transform.position = pos;
         boids.Add(boid);
         boid.SetFlock(this);
+
+        return boid;
     }
 
     // Update is called once per frame
@@ -87,5 +89,13 @@ public class Flock : MonoBehaviour
         flockAlignment = alignment;
         // flockVelocity = velocity;
         // transform.localPosition = flockCenter;
+    }
+
+    public void AddBoid(Vector3 pos)
+    {
+        Boid boid = SpawnBoid();
+        flockSize++;
+        boid.transform.position = pos;
+        // boid.transform.parent = transform;
     }
 }

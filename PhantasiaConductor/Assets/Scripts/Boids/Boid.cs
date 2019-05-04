@@ -85,6 +85,7 @@ public class Boid : MonoBehaviour
 
         var nearbyBoids = Physics.OverlapSphere(currentPos, flock.neighborRadius, flock.searchLayer);
 
+        // no need for custom case
         if (false)
         // if (nearbyBoids.Length == 1)
         {
