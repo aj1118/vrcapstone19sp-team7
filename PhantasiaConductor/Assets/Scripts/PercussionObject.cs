@@ -5,7 +5,6 @@ using UnityEngine;
 public class PercussionObject : MonoBehaviour
 {
     public AudioClip audioClip;
-    public AudioClip audioClip;
     // Start is called before the first frame update
 
     private BeatBlinkController beatBlinkController;
