@@ -16,15 +16,20 @@ namespace Valve.VR.InteractionSystem
         public float fadeDuration;
         public bool teleportEnabled;
 
+        // to prevent motion sickness
+        public GameObject motionOverlay; 
+
         private bool teleporting;
 
         private GameObject target;
+
 
         // Start is called before the first frame update
         void Start()
         {
             teleporting = false;
             target = null;
+            
         }
 
         // Update is called once per frame
@@ -38,11 +43,17 @@ namespace Valve.VR.InteractionSystem
                     StartCoroutine(FadeRotation());
 
                     teleporting = false;
+                    motionOverlay.SetActive(false);
                 }
                 else // still moving
                 {
                     float step = speed * Time.deltaTime;
                     transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+                    
+                    Debug.Log(playerCamera.transform.forward);
+                    Vector3 overlayPos = playerCamera.transform.forward * 2 + playerCamera.transform.position;
+
+                    motionOverlay.transform.position = overlayPos;
 
                 }
             }
@@ -77,6 +88,7 @@ namespace Valve.VR.InteractionSystem
                     Debug.Log("hit");
 
                     teleporting = true;
+                    motionOverlay.SetActive(true);
                     target = hit.collider.gameObject;
                     Debug.Log(hit.collider.gameObject.name);
 

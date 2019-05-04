@@ -24,11 +24,7 @@ namespace Valve.VR.InteractionSystem
         // [EnumFlags]
         // public Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.
         // Start is called before the first frame update
-        void Start()
-        {
 
-
-        }
 
         // Update is called once per frame
         void Update()
@@ -57,7 +53,7 @@ namespace Valve.VR.InteractionSystem
                 if (!interactedLastFrameRight && Physics.Raycast(rightHand.transform.position, rightHand.transform.rotation * transform.forward, out hit, Mathf.Infinity, ~(1 << 2)))
                 {
                     GameObject obj = hit.collider.gameObject;
-                    hit.collider.SendMessage("OnHit");
+                    hit.collider.SendMessage("OnHit", SendMessageOptions.DontRequireReceiver);
 
                     lastInstanceIdRight = obj.GetInstanceID();
                     interactedLastFrameRight = true;

@@ -118,10 +118,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2555535886440526972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f80a42c08df39374394623f0fa05c564, type: 3}
+  m_Script: {fileID: 11500000, guid: b473c466cf9a3aa4199d5c72ba7ffb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minVelocity: 0
   maxVelocity: 0
   randomness: 0
-  rigidBody: {fileID: 5646018794318414141}
+  rigidBody: {fileID: 0}

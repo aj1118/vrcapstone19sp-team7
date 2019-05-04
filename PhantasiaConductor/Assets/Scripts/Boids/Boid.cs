@@ -14,8 +14,6 @@ public class Boid : MonoBehaviour
 
     public Rigidbody rigidBody;
 
-    private bool inited;
-
     private GameObject chasee;
 
     float noiseOffset;
@@ -34,8 +32,10 @@ public class Boid : MonoBehaviour
         // StartCoroutine("Steering");
     }
 
-    Vector3 GetSeparationVector(Transform target) {
-        var diff = transform.position - target.transform.position;
+    Vector3 GetSeparationVector(Transform target)
+    {
+        // var diff = transform.position - target.transform.position;
+        var diff = transform.position - target.position;
         var diffLen = diff.magnitude;
         var scaler = Mathf.Clamp01(1.0f - diffLen / flock.neighborRadius);
         return diff * (scaler / diffLen);
@@ -65,25 +65,50 @@ public class Boid : MonoBehaviour
     //     }
     // }
 
-    void Update() {
+    void Update()
+    {
         var currentPos = transform.position;
         var currentRot = transform.rotation;
 
         var noise = Mathf.PerlinNoise(Time.time, noiseOffset) * 2.0f - 1.0f;
-        var velocity = flock.flockVelocity * (1.0f + noise);
+        var speed = flock.flockSpeed * (1.0f + noise);
 
         var separation = Vector3.zero;
-        var alignment = flock.transform.forward;
+        // flock alignment
+        // var alignment = flock.transform.forward;
+        var alignment = chasee.transform.position - transform.position;
+        // var alignment = flock.flockAlignment;
+        // flock center of mass
         var cohesion = flock.transform.position;
+        // var cohesion = chasee.transform.position;
+        var steering = (chasee.transform.position - transform.position).normalized;
 
         var nearbyBoids = Physics.OverlapSphere(currentPos, flock.neighborRadius, flock.searchLayer);
-        foreach (var boid in nearbyBoids) {
-            if (boid.gameObject == gameObject) continue;
-            var t = boid.transform;
-            separation += GetSeparationVector(t);
-            alignment += t.forward;
-            cohesion += t.position;
+
+        if (false)
+        // if (nearbyBoids.Length == 1)
+        {
+            var t = nearbyBoids[0].transform;
+            if (Vector3.Distance(chasee.transform.position, t.position) > 25)
+            // if (Vector3.Distance(flock.transform.position, t.position) > 25)
+            {
+                // alignment = (flock.transform.position - t.position).normalized;
+                alignment = (chasee.transform.position - t.position).normalized;
+            }
+            // Debug.Log("boid is alone");
         }
+        else
+        {
+            foreach (var boid in nearbyBoids)
+            {
+                if (boid.gameObject == gameObject) continue;
+                var t = boid.transform;
+                separation += GetSeparationVector(t);
+                alignment += t.forward;
+                cohesion += t.position;
+            }
+        }
+
 
         var avg = 1.0f / nearbyBoids.Length;
         alignment *= avg;
@@ -91,13 +116,15 @@ public class Boid : MonoBehaviour
         cohesion = (cohesion - currentPos).normalized;
 
         var direction = separation + alignment + cohesion;
+        // var direction = separation + alignment + cohesion + (steering * 20);
         var rotation = Quaternion.FromToRotation(Vector3.forward, direction.normalized);
-        if (rotation != currentRot) {
+        if (rotation != currentRot)
+        {
             var ip = Mathf.Exp(-flock.rotationCoef * Time.deltaTime);
             transform.rotation = Quaternion.Slerp(rotation, currentRot, ip);
         }
 
-        transform.position = currentPos + transform.forward * (velocity * Time.deltaTime);
+        transform.position = currentPos + transform.forward * (speed * Time.deltaTime);
 
     }
 
@@ -125,7 +152,5 @@ public class Boid : MonoBehaviour
         randomness = flock.randomness;
         chasee = flock.chasee;
 
-
-        inited = true;
     }
 }
