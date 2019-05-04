@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioHandler : MonoBehaviour
-{   
+public class ControllerRemover : MonoBehaviour
+{
     // Start is called before the first frame update
     void Start()
     {
