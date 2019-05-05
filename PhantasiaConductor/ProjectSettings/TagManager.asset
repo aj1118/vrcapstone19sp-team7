@@ -6,6 +6,10 @@ TagManager:
   tags:
   - BeatObject
   - teleportDest
+  - projectile
+  - FxTemporaire
+  - t1
+  - shpere
   layers:
   - Default
   - TransparentFX
