@@ -40,6 +40,7 @@ public class BeatBlinkController : MonoBehaviour
     {
         bool nextBeat = beatInfo.beats[(beatCount + 1) % beatInfo.beats.Length];
 
+
         if (nextBeat)
         {
             Invoke("BlinkOn", timePerBeat - (hittableBefore * timePerBeat));
