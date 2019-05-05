@@ -67,12 +67,13 @@ namespace Valve.VR.InteractionSystem
             if (vertexCount > 1) {
                 var startPos = lineRenderer.GetPosition(vertexCount - 2);
                 var endPos = lineRenderer.GetPosition(vertexCount - 1);
-
-                Debug.Log(startPos);
-                Debug.Log(endPos);
+                
                 GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                BoxCollider collider = cube.AddComponent<BoxCollider>();
                 cube.transform.position = startPos;
                 cube.transform.parent = transform;
+                float length = Vector3.Distance(startPos, endPos);
+                collider.size = new Vector3(1, 1, length);
 
             }
         }
