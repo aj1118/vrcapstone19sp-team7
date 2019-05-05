@@ -23,7 +23,7 @@ public class Blink : MonoBehaviour
 
     // true is on, false is off
     private bool blinkState = true;
-
+    /*
     void BlinkOn()
     {
         Invoke("BlinkOff", blinkOffTime);
@@ -34,7 +34,7 @@ public class Blink : MonoBehaviour
     {
         Invoke("BlinkOn", blinkOnTime);
         BlinkOffOnce();
-    }
+    }*/
 
     public void BlinkOnOnce()
     {
@@ -65,11 +65,8 @@ public class Blink : MonoBehaviour
 
     void OnEnable()
     {
-        if (blinkOnTime >= 0)
-        {
-            Invoke("BlinkOn", blinkOnTime);
-        }
+        
     }
-
+    
 
 }

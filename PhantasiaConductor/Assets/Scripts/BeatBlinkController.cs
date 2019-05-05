@@ -5,17 +5,25 @@ using UnityEngine;
 public class BeatBlinkController : MonoBehaviour
 {
 
-    private Blink blink;
     public BeatInfo beatInfo;
+    private float hittableBefore;
+    private float hittableAfter;
+    private float timePerBeat;
 
     public bool wrapAround = true;
 
+    private Blink blink;
     private int beatCount = 0;
 
     void Awake()
     {
         blink = GetComponent<Blink>();
+        hittableBefore = beatInfo.hittableBefore;
+
+        hittableAfter = beatInfo.hittableBefore;
+        timePerBeat = beatInfo.timePerBeat;
     }
+
 
     void OnEnable()
     {
@@ -30,15 +38,15 @@ public class BeatBlinkController : MonoBehaviour
 
     void RunBeat()
     {
-        bool bitValue = beatInfo.beats[beatCount];
+        bool nextBeat = beatInfo.beats[(beatCount + 1) % beatInfo.beats.Length];
 
-        if (bitValue)
+        if (nextBeat)
         {
-            blink.BlinkOnOnce();
+            Invoke("BlinkOn", timePerBeat - (hittableBefore * timePerBeat));
         }
         else
         {
-            blink.BlinkOffOnce();
+            Invoke("BlinkOff", hittableAfter);
         }
 
         beatCount++;
@@ -52,6 +60,16 @@ public class BeatBlinkController : MonoBehaviour
             Invoke("RunBeat", beatInfo.timePerBeat);
         }
 
+    }
+
+    void BlinkOn()
+    {
+        blink.BlinkOnOnce();
+    }
+
+    void BlinkOff()
+    {
+        blink.BlinkOffOnce();
     }
 
 }

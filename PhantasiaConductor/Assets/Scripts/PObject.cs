@@ -37,6 +37,7 @@ public class PObject : MonoBehaviour
     public void Alive()
     {
         GetComponent<Renderer>().enabled = true;
+        Debug.Log(GetComponent<Renderer>().enabled);
         // shape.GetComponent<Renderer>().enabled = true;
         alive = true;
 
