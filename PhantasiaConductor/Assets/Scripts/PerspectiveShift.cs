@@ -62,10 +62,12 @@ namespace Valve.VR.InteractionSystem
             {
                 if (WasTeleportButtonReleased(leftHand))
                 {
+                    Debug.Log("yep");
                     teleport(leftHand);
                 }
                 else if (WasTeleportButtonReleased(rightHand))
                 {
+                    Debug.Log("also yep");
                     teleport(rightHand);
                 }
             }
@@ -83,6 +85,7 @@ namespace Valve.VR.InteractionSystem
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 2)))
             {
+                Debug.Log("hit something");
                 if (string.Equals(hit.collider.tag, "teleportDest"))
                 {
                     Debug.Log("hit");
@@ -118,6 +121,7 @@ namespace Valve.VR.InteractionSystem
 
         private bool WasTeleportButtonReleased(Hand hand)
         {
+            
             if (hand.noSteamVRFallbackCamera != null)
             {
                 return Input.GetKeyUp(KeyCode.T);
