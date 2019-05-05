@@ -6,8 +6,9 @@ public class BeatInfo : MonoBehaviour
 {
     public int numBeats = 8;
 
-    public float hittableWindowBefore = 0f;
-    public float hittableWindowAfter = 0f;
+    // Percentage of timesPerBeat
+    public float hittableBefore = 0.5f;
+    public float hittableAfter = 0.5f;
 
     public float timePerBeat = 1f;
 
