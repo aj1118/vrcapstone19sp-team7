@@ -21,13 +21,9 @@ public class Blink : MonoBehaviour
     // invoked every blink tick
     public UnityEvent onBlinkTick;
 
-    
-
     // true is on, false is off
     private bool blinkState = true;
 
-    private const string onEventName = "OnBlinkOn";
-    private const string offEventName = "OnBlinkOff";
     void BlinkOn()
     {
         Invoke("BlinkOff", blinkOffTime);
