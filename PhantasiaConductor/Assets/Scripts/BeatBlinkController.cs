@@ -30,6 +30,8 @@ public class BeatBlinkController : MonoBehaviour
 
     void RunBeat()
     {
+        Debug.Log(beatCount);
+        Debug.Log(beatInfo.beats);
         bool bitValue = beatInfo.beats[beatCount];
 
         if (bitValue)
