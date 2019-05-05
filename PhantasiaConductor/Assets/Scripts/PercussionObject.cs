@@ -20,6 +20,7 @@ public class PercussionObject : MonoBehaviour
     private Hittable hittable;
     private BeatInfo beatInfo;
 
+    // We can remove this and set values in the prefab
     void Awake()
     {
         beatBlinkController = GetComponent<BeatBlinkController>();
