@@ -30,14 +30,14 @@ public class MelodyBlink_Controller : MonoBehaviour
 
     void RunBeat()
     {
-        bool bitValue = beatInfo.bitArray[beatCount];
+        bool bitValue = beatInfo.beats[beatCount];
 
         if (bitValue)
         {
             if (!playingNote)
             {
                 blink.BlinkOnOnce();
-                if (beatInfo.noteArray[beatCount] > 1)
+                if (beatInfo.notes[beatCount] > 1)
                 {
                     playingNote = true;
                 }
@@ -53,10 +53,10 @@ public class MelodyBlink_Controller : MonoBehaviour
 
         if (wrapAround)
         {
-            beatCount = beatCount % beatInfo.bitArray.Length;
+            beatCount = beatCount % beatInfo.beats.Length;
         }
 
-        if (beatCount < beatInfo.bitArray.Length)
+        if (beatCount < beatInfo.beats.Length)
         {
             Invoke("RunBeat", beatInfo.timePerBeat);
         }

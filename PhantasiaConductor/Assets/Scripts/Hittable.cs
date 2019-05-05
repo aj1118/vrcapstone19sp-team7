@@ -34,9 +34,10 @@ public class Hittable : MonoBehaviour
 
     void OnHit()
     {
-        anim.Play("Bounce");
         if (canHit)
         {
+
+            anim.Play("Bounce");
             hitCount++;
             if (hitCount % hitsBeforeBroadcast == 0)
             {

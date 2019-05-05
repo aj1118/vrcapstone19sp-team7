@@ -40,7 +40,7 @@ public class AudioSourceLoop : MonoBehaviour
         }
         else
         {
-            bool shouldPlay = beatInfo.bitArray[beatIndex];
+            bool shouldPlay = beatInfo.beats[beatIndex];
             if (shouldPlay) {
                 PlayOnce();
             }

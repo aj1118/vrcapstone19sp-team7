@@ -4,35 +4,50 @@ using UnityEngine;
 
 public class PercussionObject : MonoBehaviour
 {
-    public AudioClip audioClip;
+
+    public AudioClip hitClip;
+    public AudioClip loopClip;
+    public Animation hitAnim;
+    public Animation loopAnim;
+    public float timePerBeat;
+    public bool[] beats;
     // Start is called before the first frame update
 
     private BeatBlinkController beatBlinkController;
-
     private AudioSource hitSource;
-
     private AudioSource loopSource;
-
     private AudioSourceLoop audioSourceLoop;
-
     private Hittable hittable;
-
     private BeatInfo beatInfo;
 
     void Awake()
     {
         beatBlinkController = GetComponent<BeatBlinkController>();
-    
+  			
         hitSource = transform.parent.transform.Find("HitSource").GetComponent<AudioSource>();
-        audioSourceLoop = transform.parent.transform.Find("AudioSourceLoop").GetComponent<AudioSourceLoop>();
         loopSource = transform.parent.transform.Find("LoopSource").GetComponent<AudioSource>();
+        //adds 3d(ish) sound
+        loopSource.spatialBlend = 1.0f;
+        hitSource.spatialBlend = 1.0f;
+        audioSourceLoop = transform.parent.transform.Find("AudioSourceLoop").GetComponent<AudioSourceLoop>();
 
-        hitSource.clip = audioClip;
-        loopSource.clip = audioClip;
+
+
+        hitSource.clip = hitClip;
+        loopSource.clip = hitClip;
+
 
         hittable = GetComponent<Hittable>();
+        uint numBeats = 0;
+        for (uint i = 0; i < beats.Length; i++) {
+        		if (beats[i]){
+        			numBeats++;
+        		}
+        }
+        hittable.hitsBeforeBroadcast = numBeats;
         beatInfo = transform.parent.transform.Find("BeatInfo").GetComponent<BeatInfo>();
-
+        beatInfo.beats = beats;
+        beatInfo.timePerBeat = timePerBeat;
         audioSourceLoop.beatInfo = beatInfo;
         audioSourceLoop.source = loopSource;
 

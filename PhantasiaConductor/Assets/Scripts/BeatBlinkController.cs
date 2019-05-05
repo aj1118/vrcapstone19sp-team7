@@ -30,7 +30,7 @@ public class BeatBlinkController : MonoBehaviour
 
     void RunBeat()
     {
-        bool bitValue = beatInfo.bitArray[beatCount];
+        bool bitValue = beatInfo.beats[beatCount];
 
         if (bitValue)
         {
@@ -44,10 +44,10 @@ public class BeatBlinkController : MonoBehaviour
         beatCount++;
 
         if (wrapAround) {
-            beatCount = beatCount % beatInfo.bitArray.Length;
+            beatCount = beatCount % beatInfo.beats.Length;
         }
 
-        if (beatCount < beatInfo.bitArray.Length)
+        if (beatCount < beatInfo.beats.Length)
         {
             Invoke("RunBeat", beatInfo.timePerBeat);
         }

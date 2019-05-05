@@ -11,7 +11,7 @@ public class BeatInfo : MonoBehaviour
 
     public float timePerBeat = 1f;
 
-    public bool[] bitArray = {true, false, true, false, false, false, true, false};
+    public bool[] beats = {true, false, true, false, false, false, true, false};
 
     // For melody and other ntoes
     // noteArray[i] indicates for how many beats note i will be playing.
@@ -19,5 +19,5 @@ public class BeatInfo : MonoBehaviour
     //  bitArray = {true, true, ...}
     //  noteArray = {2, 0, ...}
     //  Means the first note will play for 2 beats 
-    public int[] noteArray = { 1, 0, 1, 0, 0, 0, 1, 0 };
+    public int[] notes = { 1, 0, 1, 0, 0, 0, 1, 0 };
 }
