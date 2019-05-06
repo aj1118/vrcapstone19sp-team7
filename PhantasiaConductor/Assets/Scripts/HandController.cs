@@ -34,12 +34,10 @@ namespace Valve.VR.InteractionSystem
                 if (!interactedLastFrameLeft && Physics.Raycast(leftHand.transform.position, leftHand.transform.rotation * transform.forward, out hit, Mathf.Infinity, ~(1 << 2)))
                 {
                     GameObject obj = hit.collider.gameObject;
-                    hit.collider.SendMessage("OnHit");
+                    hit.collider.SendMessage("OnHit", SendMessageOptions.DontRequireReceiver);
 
                     lastInstanceIdLeft = obj.GetInstanceID();
                     interactedLastFrameLeft = true;
-                    Debug.Log("we have hit " + lastInstanceIdLeft);
-
                 }
                 else
                 {
@@ -57,8 +55,6 @@ namespace Valve.VR.InteractionSystem
 
                     lastInstanceIdRight = obj.GetInstanceID();
                     interactedLastFrameRight = true;
-                    Debug.Log("we have hit " + lastInstanceIdRight);
-
                 }
                 else
                 {

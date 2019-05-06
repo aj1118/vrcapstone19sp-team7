@@ -5,11 +5,10 @@ using UnityEngine.Events;
 
 public class Hittable : MonoBehaviour
 {
-    public uint hitsBeforeBroadcast;
+    public uint hitsToUnlock;
 
     public UnityEvent onHitOnce;
-    public UnityEvent onHitMultiple;
-    public Animator anim;
+    public UnityEvent onUnlock;
 
     public bool canHit;
 
@@ -25,7 +24,6 @@ public class Hittable : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();
         if (GetComponent<PObject>() != null)
         {
             // canHit = GetComponent<PObject>().IsAlive();
@@ -34,17 +32,16 @@ public class Hittable : MonoBehaviour
 
     void OnHit()
     {
-        anim.Play("Bounce");
         if (canHit)
         {
+            canHit = false;
             hitCount++;
-            if (hitCount % hitsBeforeBroadcast == 0)
+            onHitOnce.Invoke();
+            if (hitCount % hitsToUnlock == 0)
             {
-                // BroadcastMessage("ObjectHit", SendMessageOptions.DontRequireReceiver);
-                onHitMultiple.Invoke();
+                onUnlock.Invoke();
             }
 
-            onHitOnce.Invoke();
             
             HitFlag = true;
         }
@@ -67,14 +64,12 @@ public class Hittable : MonoBehaviour
 
     public bool CanHit
     {
-
         get
         {
             return canHit;
         }
         set
         {
-            // Debug.Log("set?");
             canHit = value;
         }
     }
