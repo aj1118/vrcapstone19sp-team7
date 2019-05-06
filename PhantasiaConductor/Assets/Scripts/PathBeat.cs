@@ -30,19 +30,22 @@ public class PathBeat : MonoBehaviour
     float timeElapsed;
     int index;
 
-    bool beganTracking = false;
+    bool beganMovement = false;
 
     void Start()
-    {        
+    {
         LoadFromFile("Assets/Paths/path.txt");
+        Debug.Log(pathLength + " " + pathTime);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) {
-            beganTracking = true;
+        if (Input.GetMouseButtonDown(0))
+        {
+            beganMovement = true;
         }
-        if (!beganTracking)
+
+        if (!beganMovement)
         {
             return;
         }
@@ -75,13 +78,30 @@ public class PathBeat : MonoBehaviour
                 timeElapsed -= t;
                 index++;
 
-                if (index >= vertexCount - 1) {
+                if (index >= vertexCount - 1)
+                {
                     onReachedEnd.Invoke();
                 }
             }
 
             timeElapsed += Time.deltaTime;
         }
+    }
+
+    public void Reset()
+    {
+        index = 0;
+        obj.transform.position = lineRenderer.GetPosition(index);
+    }
+
+    public void Begin()
+    {
+        beganMovement = true;
+    }
+
+    public void Stop()
+    {
+        beganMovement = false;
     }
 
     public void AddVertex(Vector3 pos, float t)
@@ -113,7 +133,8 @@ public class PathBeat : MonoBehaviour
         obj.transform.position = lineRenderer.GetPosition(0);
     }
 
-    public void Hello() {
+    public void Hello()
+    {
         Debug.Log("Hello " + gameObject.name);
     }
 
@@ -123,6 +144,42 @@ public class PathBeat : MonoBehaviour
         return dist / speed;
     }
 
+    public float pathLength
+    {
+        get
+        {
+            float totalDist = 0f;
+            Vector3[] ps = positions;
+            for (int i = 0; i < vertexCount - 1; i++)
+            {
+                totalDist += Vector3.Distance(ps[i], ps[i + 1]);
+            }
+
+            return totalDist;
+        }
+    }
+
+    // seconds
+    public float pathTime
+    {
+        get
+        {
+            switch (pathMode)
+            {
+                case PathMode.SPEED_CONSTANT:
+                    return pathLength / speed;
+                case PathMode.TIMED:
+                    float s = 0f;
+                    foreach (var v in timeMap)
+                    {
+                        s += v;
+                    }
+                    return s;
+                default:
+                    return 0;
+            }
+        }
+    }
 
     public Vector3[] positions
     {
