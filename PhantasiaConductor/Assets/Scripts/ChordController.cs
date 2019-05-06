@@ -10,7 +10,7 @@ public class ChordController : MonoBehaviour
     public UnityEvent onCompleteChord;
 
     private BeatInfo beatInfo;
-    private int beatIndex = 0;
+    private int beatIndex = -1;
     private int targetIndex = 0;
     private bool waitForLoop = false;
     private bool notePlaying = false;
@@ -22,7 +22,7 @@ public class ChordController : MonoBehaviour
 
     private void OnEnable()
     {
-        RunTargets();
+        RunTarget();
     }
 
     private void OnDisable()
@@ -30,11 +30,18 @@ public class ChordController : MonoBehaviour
         CancelInvoke();
     }
 
-    private void RunTargets()
+    public void NewLoop()
+    {
+        beatIndex = -1;
+        targetIndex = 0;
+        waitForLoop = false;
+    }
+
+    private void RunTarget()
     {
         if (waitForLoop)
         {
-            if (beatIndex != 0)
+            if ((beatIndex + 1) % beatInfo.beats.Length != 0)
             {
                 return;
             } else
@@ -67,7 +74,9 @@ public class ChordController : MonoBehaviour
         {
             // Stop glowing target 
             targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = false;
-            targetIndex++;
+
+            // Change to targetIndex++
+            targetIndex = (targetIndex + 1) % targets.Length;
         }
 
         // May need to move this to begining of method
