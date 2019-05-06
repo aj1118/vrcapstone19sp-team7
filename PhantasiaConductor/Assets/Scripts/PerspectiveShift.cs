@@ -62,12 +62,10 @@ namespace Valve.VR.InteractionSystem
             {
                 if (WasTeleportButtonReleased(leftHand))
                 {
-                    Debug.Log("yep");
                     teleport(leftHand);
                 }
                 else if (WasTeleportButtonReleased(rightHand))
                 {
-                    Debug.Log("also yep");
                     teleport(rightHand);
                 }
             }
