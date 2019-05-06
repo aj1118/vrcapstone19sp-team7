@@ -1,68 +1,62 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BeatBlinkController : MonoBehaviour
 {
 
-    public BeatInfo beatInfo;
-    private float hittableBefore;
-    private float hittableAfter;
-    private float timePerBeat;
-
-    public bool wrapAround = true;
-
+    public UnityEvent onHitUnlocked; // A 'hit' that plays  once a track is unlocked
     private Blink blink;
+    public BeatInfo beatInfo;
+    public bool unlocked;
     private int beatCount = 0;
 
     void Awake()
     {
+        unlocked = false;
         blink = GetComponent<Blink>();
-        hittableBefore = beatInfo.hittableBefore;
-
-        hittableAfter = beatInfo.hittableBefore;
-        timePerBeat = beatInfo.timePerBeat;
     }
 
-
-    void OnEnable()
+    public void Unlock()
     {
+        unlocked = true;
+    }
+
+    public void NewLoop()
+    {
+        beatCount = -1;
         RunBeat();
     }
-
-    void OnDisable()
-    {
-        CancelInvoke();
-    }
-
-
+ 
     void RunBeat()
     {
-        bool nextBeat = beatInfo.beats[(beatCount + 1) % beatInfo.beats.Length];
-
-
-        if (nextBeat)
+        beatCount++;
+        if (unlocked)
         {
-            Invoke("BlinkOn", timePerBeat - (hittableBefore * timePerBeat));
+            if (beatInfo.beats[beatCount])
+            {
+                onHitUnlocked.Invoke();
+            }
         }
         else
         {
-            Invoke("BlinkOff", hittableAfter);
+            bool nextBeat = beatInfo.beats[(beatCount + 1) % beatInfo.beats.Length];
+            if (nextBeat)
+            {
+                Invoke("BlinkOn", beatInfo.beatTime - (beatInfo.beatTime * beatInfo.hittableBefore));
+            }
+            else
+            {
+                Invoke("BlinkOff", beatInfo.beatTime * beatInfo.hittableAfter);
+            }
         }
-
-        beatCount++;
-
-        if (wrapAround) {
-            beatCount = beatCount % beatInfo.beats.Length;
-        }
-
-        if (beatCount < beatInfo.beats.Length)
+        if (beatCount < beatInfo.beats.Length - 1)
         {
-            Invoke("RunBeat", beatInfo.timePerBeat);
+            Invoke("RunBeat", beatInfo.beatTime);
         }
-
     }
-
+    
     void BlinkOn()
     {
         blink.BlinkOnOnce();
@@ -73,4 +67,8 @@ public class BeatBlinkController : MonoBehaviour
         blink.BlinkOffOnce();
     }
 
+    void OnDisable()
+    {
+        CancelInvoke();
+    }
 }

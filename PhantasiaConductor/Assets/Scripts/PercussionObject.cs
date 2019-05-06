@@ -7,10 +7,10 @@ public class PercussionObject : MonoBehaviour
 
     public AudioClip hitClip;
     public AudioClip loopClip;
+
+    public uint hitsToUnlock;
     public Animation hitAnim;
     public Animation loopAnim;
-    public float timePerBeat;
-    public bool[] beats;
     // Start is called before the first frame update
 
     private BeatBlinkController beatBlinkController;
@@ -31,33 +31,36 @@ public class PercussionObject : MonoBehaviour
         loopSource.spatialBlend = 1.0f;
         hitSource.spatialBlend = 1.0f;
         audioSourceLoop = transform.parent.transform.Find("AudioSourceLoop").GetComponent<AudioSourceLoop>();
-
-
-
+        
         hitSource.clip = hitClip;
         loopSource.clip = hitClip;
 
 
         hittable = GetComponent<Hittable>();
-        uint numBeats = 0;
-        for (uint i = 0; i < beats.Length; i++) {
-        		if (beats[i]){
-        			numBeats++;
-        		}
-        }
-        hittable.hitsBeforeBroadcast = numBeats;
+        
         beatInfo = transform.parent.transform.Find("BeatInfo").GetComponent<BeatInfo>();
-        beatInfo.beats = beats;
-        beatInfo.timePerBeat = timePerBeat;
+
+        hittable.hitsToUnlock = hitsToUnlock;
+        
         audioSourceLoop.beatInfo = beatInfo;
         audioSourceLoop.source = loopSource;
 
         beatBlinkController.beatInfo = beatInfo;
     }
+
+    
+
     void Start()
     {
 
 
+
+    }
+
+    public void NewLoop()
+    {
+        beatBlinkController.NewLoop();
+        loopSource.Play();
 
     }
 

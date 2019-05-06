@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class BeatInfo : MonoBehaviour
 {
-    public int numBeats = 8;
 
+    public int numBeats;
     // Percentage of timesPerBeat
-    public float hittableBefore = 0.5f;
-    public float hittableAfter = 0.5f;
+    public float hittableBefore;
+    public float hittableAfter;
 
-    public float timePerBeat = 1f;
-
+    
     public bool[] beats = {true, false, true, false, false, false, true, false};
+
+    public float beatTime;
 
     // For melody and other ntoes
     // noteArray[i] indicates for how many beats note i will be playing.
@@ -21,4 +22,10 @@ public class BeatInfo : MonoBehaviour
     //  noteArray = {2, 0, ...}
     //  Means the first note will play for 2 beats 
     public int[] notes = { 1, 0, 1, 0, 0, 0, 1, 0 };
+    private void Awake()
+    {
+        numBeats = beats.Length;
+        beatTime = MasterLoop.loopTime / beats.Length;
+    }
+
 }

@@ -45,7 +45,7 @@ public class AudioSourceLoop : MonoBehaviour
                 PlayOnce();
             }
             beatIndex = (beatIndex + 1) % beatInfo.numBeats;
-            Invoke("PlayLooping", beatInfo.timePerBeat);
+            //Invoke("PlayLooping", beatInfo.beatTime);
         }
     }
 
