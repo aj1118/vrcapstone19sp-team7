@@ -10,6 +10,8 @@ public class ChordController : MonoBehaviour
 
     public UnityEvent onCompleteChord;
 
+    public Material Glow;
+    public Material Default;
     private BeatInfo beatInfo;
     private int[] beatCount;
     private int beatIndex = -1;
@@ -67,7 +69,8 @@ public class ChordController : MonoBehaviour
                 // Start glowing target
                 if (!notePlaying)
                 {
-                    targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = true;
+                    //targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = true;
+                    targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().material = Glow;
                     notePlaying = true;
                 }
             }
@@ -76,8 +79,8 @@ public class ChordController : MonoBehaviour
                 // Stop glowing target 
                 // Invoke("GlowOff", beatInfo.beatTime * beatInfo.hittableAfter);
                 targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = false;
-
-                // incrament target index
+                targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().material = Default;
+                // increment target index
                 beatCount[targetIndex]++;
                 notePlaying = false;
   
@@ -88,7 +91,7 @@ public class ChordController : MonoBehaviour
                 }   
             }
 
-            // May need to move this to begining of method
+            // May need to move this to beginning of method
             if (targetIndex == targets.Length)
             {
                 complete = true;
@@ -101,7 +104,7 @@ public class ChordController : MonoBehaviour
         }
     }
 
-    void GlowOn()
+    /*void GlowOn()
     {
         targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = true;
     }
@@ -109,7 +112,7 @@ public class ChordController : MonoBehaviour
     void GlowOff()
     {
         targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = false;
-    }
+    }*/
     public void ResetTargets()
     {
         NewLoop();

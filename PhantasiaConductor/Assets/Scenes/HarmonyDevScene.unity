@@ -152,7 +152,7 @@ MonoBehaviour:
   onNewLoop:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9178122277628562008}
+      - m_Target: {fileID: 0}
         m_MethodName: NewLoop
         m_Mode: 1
         m_Arguments:
@@ -782,6 +782,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7098778007086014919, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: targets.Array.data[0]
+      value: 
+      objectReference: {fileID: 1422194963}
+    - target: {fileID: 7098778007086014919, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: targets.Array.data[1]
+      value: 
+      objectReference: {fileID: 787841469}
+    - target: {fileID: 7098778007086014919, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: targets.Array.data[2]
+      value: 
+      objectReference: {fileID: 1373513805}
+    - target: {fileID: 7098778007086014919, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: targets.Array.data[3]
+      value: 
+      objectReference: {fileID: 1747019976}
     - target: {fileID: 9178122275921745024, guid: 87039fb8acce1224fa688e0239918df9,
         type: 3}
       propertyPath: m_Name
@@ -1057,72 +1077,49 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: targets.Array.size
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: numBeats.Array.size
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: numTargets
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: targets.Array.data[0]
       value: 
       objectReference: {fileID: 1422194963}
-    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: targets.Array.data[1]
       value: 
       objectReference: {fileID: 787841469}
-    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: targets.Array.data[2]
       value: 
       objectReference: {fileID: 1373513805}
-    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: targets.Array.data[3]
       value: 
       objectReference: {fileID: 1747019976}
-    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: numBeats.Array.data[0]
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: numBeats.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: numBeats.Array.data[2]
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: numBeats.Array.data[3]
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87039fb8acce1224fa688e0239918df9, type: 3}
---- !u!114 &9178122277628562008 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
-    type: 3}
-  m_PrefabInstance: {fileID: 9178122277628562007}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26952fea7ac86bc40b53f0b9ee6bd176, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
