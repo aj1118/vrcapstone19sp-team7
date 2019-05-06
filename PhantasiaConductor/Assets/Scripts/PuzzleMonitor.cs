@@ -8,7 +8,7 @@ public class PuzzleMonitor : MonoBehaviour
 {
     public UnityEvent onPuzzleCompleted;
     
-    public Dictionary<UnityEvent, bool> puzzleState;
+    public Dictionary<UnityEvent, bool> puzzleState = new Dictionary<UnityEvent, bool>();
 
     float timeElapsed = 0;
     bool timerStarted = false;
@@ -52,9 +52,10 @@ public class PuzzleMonitor : MonoBehaviour
     public void Register(UnityEvent e)
     {
         puzzleState.Add(e, false);
-        e.AddListener(delegate ()
+        e.AddListener(delegate()
         {
             puzzleState[e] = true;
+            CheckCompleted();
         });
     }
 

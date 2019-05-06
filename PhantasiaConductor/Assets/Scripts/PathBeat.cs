@@ -142,9 +142,12 @@ public class PathBeat : MonoBehaviour
             AddVertex(v, 1f);
         }
 
-        obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        obj.transform.parent = transform;
-        obj.transform.position = lineRenderer.GetPosition(0);
+        if (obj == null)
+        {
+            obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            obj.transform.parent = transform;
+            obj.transform.position = lineRenderer.GetPosition(0);
+        }
     }
 
     public void Hello()
