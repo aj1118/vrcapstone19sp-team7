@@ -7,6 +7,12 @@ using System.IO;
 
 public class PathBeat : MonoBehaviour
 {
+    public enum PathMode
+    {
+        SPEED_CONSTANT,
+        TIMED
+    }
+
     public LineRenderer lineRenderer;
 
     // time spent at each part of the line
@@ -14,8 +20,14 @@ public class PathBeat : MonoBehaviour
 
     public GameObject obj;
 
+    public PathMode pathMode = PathMode.SPEED_CONSTANT;
+
+    // units of movement per sec
+    public float speed = 5;
+
     float timeElapsed;
     int index;
+
 
     void Start()
     {
@@ -28,16 +40,34 @@ public class PathBeat : MonoBehaviour
     {
         if (index < vertexCount - 1)
         {
-            var v = Vector3.Lerp(lineRenderer.GetPosition(index),
-                                 lineRenderer.GetPosition(index + 1),
-                                 timeElapsed / timeMap[index]);
+            Vector3 v;
+            float t = timeMap[index];
+            
+            switch (pathMode)
+            {
+                case PathMode.TIMED:
+                    t = timeMap[index];
+                    break;
+                case PathMode.SPEED_CONSTANT:
+                    t = CalcTimeTraverse(lineRenderer.GetPosition(index), lineRenderer.GetPosition(index + 1));
+                    break;
+
+            }
+
+            float completion = timeElapsed / t;
+
+            v = Vector3.Lerp(lineRenderer.GetPosition(index),
+                             lineRenderer.GetPosition(index + 1),
+                             completion);
+
             obj.transform.position = v;
 
-            if (timeElapsed > timeMap[index])
+            if (timeElapsed > t)
             {
-                timeElapsed -= timeMap[index];
+                timeElapsed -= t;
                 index++;
             }
+
             timeElapsed += Time.deltaTime;
         }
     }
@@ -65,6 +95,12 @@ public class PathBeat : MonoBehaviour
             var v = new Vector3(float.Parse(tokens[0]), float.Parse(tokens[1]), float.Parse(tokens[2]));
             AddVertex(v, 1f);
         }
+    }
+
+    private float CalcTimeTraverse(Vector3 start, Vector3 end)
+    {
+        var dist = Vector3.Distance(start, end);
+        return dist / speed;
     }
 
 
