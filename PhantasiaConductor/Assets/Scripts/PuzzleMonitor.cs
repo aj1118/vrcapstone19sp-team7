@@ -7,19 +7,14 @@ using UnityEngine.Events;
 public class PuzzleMonitor : MonoBehaviour
 {
     public UnityEvent onPuzzleCompleted;
-
-    public List<UnityEvent> puzzleEvents;
-
-    Dictionary<UnityEvent, bool> puzzleState;
+    
+    public Dictionary<UnityEvent, bool> puzzleState;
 
     float timeElapsed = 0;
     bool timerStarted = false;
     // Start is called before the first frame update
     void Start()
     {
-        foreach (var e in puzzleEvents) {
-            puzzleState[e] = false;
-        }
     }
 
     void Update()
@@ -65,9 +60,15 @@ public class PuzzleMonitor : MonoBehaviour
 
     public void CheckCompleted()
     {
-        if (puzzleCompleted) {
+        if (puzzleCompleted)
+        {
             onPuzzleCompleted.Invoke();
         }
+    }
+
+    public void Hello()
+    {
+        Debug.Log("Hello: " + name);
     }
 
     public bool puzzleCompleted
