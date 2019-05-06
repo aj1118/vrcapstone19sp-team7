@@ -6,22 +6,28 @@ using UnityEngine.Events;
 public class ChordController : MonoBehaviour
 {
     public GameObject[] targets;
+    public int[] numBeats;
 
     public UnityEvent onCompleteChord;
 
     private BeatInfo beatInfo;
+    private int[] beatCount;
     private int beatIndex = -1;
     private int targetIndex = 0;
     private bool waitForLoop = false;
     private bool notePlaying = false;
+    private bool complete = false;
+    private bool invokeComplete = false;
 
     private void Awake()
     {
         beatInfo = transform.Find("BeatInfo").GetComponent<BeatInfo>();
+        beatCount = new int[targets.Length];
     }
 
     private void OnEnable()
     {
+        waitForLoop = true;
         RunTarget();
     }
 
@@ -32,70 +38,81 @@ public class ChordController : MonoBehaviour
 
     public void NewLoop()
     {
-        beatIndex = -1;
-        targetIndex = 0;
-        waitForLoop = false;
+        if (!complete)
+        {
+            beatIndex = -1;
+            targetIndex = 0;
+            waitForLoop = false;
+            for (int i = 0; i < beatCount.Length; i++)
+            {
+                beatCount[i] = 0;
+            }
+        } else if (invokeComplete)
+        {
+            invokeComplete = false;
+            onCompleteChord.Invoke();
+        }
+        
     }
 
     private void RunTarget()
     {
-        if (waitForLoop)
+        if (!waitForLoop)
         {
-            if ((beatIndex + 1) % beatInfo.beats.Length != 0)
-            {
-                return;
-            } else
-            {
-                waitForLoop = false;
-            }
-        }
+            bool nextBeat = beatInfo.beats[(beatIndex + 1) % beatInfo.beats.Length];
+            beatIndex++;
 
-        Debug.Log(beatIndex);
-
-        bool nextBeat = beatInfo.beats[(beatIndex + 1) % beatInfo.beats.Length];
-        int noteLength = beatInfo.notes[(beatIndex + 1) % beatInfo.notes.Length];
-
-        if (nextBeat)
-        {
-            if (!notePlaying)
+            if (nextBeat)
             {
                 // Start glowing target
-                targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = true;
+                if (!notePlaying)
+                {
+                    targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = true;
+                    notePlaying = true;
+                }
             }
-            if (noteLength > 1)
+            else if (notePlaying)
             {
-                notePlaying = true;
-            } else
-            {
+                // Stop glowing target 
+                // Invoke("GlowOff", beatInfo.beatTime * beatInfo.hittableAfter);
+                targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = false;
+
+                // incrament target index
+                beatCount[targetIndex]++;
                 notePlaying = false;
+  
+                if (beatCount[targetIndex] == numBeats[targetIndex])
+                {
+                    // targetIndex++;
+                    targetIndex = (targetIndex + 1) % targets.Length;
+                }   
+            }
+
+            // May need to move this to begining of method
+            if (targetIndex == targets.Length)
+            {
+                complete = true;
+                invokeComplete = true;
             }
         }
-        else
-        {
-            // Stop glowing target 
-            targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = false;
-
-            // Change to targetIndex++
-            targetIndex = (targetIndex + 1) % targets.Length;
-        }
-
-        // May need to move this to begining of method
-        if (targetIndex == targets.Length)
-        {
-            onCompleteChord.Invoke();
-        }
-
-        beatIndex++;
-
-        if (beatIndex < beatInfo.beats.Length)
+        if (targetIndex < targets.Length)
         {
             Invoke("RunTarget", beatInfo.beatTime);
         }
     }
 
+    void GlowOn()
+    {
+        targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = true;
+    }
+
+    void GlowOff()
+    {
+        targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = false;
+    }
     public void ResetTargets()
     {
-        targetIndex = 0;
+        NewLoop();
         waitForLoop = true;
     }
 }
