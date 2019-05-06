@@ -38,8 +38,6 @@ namespace Valve.VR.InteractionSystem
 
                     lastInstanceIdLeft = obj.GetInstanceID();
                     interactedLastFrameLeft = true;
-                    Debug.Log("we have hit " + lastInstanceIdLeft);
-
                 }
                 else
                 {
@@ -57,8 +55,6 @@ namespace Valve.VR.InteractionSystem
 
                     lastInstanceIdRight = obj.GetInstanceID();
                     interactedLastFrameRight = true;
-                    Debug.Log("we have hit " + lastInstanceIdRight);
-
                 }
                 else
                 {
