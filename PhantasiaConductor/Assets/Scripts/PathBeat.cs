@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-using UnityEngine.Assertions;
 using System.IO;
 
 public class PathBeat : MonoBehaviour
 {
+    public UnityEvent onReachedEnd;
+
     public enum PathMode
     {
         SPEED_CONSTANT,
@@ -28,21 +30,27 @@ public class PathBeat : MonoBehaviour
     float timeElapsed;
     int index;
 
+    bool beganTracking = false;
 
     void Start()
-    {
-        obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        obj.transform.parent = transform;
+    {        
         LoadFromFile("Assets/Paths/path.txt");
     }
 
     void Update()
     {
+        if (Input.GetMouseButtonDown(0)) {
+            beganTracking = true;
+        }
+        if (!beganTracking)
+        {
+            return;
+        }
         if (index < vertexCount - 1)
         {
             Vector3 v;
             float t = timeMap[index];
-            
+
             switch (pathMode)
             {
                 case PathMode.TIMED:
@@ -66,6 +74,10 @@ public class PathBeat : MonoBehaviour
             {
                 timeElapsed -= t;
                 index++;
+
+                if (index >= vertexCount - 1) {
+                    onReachedEnd.Invoke();
+                }
             }
 
             timeElapsed += Time.deltaTime;
@@ -95,6 +107,14 @@ public class PathBeat : MonoBehaviour
             var v = new Vector3(float.Parse(tokens[0]), float.Parse(tokens[1]), float.Parse(tokens[2]));
             AddVertex(v, 1f);
         }
+
+        obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        obj.transform.parent = transform;
+        obj.transform.position = lineRenderer.GetPosition(0);
+    }
+
+    public void Hello() {
+        Debug.Log("Hello " + gameObject.name);
     }
 
     private float CalcTimeTraverse(Vector3 start, Vector3 end)
