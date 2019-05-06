@@ -781,6 +781,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1422194963 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2545856613088183674, guid: dc1d077b1c430934d81ea1d40f96c209,
+    type: 3}
+  m_PrefabInstance: {fileID: 2545856612987303743}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1644655617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,5 +1246,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9178122276672521802, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: beats.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178122276672521802, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: notes.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178122276672521802, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: beats.Array.data[7]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178122276066343105, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: cfbca8984aa56214ab71f0500153edbf, type: 3}
+    - target: {fileID: 9178122276066343105, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: Mute
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178122276066343105, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: targets.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: numTargets
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809524321640659376, guid: 87039fb8acce1224fa688e0239918df9,
+        type: 3}
+      propertyPath: targets.Array.data[0]
+      value: 
+      objectReference: {fileID: 1422194963}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87039fb8acce1224fa688e0239918df9, type: 3}
