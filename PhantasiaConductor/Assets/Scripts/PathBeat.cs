@@ -8,6 +8,7 @@ using System.IO;
 public class PathBeat : MonoBehaviour
 {
     public UnityEvent onReachedEnd;
+    public UnityEvent onBegan;
 
     public enum PathMode
     {
@@ -27,22 +28,33 @@ public class PathBeat : MonoBehaviour
     // units of movement per sec
     public float speed = 5;
 
+    public string fileName;
+
     float timeElapsed;
     int index;
 
     bool beganMovement = false;
 
+    bool isRenderingLine = true;
+
+    const string directory = "Assets/Paths/";
+
     void Start()
     {
-        LoadFromFile("Assets/Paths/path.txt");
-        Debug.Log(pathLength + " " + pathTime);
+        if (!string.IsNullOrEmpty(fileName))
+        {
+            LoadFromFile(directory + fileName + ".txt");
+        }
+
+        lineVisible = isRenderingLine;
+        lineVisible = false;
     }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            beganMovement = true;
+            Begin();
         }
 
         if (!beganMovement)
@@ -92,11 +104,13 @@ public class PathBeat : MonoBehaviour
     {
         index = 0;
         obj.transform.position = lineRenderer.GetPosition(index);
+        beganMovement = false;
     }
 
     public void Begin()
     {
         beganMovement = true;
+        onBegan.Invoke();
     }
 
     public void Stop()
@@ -178,6 +192,20 @@ public class PathBeat : MonoBehaviour
                 default:
                     return 0;
             }
+        }
+    }
+
+    public bool lineVisible
+    {
+        get
+        {
+            return isRenderingLine;
+        }
+
+        set
+        {
+            lineRenderer.enabled = value;
+            isRenderingLine = value;
         }
     }
 
