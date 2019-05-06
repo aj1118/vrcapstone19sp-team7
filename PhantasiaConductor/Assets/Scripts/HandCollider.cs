@@ -18,7 +18,6 @@ public class HandCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("AAAAAA\nAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAA\nAAAAAAAAAAAAA\nAAAAAAAAAA");
         other.SendMessage("OnHit");
     }
 }

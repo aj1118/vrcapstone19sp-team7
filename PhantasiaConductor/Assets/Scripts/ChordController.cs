@@ -80,7 +80,7 @@ public class ChordController : MonoBehaviour
 
         if (beatIndex < beatInfo.beats.Length)
         {
-            Invoke("RunTarget", beatInfo.timePerBeat);
+            Invoke("RunTarget", beatInfo.beatTime);
         }
     }
 

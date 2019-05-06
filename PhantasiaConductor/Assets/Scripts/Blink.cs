@@ -5,12 +5,6 @@ using UnityEngine.Events;
 
 public class Blink : MonoBehaviour
 {
-
-    // time before blinking on, if negative, then it will not automatically blink
-    public float blinkOnTime = -1;
-    // time before blinking off
-    public float blinkOffTime = -1;
-
     public UnityEvent onBlinkOn;
     public UnityEvent onBlinkOff;
     
@@ -23,49 +17,48 @@ public class Blink : MonoBehaviour
 
     // true is on, false is off
     private bool blinkState = true;
-    /*
-    void BlinkOn()
-    {
-        Invoke("BlinkOff", blinkOffTime);
-        BlinkOnOnce();
-    }
+    private bool unlocked = false;
 
-    void BlinkOff()
-    {
-        Invoke("BlinkOn", blinkOnTime);
-        BlinkOffOnce();
-    }*/
 
     public void BlinkOnOnce()
     {
-        if (!blinkState) {
-            onBlinkOffToOn.Invoke();
+        if (!unlocked)
+        {
+            if (!blinkState)
+            {
+                onBlinkOffToOn.Invoke();
+            }
+            blinkState = true;
+
+            PObject pObj = gameObject.GetComponent<PObject>();
+            pObj.Alive();
+            onBlinkOn.Invoke();
+            // pObj.SendMessage(onEventName, SendMessageOptions.DontRequireReceiver);
         }
-        blinkState = true;
-
-        PObject pObj = gameObject.GetComponent<PObject>();
-        pObj.Alive();
-        onBlinkOn.Invoke();
-        // pObj.SendMessage(onEventName, SendMessageOptions.DontRequireReceiver);
-
     }
 
     public void BlinkOffOnce()
     {
-        if (blinkState) {
-            onBlinkOnToOff.Invoke();
-        }
-        blinkState = false;
+        if (!unlocked)
+        {
+            if (blinkState)
+            {
+                onBlinkOnToOff.Invoke();
+            }
+            blinkState = false;
 
-        PObject pObj = gameObject.GetComponent<PObject>();
-        pObj.Dead();
-        onBlinkOff.Invoke();
-        // pObj.SendMessage(offEventName, SendMessageOptions.DontRequireReceiver);
+            PObject pObj = gameObject.GetComponent<PObject>();
+            pObj.Dead();
+            onBlinkOff.Invoke();
+            // pObj.SendMessage(offEventName, SendMessageOptions.DontRequireReceiver);
+        }
     }
 
-    void OnEnable()
+    public void Unlock()
     {
-        
+        unlocked = true;
+        PObject pObj = gameObject.GetComponent<PObject>();
+        pObj.Alive();
     }
     
 
