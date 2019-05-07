@@ -106,7 +106,6 @@ public class PathBeat : MonoBehaviour
             }
 
             timeElapsed += Time.deltaTime;
-            markAsHit();
         }
     }
 
@@ -191,6 +190,11 @@ public class PathBeat : MonoBehaviour
             obj.transform.parent = transform;
             obj.transform.localPosition = lineRenderer.GetPosition(0);
             obj.layer = 1 << 2;
+
+            Hittable hittable = obj.AddComponent<Hittable>();
+            // hittable.onHitOnce.AddListener(delegate() {
+            //     markAsHit();
+            // });
         }
     }
 
