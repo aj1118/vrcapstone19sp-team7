@@ -136,7 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9178122275921745039}
-  - component: {fileID: 8809524321640659376}
+  - component: {fileID: 7098778007086014919}
   m_Layer: 0
   m_Name: PianoChord
   m_TagString: Untagged
@@ -160,7 +160,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8809524321640659376
+--- !u!114 &7098778007086014919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,6 +194,8 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  Glow: {fileID: 2100000, guid: bfa71f97c3a254247918df9af54ef267, type: 2}
+  Default: {fileID: 2100000, guid: 3bcd07ba536f46449b4820028f62982f, type: 2}
 --- !u!1 &9178122276672521804
 GameObject:
   m_ObjectHideFlags: 0
