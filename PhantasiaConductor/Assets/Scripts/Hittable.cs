@@ -35,9 +35,10 @@ public class Hittable : MonoBehaviour
         if (canHit)
         {
             canHit = false;
-            hitCount++;
+
             onHitOnce.Invoke();
-            Debug.Log(hitCount + "       " + hitsToUnlock);
+            hitCount++;
+            //Debug.Log(hitCount + "       " + hitsToUnlock);
             if (hitCount == hitsToUnlock)
             {
                 onUnlock.Invoke();
@@ -77,6 +78,9 @@ public class Hittable : MonoBehaviour
 
     // Resets the hit count if the hitflag is not set
     public void ResetIfHitFlagNotSet() {
+        if (hitCount != 0) {
+            Debug.Log("BadSoundEffect");
+        }
         if (!HitFlag) {
             HitCount = 0;
         }

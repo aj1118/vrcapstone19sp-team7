@@ -18,17 +18,16 @@ public class PercussionObject : MonoBehaviour
     private AudioSource loopSource;
     private Hittable hittable;
     private BeatInfo beatInfo;
-    private Loop loop;
 
     // We can remove this and set values in the prefab
     void Awake()
     {
         beatBlinkController = GetComponent<BeatBlinkController>();
-  		  loop = GetComponent<Loop>();
+  	
         hitSource = transform.parent.transform.Find("HitSource").GetComponent<AudioSource>();
         loopSource = transform.parent.transform.Find("LoopSource").GetComponent<AudioSource>();
         loopSource.pitch = loopClip.length / MasterLoop.loopTime;
-        Debug.Log(loopClip.length);
+        
         //adds 3d(ish) sound
         loopSource.spatialBlend = 1.0f;
         hitSource.spatialBlend = 1.0f;
