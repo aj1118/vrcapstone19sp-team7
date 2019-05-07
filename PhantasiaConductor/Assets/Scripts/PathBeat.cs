@@ -10,6 +10,12 @@ public class PathBeat : MonoBehaviour
     public UnityEvent onReachedEnd;
     public UnityEvent onBegan;
 
+    // invoked when completed and successful
+    public UnityEvent onSuccessful;
+    // invoked when failed
+    public UnityEvent onFailed;
+
+
     public enum PathMode
     {
         SPEED_CONSTANT,
@@ -35,6 +41,11 @@ public class PathBeat : MonoBehaviour
 
     bool isRenderingLine = true;
 
+    bool hasFailed = false;
+
+    // was marked this frame
+    bool wasMarked = false;
+
     const string directory = "Assets/Paths/";
 
     void Start()
@@ -54,7 +65,7 @@ public class PathBeat : MonoBehaviour
         {
             return;
         }
-        if (index < vertexCount - 1)
+        if (canMoveForward)
         {
             Vector3 v;
             float t = timeMap[index];
@@ -78,19 +89,42 @@ public class PathBeat : MonoBehaviour
 
             obj.transform.localPosition = v;
 
+
             if (timeElapsed > t)
             {
                 timeElapsed -= t;
                 index++;
 
-                if (index >= vertexCount - 1)
+                if (!canMoveForward)
                 {
                     onReachedEnd.Invoke();
+                    if (!hasFailed)
+                    {
+                        onSuccessful.Invoke();
+                    }
                 }
             }
 
             timeElapsed += Time.deltaTime;
+            markAsHit();
         }
+    }
+
+    void LateUpdate()
+    {
+        if (canMoveForward && beganMovement &&
+            !hasFailed && !wasMarked)
+        {
+            hasFailed = true;
+            onFailed.Invoke();
+        }
+
+        wasMarked = false;
+    }
+
+    public void markAsHit()
+    {
+        wasMarked = true;
     }
 
     public void Reset()
@@ -98,6 +132,7 @@ public class PathBeat : MonoBehaviour
         index = 0;
         obj.transform.localPosition = lineRenderer.GetPosition(index);
         beganMovement = false;
+        hasFailed = false;
     }
 
     public void Begin()
@@ -122,15 +157,17 @@ public class PathBeat : MonoBehaviour
         lineRenderer.SetPosition(vertexCount - 1, pos);
     }
 
-    public void SetCompletionTime(float t) {
-        switch (pathMode) {
+    public void SetCompletionTime(float t)
+    {
+        switch (pathMode)
+        {
             case PathMode.SPEED_CONSTANT:
-            Debug.Log(pathLength + " " + t);
-            this.speed = pathLength / t;
-            break;
+                Debug.Log(pathLength + " " + t);
+                this.speed = pathLength / t;
+                break;
             case PathMode.TIMED:
-            Debug.Log("set completion time not supported for PathMode.TIMED");
-            break;
+                Debug.Log("set completion time not supported for PathMode.TIMED");
+                break;
         }
     }
 
@@ -153,6 +190,7 @@ public class PathBeat : MonoBehaviour
             obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             obj.transform.parent = transform;
             obj.transform.localPosition = lineRenderer.GetPosition(0);
+            obj.layer = 1 << 2;
         }
     }
 
@@ -227,6 +265,14 @@ public class PathBeat : MonoBehaviour
 
             lineRenderer.GetPositions(p);
             return p;
+        }
+    }
+
+    public bool canMoveForward
+    {
+        get
+        {
+            return index < vertexCount - 1;
         }
     }
 

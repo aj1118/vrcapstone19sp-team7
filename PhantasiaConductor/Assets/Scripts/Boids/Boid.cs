@@ -12,7 +12,7 @@ public class Boid : MonoBehaviour
 
     public float randomness;
 
-    public Rigidbody rigidBody;
+    // public Rigidbody rigidBody;
 
     private GameObject chasee;
 
