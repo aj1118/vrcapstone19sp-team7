@@ -78,6 +78,9 @@ public class Hittable : MonoBehaviour
 
     // Resets the hit count if the hitflag is not set
     public void ResetIfHitFlagNotSet() {
+        if (hitCount != 0) {
+            Debug.Log("BadSoundEffect");
+        }
         if (!HitFlag) {
             HitCount = 0;
         }
