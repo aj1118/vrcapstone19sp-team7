@@ -51,6 +51,11 @@ namespace Valve.VR.InteractionSystem
                 AddVertexFromHand();
             }
 
+            if (pinchAction.GetStateUp(hand.handType))
+            {
+                AddVertexFromHand();
+            }
+
             if (tracking)
             {
                 if (acc > refreshRate)
@@ -61,7 +66,7 @@ namespace Valve.VR.InteractionSystem
                 acc += Time.deltaTime;
             }
 
-            
+
             if (gripAction.GetStateUp(hand.handType))
             {
                 tracking = !tracking;
@@ -132,7 +137,8 @@ namespace Valve.VR.InteractionSystem
             StreamWriter writer = new StreamWriter(path, false);
             Vector3[] vertices = positions;
 
-            foreach (var vertex in vertices) {
+            foreach (var vertex in vertices)
+            {
                 writer.WriteLine(vertex.x + "," + vertex.y + "," + vertex.z);
             }
 
