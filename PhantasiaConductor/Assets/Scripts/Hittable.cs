@@ -35,9 +35,11 @@ public class Hittable : MonoBehaviour
         if (canHit)
         {
             canHit = false;
-            hitCount++;
+
             onHitOnce.Invoke();
-            if (hitCount % hitsToUnlock == 0)
+            hitCount++;
+            //Debug.Log(hitCount + "       " + hitsToUnlock);
+            if (hitCount == hitsToUnlock)
             {
                 onUnlock.Invoke();
             }

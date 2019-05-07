@@ -12,9 +12,6 @@ public class Blink : MonoBehaviour
     public UnityEvent onBlinkOnToOff;
     public UnityEvent onBlinkOffToOn;
 
-    // invoked every blink tick
-    public UnityEvent onBlinkTick;
-
     // true is on, false is off
     private bool blinkState = true;
     private bool unlocked = false;
@@ -39,26 +36,17 @@ public class Blink : MonoBehaviour
 
     public void BlinkOffOnce()
     {
-        if (!unlocked)
+        
+        if (blinkState)
         {
-            if (blinkState)
-            {
-                onBlinkOnToOff.Invoke();
-            }
-            blinkState = false;
-
-            PObject pObj = gameObject.GetComponent<PObject>();
-            pObj.Dead();
-            onBlinkOff.Invoke();
-            // pObj.SendMessage(offEventName, SendMessageOptions.DontRequireReceiver);
+            onBlinkOnToOff.Invoke();
         }
-    }
+        blinkState = false;
 
-    public void Unlock()
-    {
-        unlocked = true;
         PObject pObj = gameObject.GetComponent<PObject>();
-        pObj.Alive();
+        pObj.Dead();
+        onBlinkOff.Invoke();
+        // pObj.SendMessage(offEventName, SendMessageOptions.DontRequireReceiver);
     }
     
 

@@ -31,9 +31,16 @@ public class BeatBlinkController : MonoBehaviour
  
     void RunBeat()
     {
+
+        Debug.Log("BEAT");
         beatCount++;
+        if (beatCount < beatInfo.beats.Length - 1)
+        {
+            Invoke("RunBeat", beatInfo.beatTime);
+        }
         if (unlocked)
         {
+            Debug.Log("HEEEY");
             if (beatInfo.beats[beatCount])
             {
                 onHitUnlocked.Invoke();
@@ -51,10 +58,7 @@ public class BeatBlinkController : MonoBehaviour
                 Invoke("BlinkOff", beatInfo.beatTime * beatInfo.hittableAfter);
             }
         }
-        if (beatCount < beatInfo.beats.Length - 1)
-        {
-            Invoke("RunBeat", beatInfo.beatTime);
-        }
+        
     }
     
     void BlinkOn()
