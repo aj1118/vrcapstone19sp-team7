@@ -28,8 +28,6 @@ public class PathBeat : MonoBehaviour
     // units of movement per sec
     public float speed = 5;
 
-    public string fileName;
-
     float timeElapsed;
     int index;
 
@@ -41,11 +39,6 @@ public class PathBeat : MonoBehaviour
 
     void Start()
     {
-        if (!string.IsNullOrEmpty(fileName))
-        {
-            LoadFromFile(directory + fileName + ".txt");
-        }
-
         lineVisible = isRenderingLine;
         lineVisible = false;
     }
@@ -83,7 +76,7 @@ public class PathBeat : MonoBehaviour
                              lineRenderer.GetPosition(index + 1),
                              completion);
 
-            obj.transform.position = v;
+            obj.transform.localPosition = v;
 
             if (timeElapsed > t)
             {
@@ -103,7 +96,7 @@ public class PathBeat : MonoBehaviour
     public void Reset()
     {
         index = 0;
-        obj.transform.position = lineRenderer.GetPosition(index);
+        obj.transform.localPosition = lineRenderer.GetPosition(index);
         beganMovement = false;
     }
 
@@ -129,8 +122,21 @@ public class PathBeat : MonoBehaviour
         lineRenderer.SetPosition(vertexCount - 1, pos);
     }
 
+    public void SetCompletionTime(float t) {
+        switch (pathMode) {
+            case PathMode.SPEED_CONSTANT:
+            Debug.Log(pathLength + " " + t);
+            this.speed = pathLength / t;
+            break;
+            case PathMode.TIMED:
+            Debug.Log("set completion time not supported for PathMode.TIMED");
+            break;
+        }
+    }
+
     public void LoadFromFile(string path)
     {
+        path = directory + path + ".txt";
         StreamReader reader = new StreamReader(path);
         string line;
         while (!reader.EndOfStream)
@@ -146,7 +152,7 @@ public class PathBeat : MonoBehaviour
         {
             obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             obj.transform.parent = transform;
-            obj.transform.position = lineRenderer.GetPosition(0);
+            obj.transform.localPosition = lineRenderer.GetPosition(0);
         }
     }
 

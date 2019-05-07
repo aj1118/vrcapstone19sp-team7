@@ -119,7 +119,7 @@ namespace Valve.VR.InteractionSystem
 
         private bool WasTeleportButtonReleased(Hand hand)
         {
-            
+            return Input.GetKeyUp(KeyCode.T);
             if (hand.noSteamVRFallbackCamera != null)
             {
                 return Input.GetKeyUp(KeyCode.T);
