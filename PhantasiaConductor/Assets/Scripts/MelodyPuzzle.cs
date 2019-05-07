@@ -16,7 +16,7 @@ public class MelodyPuzzle : MonoBehaviour
         InstantiatePath("path", 1);
         InstantiatePath("path1", 2);
         InstantiatePath("path2", 3);
-        PathBeat pathBeat = InstantiatePath("path3", 4);
+        PathBeat pathBeat = InstantiatePath("path3", 20);
 
         monitor.onPuzzleCompleted.AddListener(delegate ()
         {
