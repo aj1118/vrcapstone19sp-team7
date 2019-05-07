@@ -16,7 +16,6 @@ public class PercussionObject : MonoBehaviour
     private BeatBlinkController beatBlinkController;
     private AudioSource hitSource;
     private AudioSource loopSource;
-    private AudioSourceLoop audioSourceLoop;
     private Hittable hittable;
     private BeatInfo beatInfo;
 
@@ -24,16 +23,17 @@ public class PercussionObject : MonoBehaviour
     void Awake()
     {
         beatBlinkController = GetComponent<BeatBlinkController>();
-  			
+  	
         hitSource = transform.parent.transform.Find("HitSource").GetComponent<AudioSource>();
         loopSource = transform.parent.transform.Find("LoopSource").GetComponent<AudioSource>();
+        loopSource.pitch = loopClip.length / MasterLoop.loopTime;
+        
         //adds 3d(ish) sound
         loopSource.spatialBlend = 1.0f;
         hitSource.spatialBlend = 1.0f;
-        audioSourceLoop = transform.parent.transform.Find("AudioSourceLoop").GetComponent<AudioSourceLoop>();
         
         hitSource.clip = hitClip;
-        loopSource.clip = hitClip;
+        loopSource.clip = loopClip;
 
 
         hittable = GetComponent<Hittable>();
@@ -41,32 +41,23 @@ public class PercussionObject : MonoBehaviour
         beatInfo = transform.parent.transform.Find("BeatInfo").GetComponent<BeatInfo>();
 
         hittable.hitsToUnlock = hitsToUnlock;
-        
-        audioSourceLoop.beatInfo = beatInfo;
-        audioSourceLoop.source = loopSource;
-
         beatBlinkController.beatInfo = beatInfo;
     }
 
     
-
-    void Start()
+    public void Unlock()
     {
+    	Invoke("LoopSourceOn", hitClip.length + .1f);
+    }
 
-
-
+    void LoopSourceOn(){
+    	loopSource.volume = 1.0f;
     }
 
     public void NewLoop()
     {
         beatBlinkController.NewLoop();
         loopSource.Play();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+ 
     }
 }
