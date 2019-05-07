@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HitAnimation : MonoBehaviour
 {
+    public float speed;
 	Animator anim;
     public string animationName;
     Animation animClip;
@@ -11,15 +12,16 @@ public class HitAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+       
     	anim = GetComponent<Animator>();
+        anim.speed = speed;
         animClip = GetComponent<Animation>();
     }
 
     void OnEnable() {
-
+        //Debug.Log("AANIME");
         //assumes only one animation, janky
         anim.Play(animationName);
-        float speed = anim.GetCurrentAnimatorStateInfo(0).speed;
         Invoke("GoodbyeCruelWorld", animClip.clip.length / speed);
     }
 
