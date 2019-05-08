@@ -64,10 +64,12 @@ namespace Valve.VR.InteractionSystem
                     {
                         teleporting = false;
                         motionOverlay.SetActive(false);
-                        // leftHand.transform.rotation = target.transform.rotation;
-                        // rightHand.transform.rotation = target.transform.rotation;
 
                         onReachDestination.Invoke();
+
+                        Debug.Log(target.transform.parent.name);
+                        Debug.Log(target.transform.parent.transform.parent.name);
+                        target.transform.parent.transform.parent.transform.GetComponent<DestinationActions>().onArrive();
                     }
                     else // rotate 
                     {
@@ -172,7 +174,7 @@ namespace Valve.VR.InteractionSystem
         {
             if (string.Equals(e.target.tag, "teleportDest"))
             {
-                e.target.gameObject.GetComponent<VisualFeedback>().GlowTargets();
+                e.target.gameObject.GetComponent<Glow>().GlowOn();
             }
         }
 
@@ -180,8 +182,19 @@ namespace Valve.VR.InteractionSystem
         {
             if (string.Equals(e.target.tag, "teleportDest"))
             {
-                e.target.gameObject.GetComponent<VisualFeedback>().StopGlowTargets();
+                e.target.gameObject.GetComponent<Glow>().GlowOff();
             }
+        }
+
+        public void TeleportTo(GameObject destination) 
+        {
+            Debug.Log("teleporting to " + destination.name);
+            teleporting = true;
+            motionOverlay.SetActive(true);
+            target = destination;
+
+            float step = speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
         }
     }
 }

@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 212365156}
   m_Layer: 0
   m_Name: Percussion
-  m_TagString: Untagged
+  m_TagString: teleportDest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -301,7 +301,7 @@ Transform:
   m_LocalPosition: {x: -0.5, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 393420444}
+  m_Father: {fileID: 1456094574}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &212365156
@@ -361,9 +361,10 @@ GameObject:
   m_Component:
   - component: {fileID: 393420444}
   - component: {fileID: 393420445}
+  - component: {fileID: 393420446}
   m_Layer: 0
   m_Name: TeleportDest
-  m_TagString: teleportDest
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -379,8 +380,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.5, z: 4.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 212365155}
-  - {fileID: 2032348582}
+  - {fileID: 1456094574}
+  - {fileID: 665751142}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -399,12 +400,112 @@ MonoBehaviour:
   targets:
   - {fileID: 212365151}
   - {fileID: 2032348581}
-  glowMaterial: {fileID: 2100000, guid: bfa71f97c3a254247918df9af54ef267, type: 2}
+--- !u!114 &393420446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393420443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbf2274a7175704684d2d7d466f537d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puzzlePrefab: {fileID: 665751141}
+  startingPosition: {fileID: 1963660366}
+  returnDelay: 1
 --- !u!1 &489015255 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8932614563594730460, guid: c8047d5f71dc0a3498d345b99c62ae1d,
     type: 3}
   m_PrefabInstance: {fileID: 1819897274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &537145506
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 393420444}
+    m_Modifications:
+    - target: {fileID: 2486190801299894929, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_Name
+      value: Percussion Puzzle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894929, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fc8db40cdea324349aed0f6c741f61a9, type: 3}
+--- !u!1 &665751141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2486190801299894929, guid: fc8db40cdea324349aed0f6c741f61a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 537145506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &665751142 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2486190801299894928, guid: fc8db40cdea324349aed0f6c741f61a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 537145506}
   m_PrefabAsset: {fileID: 0}
 --- !u!20 &751031218 stripped
 Camera:
@@ -725,6 +826,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glowMaterial: {fileID: 2100000, guid: bfa71f97c3a254247918df9af54ef267, type: 2}
+--- !u!1 &1456094573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1456094574}
+  m_Layer: 0
+  m_Name: Instruments
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1456094574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456094573}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 212365155}
+  - {fileID: 2032348582}
+  m_Father: {fileID: 393420444}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1633675562 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 11450312, guid: dc06161b6d97feb419f45f03b62e14b9,
@@ -1070,7 +1203,7 @@ GameObject:
   - component: {fileID: 2032348583}
   m_Layer: 0
   m_Name: Percussion (1)
-  m_TagString: Untagged
+  m_TagString: teleportDest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1086,7 +1219,7 @@ Transform:
   m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 393420444}
+  m_Father: {fileID: 1456094574}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &2032348583
