@@ -5,19 +5,25 @@ using UnityEngine.Events;
 
 public class MasterLoop_AJ : MonoBehaviour
 {
-    public UnityEvent onNewLoop;
-    public UnityEvent unlockedLoop;
-
+    //public UnityEvent onNewLoop;
+    //public UnityEvent unlockedLoop;
+    public AudioClip pianoLoop;
     public static float loopTime = 4f;
 
     public static float unitLoopTime = 4f; //The 'default' time for one loop
     
     public static float delay = .3f;
     // Start is called before the first frame update
+    private TestingThrows t;
+    public int numTargets = 3;
+    public GameObject[] Targets;
 
-    public GameObject[] Targets = new GameObject[4];
-
-    private void OnEnable()
+    private void Awake()
+    {
+        GetComponent<AudioSource>().clip = pianoLoop;
+        Invoke("Tutorial", 5f);
+    }
+    /*private void OnEnable()
     {
         if (CheckUnlocked())
         {
@@ -50,5 +56,23 @@ public class MasterLoop_AJ : MonoBehaviour
         {
             return false;
         }     
+    }*/
+    private void Tutorial()
+    {
+        GetComponent<AudioSource>().Play();
+        Targets[0].GetComponent<TestingThrows>().PlaynFlash(10f);
+        Targets[0].GetComponent<TestingThrows>().PlaynFlash(10.2f);
+        Targets[1].GetComponent<TestingThrows>().PlaynFlash(10.3f);
+        Targets[1].GetComponent<TestingThrows>().PlaynFlash(10.4f);
+        Targets[2].GetComponent<TestingThrows>().PlaynFlash(10.5f);
+        Targets[2].GetComponent<TestingThrows>().PlaynFlash(10.6f);
+
+        /*Targets[0].GetComponent<AudioSource>().PlayDelayed(5f);
+        Targets[0].GetComponent<AudioSource>().PlayDelayed(5.2f);
+        Targets[1].GetComponent<AudioSource>().PlayDelayed(5.3f);
+        Targets[1].GetComponent<AudioSource>().PlayDelayed(5.4f);
+        Targets[2].GetComponent<AudioSource>().PlayDelayed(5.5f);
+        Targets[2].GetComponent<AudioSource>().PlayDelayed(5.6f);
+        Targets[2].GetComponent<AudioSource>().PlayDelayed(5.7f);*/
     }
 }

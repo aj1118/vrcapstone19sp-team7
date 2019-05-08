@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -48,10 +46,11 @@ namespace Valve.VR.InteractionSystem
             
             int childCount = instruments.transform.childCount;
             for (int i = 0; i < childCount; i++) {
-                // should probably animate this 
-                transform.GetChild(i).gameObject.SetActive(false);
+                Transform child = transform.GetChild(i);
 
-                // call visual feedback MakeColorful()
+                child.gameObject.SetActive(true); // should probably animate
+
+                child.GetComponent<AddColor>().SetColor();
             }
 
             yield return new WaitForSeconds(returnDelay);
