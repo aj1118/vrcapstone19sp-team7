@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Valve.VR.Extras
+namespace Valve.VR.InteractionSystem
 {
     public class CustomLaserPointer : MonoBehaviour
     {

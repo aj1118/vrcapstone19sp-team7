@@ -1,29 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Valve.VR.InteractionSystem
 {
     public class PerspectiveShift : MonoBehaviour
     {
         public SteamVR_Action_Boolean teleportAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("Teleport");
-
+       
         public Hand leftHand;
         public Hand rightHand;
         public Camera playerCamera;
 
         public float speed;
-        public float fadeDuration;
+        public float rotateSpeed;
         public bool teleportEnabled;
 
         // to prevent motion sickness
-        public GameObject motionOverlay; 
+        public GameObject motionOverlay;
+
+        public UnityEvent onReachDestination;
 
         private bool teleporting;
 
         private GameObject target;
+        private CustomLaserPointer leftLaser;
+        private CustomLaserPointer rightLaser;
 
-        private bool MOUSE_DEBUG = true; 
+        private bool MOUSE_DEBUG = true;
+
+        void Awake()
+        {
+            leftLaser = leftHand.GetComponent<CustomLaserPointer>();
+            rightLaser = rightHand.GetComponent<CustomLaserPointer>();
+
+            leftLaser.active = false;
+            leftLaser.PointerIn += onPointerIn;
+            leftLaser.PointerOut += onPointerOut;
+
+            rightLaser.active = false;
+            rightLaser.PointerIn += onPointerIn;
+            rightLaser.PointerOut += onPointerOut;
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -41,10 +60,22 @@ namespace Valve.VR.InteractionSystem
 
                 if (transform.position == target.transform.position) // reached destination
                 {
-                    StartCoroutine(FadeRotation());
+                    if (transform.rotation == target.transform.rotation) // stopped
+                    {
+                        teleporting = false;
+                        motionOverlay.SetActive(false);
 
-                    teleporting = false;
-                    motionOverlay.SetActive(false);
+                        onReachDestination.Invoke();
+                    }
+                    else // rotate 
+                    {
+                        float step = rotateSpeed * Time.deltaTime;
+                        transform.rotation = Quaternion.RotateTowards(transform.rotation, target.transform.rotation, step);
+
+                        Vector3 overlayPos = playerCamera.transform.forward * 2 + playerCamera.transform.position;
+
+                        motionOverlay.transform.position = overlayPos;
+                    }
                 }
                 else // still moving
                 {
@@ -61,12 +92,21 @@ namespace Valve.VR.InteractionSystem
             {
                 if (WasTeleportButtonReleased(leftHand))
                 {
-                    Debug.Log("trying to teleport");
                     teleport(leftHand);
+                    leftHand.GetComponent<CustomLaserPointer>().active = false;
                 }
                 else if (WasTeleportButtonReleased(rightHand))
                 {
                     teleport(rightHand);
+                    rightHand.GetComponent<CustomLaserPointer>().active = false;
+                }
+                else if (IsTeleportButtonDown(leftHand) && !IsTeleportButtonDown(rightHand))
+                {
+                    leftHand.GetComponent<CustomLaserPointer>().active = true; 
+                }
+                else if (IsTeleportButtonDown(rightHand) && !IsTeleportButtonDown(leftHand))
+                {
+                    rightHand.GetComponent<CustomLaserPointer>().active = true;
                 }
             }
         }
@@ -102,21 +142,16 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
-        private IEnumerator FadeRotation()
+        private bool IsTeleportButtonDown(Hand hand)
         {
-            // Fade to black
-            SteamVR_Fade.Start(Color.clear, 0f);
-            SteamVR_Fade.Start(Color.black, fadeDuration);
-
-            yield return new WaitForSeconds(fadeDuration);
-
-            transform.rotation = target.transform.rotation;
-
-            yield return new WaitForSeconds(fadeDuration);
-
-            // Fade back in
-            SteamVR_Fade.Start(Color.black, 0f);
-            SteamVR_Fade.Start(Color.clear, fadeDuration);
+            if (MOUSE_DEBUG)
+            {
+                return Input.GetKeyDown(KeyCode.T);
+            }
+            else
+            {
+                return teleportAction.GetStateUp(hand.handType);
+            }
         }
 
         private bool WasTeleportButtonReleased(Hand hand)
@@ -128,6 +163,24 @@ namespace Valve.VR.InteractionSystem
             else
             {
                 return teleportAction.GetStateUp(hand.handType);
+            }
+        }
+
+        // Laser Pointer Methods
+
+        private void onPointerIn(object sender, PointerEventArgs e)
+        {
+            if (string.Equals(e.target.tag, "teleportDest"))
+            {
+                e.target.gameObject.GetComponent<Glow>().GlowOn();
+            }
+        }
+
+        private void onPointerOut(object sender, PointerEventArgs e)
+        {
+            if (string.Equals(e.target.tag, "teleportDest"))
+            {
+                e.target.gameObject.GetComponent<Glow>().GlowOff();
             }
         }
     }
