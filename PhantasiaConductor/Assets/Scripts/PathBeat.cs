@@ -31,8 +31,6 @@ public class PathBeat : MonoBehaviour
     // time spent at each part of the line
     public List<float> timeMap = new List<float>();
 
-    public GameObject objPrefab;
-
     public GameObject obj;
 
     public PathMode pathMode = PathMode.SPEED_CONSTANT;
@@ -47,9 +45,10 @@ public class PathBeat : MonoBehaviour
 
     bool beganMovement = false;
 
-    
 
     bool hasFailed = false;
+
+    bool hasSuccessfullyCompleted = false;
 
     // was marked this frame
     bool wasMarked = false;
@@ -63,10 +62,6 @@ public class PathBeat : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Begin();
-        }
 
         if (!beganMovement)
         {
@@ -105,10 +100,14 @@ public class PathBeat : MonoBehaviour
                 if (!canMoveForward)
                 {
                     onReachedEnd.Invoke();
-                    if (!hasFailed)
+                    if (!hasFailed && !hasSuccessfullyCompleted)
                     {
-                        onSuccessful.Invoke();
+                        // we succeeded
+                        OnSuccess();
                     }
+
+                    // return to the start
+                    index = 0;
                 }
             }
 
@@ -118,7 +117,7 @@ public class PathBeat : MonoBehaviour
 
     void LateUpdate()
     {
-        if (canMoveForward && beganMovement &&
+        if (!hasSuccessfullyCompleted && canMoveForward && beganMovement &&
             !hasFailed && !wasMarked)
         {
             OnFailed();
@@ -194,30 +193,26 @@ public class PathBeat : MonoBehaviour
             AddVertex(v, 1f);
         }
 
-        if (obj == null)
+
+        obj.transform.parent = transform;
+        obj.transform.localPosition = lineRenderer.GetPosition(0);
+        obj.layer = 1 << 2;
+
+        Hittable hittable = obj.GetComponent<Hittable>();
+        if (hittable != null)
         {
-            // TODO change this
-            obj = objPrefab;
-
-            obj.transform.parent = transform;
-            obj.transform.localPosition = lineRenderer.GetPosition(0);
-            obj.layer = 1 << 2;
-
-            Hittable hittable = obj.GetComponent<Hittable>();
-            if (hittable != null)
+            hittable.onPinched.AddListener(delegate ()
             {
-                hittable.onPinched.AddListener(delegate ()
+                if (!beganMovement)
                 {
-                    if (!beganMovement)
-                    {
-                        Begin();
-                    }
-                });
+                    Begin();
+                }
+            });
 
-                hittable.onTracked.AddListener(delegate () {
-                    markAsHit();
-                });
-            }
+            hittable.onTracked.AddListener(delegate ()
+            {
+                markAsHit();
+            });
         }
     }
 
@@ -322,8 +317,19 @@ public class PathBeat : MonoBehaviour
         onFailed.Invoke();
 
         Renderer renderer = obj.GetComponent<Renderer>();
-        if (renderer != null) {
+        if (renderer != null)
+        {
             renderer.material = failedMat;
         }
+    }
+
+    private void OnSuccess()
+    {
+        onSuccessful.Invoke();
+        Renderer renderer = obj.GetComponent<Renderer>();
+        var color = renderer.material.color;
+        renderer.material.color = new Color(color.r, color.g, color.b, 1);
+
+        hasSuccessfullyCompleted = true;
     }
 }
