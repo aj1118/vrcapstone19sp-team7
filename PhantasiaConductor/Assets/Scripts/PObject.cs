@@ -27,11 +27,11 @@ public class PObject : MonoBehaviour
 
     public void BeginLevel()
     {
+        
     }
 
     public void EndLevel()
     {
-
     }
 
     public void Alive()

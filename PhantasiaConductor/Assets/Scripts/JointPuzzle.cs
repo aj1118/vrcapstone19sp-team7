@@ -15,7 +15,10 @@ public class JointPuzzle : MonoBehaviour
 
     public float startWindow = 2;
 
-    public List<UnityEvent> eventList = new List<UnityEvent>();
+    public List<UnityEvent> endEvents = new List<UnityEvent>();
+
+    public List<UnityEvent> startEvents = new List<UnityEvent>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +32,7 @@ public class JointPuzzle : MonoBehaviour
         
     }
 
-    public void Register(UnityEvent e) {
+    public void Register(UnityEvent start, UnityEvent end) {
         
     }
 }
