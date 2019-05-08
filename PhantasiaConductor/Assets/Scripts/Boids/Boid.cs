@@ -26,6 +26,9 @@ public class Boid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LayerMask mask = (1 << 4);
+        gameObject.layer = mask;
+
         noiseOffset = Random.value * 10.0f;
 
         // float scale = Random.Range(minScale, maxScale);

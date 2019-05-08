@@ -216,7 +216,8 @@ public class PathBeat : MonoBehaviour
 
         obj.transform.parent = transform;
         obj.transform.localPosition = lineRenderer.GetPosition(0);
-        obj.layer = 1 << 2;
+        // LayerMask mask = 1 << 3;
+        // obj.layer = mask;
 
         Hittable hittable = obj.GetComponent<Hittable>();
         if (hittable != null)

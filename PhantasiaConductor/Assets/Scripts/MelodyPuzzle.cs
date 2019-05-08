@@ -9,6 +9,8 @@ public class MelodyPuzzle : MonoBehaviour
 
     public PuzzleMonitor monitor;
 
+    public Flock flock;
+
 
     // Start is called before the first frame update
     void Start()
