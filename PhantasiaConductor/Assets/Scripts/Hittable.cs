@@ -10,9 +10,14 @@ public class Hittable : MonoBehaviour
     public UnityEvent onHitOnce;
     public UnityEvent onUnlock;
 
+    public UnityEvent onPinched;
+
+    public UnityEvent onTracked;
+    
+
     public bool canHit;
 
-    public bool broadcastUp = false;
+    public bool preventRepeated = true;    
 
     // keep track of hit counts
     private uint hitCount;
@@ -34,7 +39,9 @@ public class Hittable : MonoBehaviour
     {
         if (canHit)
         {
-            canHit = false;
+            if (preventRepeated) {
+                canHit = false;
+            }
 
             onHitOnce.Invoke();
             hitCount++;
@@ -48,6 +55,16 @@ public class Hittable : MonoBehaviour
             HitFlag = true;
         }
     }
+
+    void OnPinched() 
+    {
+        onPinched.Invoke();
+    }
+
+    void OnTracked() {
+        onTracked.Invoke();
+    }
+
 
     void OnAlive()
     {

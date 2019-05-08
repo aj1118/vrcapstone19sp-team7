@@ -17,18 +17,55 @@ namespace Valve.VR.InteractionSystem
         private int lastInstanceIdRight;
         private bool interactedLastFrameRight;
 
+        private List<Hand> hands = new List<Hand>();
+
 
         public LineRenderer leftLineRenderer;
         public LineRenderer rightLineRenderer;
+
+        private SteamVR_Action_Boolean gripAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
+        private SteamVR_Action_Boolean pinchAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");
+
+        private SteamVR_Action_Boolean teleportAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("Teleport");
 
         // [EnumFlags]
         // public Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.
         // Start is called before the first frame update
 
+        void Start()
+        {
+            hands.Add(rightHand);
+            hands.Add(leftHand);
+        }
+
 
         // Update is called once per frame
         void Update()
         {
+            foreach (var hand in hands)
+            {
+                // Raycast only once for each hand
+                GameObject obj = PerformRaycast(hand);
+                if (obj == null)
+                {
+                    continue;
+                }
+
+                if (pinchAction.GetStateDown(hand.handType))
+                {
+                    obj.SendMessage("OnPinched", SendMessageOptions.DontRequireReceiver);
+                }
+
+                if (gripAction.GetStateDown(hand.handType))
+                {
+                    obj.SendMessage("OnGripped", SendMessageOptions.DontRequireReceiver);
+
+                }
+
+                obj.SendMessage("OnTracked", SendMessageOptions.DontRequireReceiver);
+            }
+
+
             {
                 RaycastHit hit;
                 if (!interactedLastFrameLeft && Physics.Raycast(leftHand.transform.position, leftHand.transform.rotation * transform.forward, out hit, Mathf.Infinity, ~(1 << 2)))
@@ -45,7 +82,7 @@ namespace Valve.VR.InteractionSystem
                     interactedLastFrameLeft = false;
                 }
             }
-            
+
             {
                 RaycastHit hit;
                 if (!interactedLastFrameRight && Physics.Raycast(rightHand.transform.position, rightHand.transform.rotation * transform.forward, out hit, Mathf.Infinity, ~(1 << 2)))
@@ -89,24 +126,15 @@ namespace Valve.VR.InteractionSystem
 
         }
 
-        private void PerformHitRaycast(Hand hand)
+        private GameObject PerformRaycast(Hand hand)
         {
-
-            // RaycastHit hit;
-            // if (!interactedLastFrame && Physics.Raycast(hand.transform.position, hand.transform.rotation * transform.forward, out hit, Mathf.Infinity, ~(1 << 2)))
-            // {
-            //     GameObject obj = hit.collider.gameObject;
-            //     hit.collider.SendMessage("OnHit");
-
-            //     lastInstanceId = obj.GetInstanceID();
-            //     interactedLastFrame = true;
-            //     Debug.Log("we have hit " + lastInstanceId);
-            // }
-            // else
-            // {
-            //     lastInstanceId = -1;
-            //     interactedLastFrame = false;
-            // }
+            RaycastHit hit;
+            if (Physics.Raycast(hand.transform.position, hand.transform.rotation * transform.forward, out hit, Mathf.Infinity, ~(1 << 2)))
+            {
+                GameObject obj = hit.collider.gameObject;
+                return obj;
+            }
+            return null;
         }
 
     }
