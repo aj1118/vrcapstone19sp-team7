@@ -9,15 +9,18 @@ public class PMouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        { // if left button pressed...
-            Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 2)))
-            {
-                Collider collider = hit.collider;
-                collider.SendMessage("OnHit", SendMessageOptions.DontRequireReceiver);
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 2)))
+        {
+            GameObject go = hit.collider.gameObject;
+
+            if (Input.GetMouseButtonDown(0)) {
+                go.SendMessage("OnHit", SendMessageOptions.DontRequireReceiver);
             }
+
+            go.SendMessage("OnTracked", SendMessageOptions.DontRequireReceiver);
         }
     }
 }

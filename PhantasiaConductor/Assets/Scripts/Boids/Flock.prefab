@@ -47,8 +47,9 @@ MonoBehaviour:
   minVelocity: 5
   maxVelocity: 20
   randomness: 1
-  boidPrefab: {fileID: 2555535886440526972, guid: 9a93738783b000b468a2571cbe1911dd,
-    type: 3}
+  boidPrefabs:
+  - {fileID: 2555535886440526972, guid: 9a93738783b000b468a2571cbe1911dd, type: 3}
+  - {fileID: 52046762943889804, guid: 3b87dfe936239aa45a746762429aa193, type: 3}
   chasee: {fileID: 0}
   flockCenter: {x: 0, y: 0, z: 0}
   flockAlignment: {x: 0, y: 0, z: 0}
