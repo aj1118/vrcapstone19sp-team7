@@ -21,6 +21,9 @@ namespace Valve.VR.InteractionSystem
         public LineRenderer leftLineRenderer;
         public LineRenderer rightLineRenderer;
 
+        private SteamVR_Action_Boolean gripAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
+        private SteamVR_Action_Boolean pinchAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");
+
         // [EnumFlags]
         // public Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.
         // Start is called before the first frame update
@@ -29,6 +32,15 @@ namespace Valve.VR.InteractionSystem
         // Update is called once per frame
         void Update()
         {
+            // if (pinchAction.GetStateUp(rightHand.handType)) {
+            //     // Debug.Log("pressed");
+            // }
+
+            // if (pinchAction.GetState(rightHand.handType) {
+
+            // }
+
+            
             {
                 RaycastHit hit;
                 if (!interactedLastFrameLeft && Physics.Raycast(leftHand.transform.position, leftHand.transform.rotation * transform.forward, out hit, Mathf.Infinity, ~(1 << 2)))

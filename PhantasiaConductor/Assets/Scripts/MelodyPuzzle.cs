@@ -13,7 +13,7 @@ public class MelodyPuzzle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InstantiatePath("path", 1);
+        InstantiatePath("path", 5);
         InstantiatePath("path1", 2);
         InstantiatePath("path2", 3);
         PathBeat pathBeat = InstantiatePath("path3", 20);

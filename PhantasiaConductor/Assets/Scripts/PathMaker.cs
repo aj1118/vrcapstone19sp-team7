@@ -33,6 +33,11 @@ namespace Valve.VR.InteractionSystem
 
         private float acc;
 
+        private SteamVR_Action_Boolean gripAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
+        private SteamVR_Action_Boolean pinchAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");
+
+        private SteamVR_Action_Boolean teleportAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("Teleport");
+
         void Start()
         {
 
@@ -42,6 +47,11 @@ namespace Valve.VR.InteractionSystem
         void Update()
         {
             if (Input.GetKeyUp(KeyCode.T))
+            {
+                AddVertexFromHand();
+            }
+
+            if (pinchAction.GetStateUp(hand.handType))
             {
                 AddVertexFromHand();
             }
@@ -56,17 +66,25 @@ namespace Valve.VR.InteractionSystem
                 acc += Time.deltaTime;
             }
 
-            if (Input.GetKeyUp(KeyCode.S))
+
+            if (gripAction.GetStateUp(hand.handType))
             {
                 tracking = !tracking;
             }
 
+            // make vertex with mouse
             if (Input.GetMouseButtonDown(0))
             {
                 AddVertexFromMouse();
             }
 
+            // save
             if (Input.GetKeyUp(KeyCode.X))
+            {
+                SavePath();
+            }
+
+            if (teleportAction.GetStateUp(hand.handType))
             {
                 SavePath();
             }
@@ -99,16 +117,16 @@ namespace Valve.VR.InteractionSystem
                 float length = Vector3.Distance(startPos, endPos);
                 var offset = dif.normalized * length / 2;
 
-                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                BoxCollider collider = cube.AddComponent<BoxCollider>();
-                cube.transform.position = startPos + offset;
-                cube.transform.parent = transform;
+                // GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                // BoxCollider collider = cube.AddComponent<BoxCollider>();
+                // cube.transform.position = startPos + offset;
+                // cube.transform.parent = transform;
 
-                collider.size = new Vector3(pathWidth, pathWidth, length);
-                cube.transform.localScale = collider.size;
+                // collider.size = new Vector3(pathWidth, pathWidth, length);
+                // cube.transform.localScale = collider.size;
 
-                Quaternion rot = Quaternion.FromToRotation(cube.transform.forward, dif);
-                cube.transform.rotation = rot;
+                // Quaternion rot = Quaternion.FromToRotation(cube.transform.forward, dif);
+                // cube.transform.rotation = rot;
             }
         }
 
@@ -116,10 +134,11 @@ namespace Valve.VR.InteractionSystem
         {
             string path = "Assets/Paths/path.txt";
 
-            StreamWriter writer = new StreamWriter(path, true);
+            StreamWriter writer = new StreamWriter(path, false);
             Vector3[] vertices = positions;
 
-            foreach (var vertex in vertices) {
+            foreach (var vertex in vertices)
+            {
                 writer.WriteLine(vertex.x + "," + vertex.y + "," + vertex.z);
             }
 
