@@ -10,6 +10,8 @@ TagManager:
   - FxTemporaire
   - t1
   - shpere
+  - t2
+  - t3
   layers:
   - Default
   - TransparentFX

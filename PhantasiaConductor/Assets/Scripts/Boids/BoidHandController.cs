@@ -13,15 +13,22 @@ namespace Valve.VR.InteractionSystem
         public GameObject rightTarget;
         public GameObject leftTarget;
 
-        public float placementRadius = 20;
+        public float placementRadius = 35;
 
 
         // Update is called once per frame
         void Update()
         {
+            if (rightHand != null && rightTarget != null)
+            {
+                PlaceTarget(rightTarget, rightHand);
+            }
 
-            PlaceTarget(rightTarget, rightHand);
-            PlaceTarget(leftTarget, leftHand);
+            if (leftHand != null && leftTarget != null)
+            {
+                PlaceTarget(leftTarget, leftHand);
+            }
+
         }
 
         void PlaceTarget(GameObject targ, Hand hand)

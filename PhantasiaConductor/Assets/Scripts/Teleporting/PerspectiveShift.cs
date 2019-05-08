@@ -22,8 +22,6 @@ namespace Valve.VR.InteractionSystem
         // to prevent motion sickness
         public GameObject motionOverlay;
 
-        public UnityEvent onReachDestination;
-
         private bool teleporting;
 
         private GameObject target;
@@ -65,10 +63,6 @@ namespace Valve.VR.InteractionSystem
                         teleporting = false;
                         motionOverlay.SetActive(false);
 
-                        onReachDestination.Invoke();
-
-                        Debug.Log(target.transform.parent.name);
-                        Debug.Log(target.transform.parent.transform.parent.name);
                         target.transform.parent.transform.parent.transform.GetComponent<DestinationActions>().onArrive();
                     }
                     else // rotate 
