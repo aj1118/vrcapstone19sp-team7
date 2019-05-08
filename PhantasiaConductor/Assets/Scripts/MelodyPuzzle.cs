@@ -23,13 +23,7 @@ public class MelodyPuzzle : MonoBehaviour
             Debug.Log("All puzzles were completed");
         });
 
-        pathBeat.onSuccessful.AddListener(delegate() {
-            Debug.Log("successfully completed");
-        });
-
-        pathBeat.onFailed.AddListener(delegate() {
-            Debug.Log("failed");
-        });
+        
     }
 
     PathBeat InstantiatePath(string fileName, float t = 3)
@@ -43,6 +37,14 @@ public class MelodyPuzzle : MonoBehaviour
         pathBeat.onReachedEnd.AddListener(delegate ()
         {
             Debug.Log("end was reached");
+        });
+
+        pathBeat.onSuccessful.AddListener(delegate() {
+            Debug.Log("successfully completed");
+        });
+
+        pathBeat.onFailed.AddListener(delegate() {
+            Debug.Log("failed");
         });
 
         monitor.Register(pathBeat.onReachedEnd);
