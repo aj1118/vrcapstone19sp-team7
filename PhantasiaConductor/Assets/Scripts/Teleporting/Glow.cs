@@ -18,6 +18,7 @@ namespace Valve.VR.InteractionSystem
 
         public void GlowOn()
         {
+            originalMaterial = GetComponent<Renderer>().material;
             GetComponent<Renderer>().material = glowMaterial;
         }
 

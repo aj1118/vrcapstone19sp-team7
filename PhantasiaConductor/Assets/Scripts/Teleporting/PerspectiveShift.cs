@@ -172,7 +172,7 @@ namespace Valve.VR.InteractionSystem
         {
             if (string.Equals(e.target.tag, "teleportDest"))
             {
-                e.target.gameObject.GetComponent<Glow>().GlowOn();
+                e.target.gameObject.GetComponent<VisualFeedback>().GlowTargets();
             }
         }
 
@@ -180,7 +180,7 @@ namespace Valve.VR.InteractionSystem
         {
             if (string.Equals(e.target.tag, "teleportDest"))
             {
-                e.target.gameObject.GetComponent<Glow>().GlowOff();
+                e.target.gameObject.GetComponent<VisualFeedback>().StopGlowTargets();
             }
         }
     }
