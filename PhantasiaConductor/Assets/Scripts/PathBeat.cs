@@ -40,12 +40,14 @@ public class PathBeat : MonoBehaviour
     // units of movement per sec
     public float speed = 5;
 
+    public bool isRenderingLine;
+
     float timeElapsed;
     int index;
 
     bool beganMovement = false;
 
-    bool isRenderingLine = true;
+    
 
     bool hasFailed = false;
 
@@ -57,7 +59,6 @@ public class PathBeat : MonoBehaviour
     void Start()
     {
         lineVisible = isRenderingLine;
-        lineVisible = false;
     }
 
     void Update()
@@ -170,7 +171,7 @@ public class PathBeat : MonoBehaviour
         switch (pathMode)
         {
             case PathMode.SPEED_CONSTANT:
-                Debug.Log(pathLength + " " + t);
+                // Debug.Log(pathLength + " " + t);
                 this.speed = pathLength / t;
                 break;
             case PathMode.TIMED:
@@ -195,7 +196,8 @@ public class PathBeat : MonoBehaviour
 
         if (obj == null)
         {
-            obj = Instantiate(objPrefab, lineRenderer.GetPosition(0), Quaternion.identity);
+            // TODO change this
+            obj = objPrefab;
 
             obj.transform.parent = transform;
             obj.transform.localPosition = lineRenderer.GetPosition(0);
