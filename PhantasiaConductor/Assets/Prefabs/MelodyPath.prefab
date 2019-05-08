@@ -81,8 +81,7 @@ MonoBehaviour:
   failedMat: {fileID: 2100000, guid: 9f7f1abc663f73e49a59d693e721189e, type: 2}
   lineRenderer: {fileID: 627143754716700719}
   timeMap: []
-  objPrefab: {fileID: 3869294567150328659}
-  obj: {fileID: 0}
+  obj: {fileID: 3869294567150328659}
   pathMode: 0
   speed: 5
   isRenderingLine: 1
