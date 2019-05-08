@@ -10,12 +10,15 @@ public class PathBeat : MonoBehaviour
     public UnityEvent onReachedEnd;
     public UnityEvent onBegan;
 
+    // reached end but failed
+    public UnityEvent onReachedEndBad;
+
     // invoked when completed and successful
     public UnityEvent onSuccessful;
     // invoked when failed
     public UnityEvent onFailed;
 
-    public Material trackedMat;
+    public Material goodMat;
 
     public Material failedMat;
 
@@ -31,8 +34,6 @@ public class PathBeat : MonoBehaviour
     // time spent at each part of the line
     public List<float> timeMap = new List<float>();
 
-    public GameObject objPrefab;
-
     public GameObject obj;
 
     public PathMode pathMode = PathMode.SPEED_CONSTANT;
@@ -45,11 +46,12 @@ public class PathBeat : MonoBehaviour
     float timeElapsed;
     int index;
 
-    bool beganMovement = false;
+    bool isMoving = false;
 
-    
 
     bool hasFailed = false;
+
+    bool hasSuccessfullyCompleted = false;
 
     // was marked this frame
     bool wasMarked = false;
@@ -63,12 +65,8 @@ public class PathBeat : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Begin();
-        }
 
-        if (!beganMovement)
+        if (!moving)
         {
             return;
         }
@@ -96,7 +94,6 @@ public class PathBeat : MonoBehaviour
 
             obj.transform.localPosition = v;
 
-
             if (timeElapsed > t)
             {
                 timeElapsed -= t;
@@ -105,10 +102,21 @@ public class PathBeat : MonoBehaviour
                 if (!canMoveForward)
                 {
                     onReachedEnd.Invoke();
-                    if (!hasFailed)
+                    if (!hasSuccessfullyCompleted)
                     {
-                        onSuccessful.Invoke();
+                        if (!hasFailed)
+                        {
+                            // succeeded for the first time
+                            OnSuccess();
+                        }
+                        else
+                        {
+                            OnReachedEndBad();
+                        }
                     }
+
+                    // return to the start
+                    ResetPosition();
                 }
             }
 
@@ -118,11 +126,11 @@ public class PathBeat : MonoBehaviour
 
     void LateUpdate()
     {
-        if (canMoveForward && beganMovement &&
+        if (!hasSuccessfullyCompleted && canMoveForward && isMoving &&
             !hasFailed && !wasMarked)
         {
+            // was not marked in the most recent update frame
             OnFailed();
-
         }
 
         wasMarked = false;
@@ -136,23 +144,34 @@ public class PathBeat : MonoBehaviour
         wasMarked = true;
     }
 
+    // resets only the position
+    public void ResetPosition()
+    {
+        index = 0;
+        obj.transform.localPosition = lineRenderer.GetPosition(index);
+    }
+
+    // resets to a state as if it was never started
     public void Reset()
     {
         index = 0;
         obj.transform.localPosition = lineRenderer.GetPosition(index);
-        beganMovement = false;
+        moving = false;
         hasFailed = false;
+
+        Renderer renderer = obj.GetComponent<Renderer>();
+        renderer.material = goodMat;
     }
 
     public void Begin()
     {
-        beganMovement = true;
+        moving = true;
         onBegan.Invoke();
     }
 
     public void Stop()
     {
-        beganMovement = false;
+        moving = false;
     }
 
     public void AddVertex(Vector3 pos, float t)
@@ -194,30 +213,27 @@ public class PathBeat : MonoBehaviour
             AddVertex(v, 1f);
         }
 
-        if (obj == null)
+
+        obj.transform.parent = transform;
+        obj.transform.localPosition = lineRenderer.GetPosition(0);
+        // LayerMask mask = 1 << 3;
+        // obj.layer = mask;
+
+        Hittable hittable = obj.GetComponent<Hittable>();
+        if (hittable != null)
         {
-            // TODO change this
-            obj = objPrefab;
-
-            obj.transform.parent = transform;
-            obj.transform.localPosition = lineRenderer.GetPosition(0);
-            obj.layer = 1 << 2;
-
-            Hittable hittable = obj.GetComponent<Hittable>();
-            if (hittable != null)
+            hittable.onPinched.AddListener(delegate ()
             {
-                hittable.onPinched.AddListener(delegate ()
+                if (!isMoving)
                 {
-                    if (!beganMovement)
-                    {
-                        Begin();
-                    }
-                });
+                    Begin();
+                }
+            });
 
-                hittable.onTracked.AddListener(delegate () {
-                    markAsHit();
-                });
-            }
+            hittable.onTracked.AddListener(delegate ()
+            {
+                markAsHit();
+            });
         }
     }
 
@@ -303,6 +319,16 @@ public class PathBeat : MonoBehaviour
         }
     }
 
+    private bool moving {
+        get {
+            return isMoving;
+        }
+
+        set {
+            isMoving = value;
+        }
+    }
+
     private int vertexCount
     {
         get
@@ -322,8 +348,28 @@ public class PathBeat : MonoBehaviour
         onFailed.Invoke();
 
         Renderer renderer = obj.GetComponent<Renderer>();
-        if (renderer != null) {
+        if (renderer != null)
+        {
             renderer.material = failedMat;
         }
+    }
+
+    private void OnSuccess()
+    {
+        onSuccessful.Invoke();
+        Renderer renderer = obj.GetComponent<Renderer>();
+        var color = renderer.material.color;
+        renderer.material.color = new Color(color.r, color.g, color.b, 1);
+
+        hasSuccessfullyCompleted = true;
+    }
+
+    private void OnReachedEndBad()
+    {
+        onReachedEndBad.Invoke();
+        Reset();
+        // mark so that we don't immediately fail
+        wasMarked = true;
+        moving = true;
     }
 }

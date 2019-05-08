@@ -13,11 +13,17 @@ public class BoidEmitter : MonoBehaviour
         if (flock == null) {
             flock = GameObject.Find("Flock").GetComponent<Flock>();
         }
-        // InvokeRepeating("EmitBoid", 0, 5);
+        InvokeRepeating("EmitBoid", 0, 5);
     }
 
     public void EmitBoid() {
-        flock.AddBoid(transform.position);
+        EmitBoids(1);
+    }
+
+    public void EmitBoids(int n) {
+        for (var i = 0; i < n; i++) {
+            flock.AddBoid(transform.position);
+        }
     }
 
 }

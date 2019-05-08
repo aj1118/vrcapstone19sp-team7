@@ -67,6 +67,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onReachedEndBad:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   onSuccessful:
     m_PersistentCalls:
       m_Calls: []
@@ -77,12 +82,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  trackedMat: {fileID: 2100000, guid: 098f4bf782fc9da4d839880943ffae05, type: 2}
+  goodMat: {fileID: 2100000, guid: c3efabafc9571984fa1de390ee18d1cd, type: 2}
   failedMat: {fileID: 2100000, guid: 9f7f1abc663f73e49a59d693e721189e, type: 2}
   lineRenderer: {fileID: 627143754716700719}
   timeMap: []
-  objPrefab: {fileID: 3869294567150328659}
-  obj: {fileID: 0}
+  obj: {fileID: 3869294567150328659}
   pathMode: 0
   speed: 5
   isRenderingLine: 1
