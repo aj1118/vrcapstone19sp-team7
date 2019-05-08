@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,10 +11,15 @@ public class ChordController : MonoBehaviour
 
     public UnityEvent onCompleteChord;
 
+    public Material Glow;
+    public Material Hit;
+    public Material Default;
     private BeatInfo beatInfo;
     private int[] beatCount;
     private int beatIndex = -1;
     private int targetIndex = 0;
+    private int hitCount = 0;
+    public float wait = 5f;
     private bool waitForLoop = false;
     private bool notePlaying = false;
     private bool complete = false;
@@ -67,17 +73,19 @@ public class ChordController : MonoBehaviour
                 // Start glowing target
                 if (!notePlaying)
                 {
-                    targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = true;
+                    //targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = true;
+                    targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().material = Glow;
                     notePlaying = true;
+                    Invoke("HitTime", wait);
                 }
             }
             else if (notePlaying)
             {
                 // Stop glowing target 
                 // Invoke("GlowOff", beatInfo.beatTime * beatInfo.hittableAfter);
-                targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = false;
-
-                // incrament target index
+                //targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = false;
+                targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().material = Default;
+                // increment target index
                 beatCount[targetIndex]++;
                 notePlaying = false;
   
@@ -88,7 +96,7 @@ public class ChordController : MonoBehaviour
                 }   
             }
 
-            // May need to move this to begining of method
+            // May need to move this to beginning of method
             if (targetIndex == targets.Length)
             {
                 complete = true;
@@ -101,7 +109,7 @@ public class ChordController : MonoBehaviour
         }
     }
 
-    void GlowOn()
+    /*void GlowOn()
     {
         targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = true;
     }
@@ -109,10 +117,19 @@ public class ChordController : MonoBehaviour
     void GlowOff()
     {
         targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = false;
-    }
+    }*/
     public void ResetTargets()
     {
         NewLoop();
         waitForLoop = true;
     }
+    private void HitTime()
+    {
+        if(targets[targetIndex].GetComponent<Collision>().contactCount != hitCount)
+        {
+
+        }
+
+    }
+    
 }

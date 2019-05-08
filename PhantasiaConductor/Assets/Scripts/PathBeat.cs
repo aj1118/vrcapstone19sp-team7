@@ -15,6 +15,10 @@ public class PathBeat : MonoBehaviour
     // invoked when failed
     public UnityEvent onFailed;
 
+    public Material trackedMat;
+
+    public Material failedMat;
+
 
     public enum PathMode
     {
@@ -26,6 +30,8 @@ public class PathBeat : MonoBehaviour
 
     // time spent at each part of the line
     public List<float> timeMap = new List<float>();
+
+    public GameObject objPrefab;
 
     public GameObject obj;
 
@@ -114,13 +120,16 @@ public class PathBeat : MonoBehaviour
         if (canMoveForward && beganMovement &&
             !hasFailed && !wasMarked)
         {
-            hasFailed = true;
-            onFailed.Invoke();
+            OnFailed();
+
         }
 
         wasMarked = false;
     }
 
+    /* 
+        Marks the object as having been hit this frame
+     */
     public void markAsHit()
     {
         wasMarked = true;
@@ -186,15 +195,27 @@ public class PathBeat : MonoBehaviour
 
         if (obj == null)
         {
-            obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            obj = Instantiate(objPrefab, lineRenderer.GetPosition(0), Quaternion.identity);
+
             obj.transform.parent = transform;
             obj.transform.localPosition = lineRenderer.GetPosition(0);
             obj.layer = 1 << 2;
 
-            Hittable hittable = obj.AddComponent<Hittable>();
-            // hittable.onHitOnce.AddListener(delegate() {
-            //     markAsHit();
-            // });
+            Hittable hittable = obj.GetComponent<Hittable>();
+            if (hittable != null)
+            {
+                hittable.onPinched.AddListener(delegate ()
+                {
+                    if (!beganMovement)
+                    {
+                        Begin();
+                    }
+                });
+
+                hittable.onTracked.AddListener(delegate () {
+                    markAsHit();
+                });
+            }
         }
     }
 
@@ -290,6 +311,17 @@ public class PathBeat : MonoBehaviour
         set
         {
             lineRenderer.positionCount = value;
+        }
+    }
+
+    private void OnFailed()
+    {
+        hasFailed = true;
+        onFailed.Invoke();
+
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null) {
+            renderer.material = failedMat;
         }
     }
 }

@@ -19,8 +19,6 @@ public class HitAnimation : MonoBehaviour
     }
 
     void OnEnable() {
-        //Debug.Log("AANIME");
-        //assumes only one animation, janky
         anim.Play(animationName);
         Invoke("GoodbyeCruelWorld", animClip.clip.length / speed);
     }
