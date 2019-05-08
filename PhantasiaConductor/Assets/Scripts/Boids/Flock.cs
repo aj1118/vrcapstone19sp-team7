@@ -13,7 +13,7 @@ public class Flock : MonoBehaviour
 
     public float randomness = 1;
 
-    public GameObject boidPrefab;
+    public GameObject[] boidPrefabs;
 
     public GameObject chasee;
 
@@ -54,7 +54,8 @@ public class Flock : MonoBehaviour
     {
         Vector3 pos = transform.position + Random.insideUnitSphere * 10;
         Quaternion rot = Quaternion.Slerp(transform.rotation, Random.rotation, 0.3f);
-        Boid boid = Instantiate(boidPrefab, transform.position, rot).GetComponent<Boid>();
+        int i = Random.Range(0, boidPrefabs.Length);
+        Boid boid = Instantiate(boidPrefabs[i], transform.position, rot).GetComponent<Boid>();
         boid.transform.parent = transform;
         boid.transform.position = pos;
         boids.Add(boid);
@@ -96,6 +97,5 @@ public class Flock : MonoBehaviour
         Boid boid = SpawnBoid();
         flockSize++;
         boid.transform.position = pos;
-        // boid.transform.parent = transform;
     }
 }

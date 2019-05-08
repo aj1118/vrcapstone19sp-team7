@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3bcd07ba536f46449b4820028f62982f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,4 +124,10 @@ MonoBehaviour:
   minVelocity: 0
   maxVelocity: 0
   randomness: 0
-  rigidBody: {fileID: 0}
+  minScale: 0.2
+  maxScale: 0.5
+  colors:
+  - {r: 0, g: 0.72156864, b: 0.6627451, a: 0}
+  - {r: 0.972549, g: 0.9529412, b: 0.83137256, a: 0}
+  - {r: 1, g: 0.87058824, b: 0.49019608, a: 0}
+  - {r: 0.9647059, g: 0.25490198, b: 0.42352942, a: 0}
