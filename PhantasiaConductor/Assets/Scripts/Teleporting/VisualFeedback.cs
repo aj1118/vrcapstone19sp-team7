@@ -7,29 +7,21 @@ namespace Valve.VR.InteractionSystem
     public class VisualFeedback : MonoBehaviour
     {
         public GameObject[] targets;
-        public Material glowMaterial;
 
-        private void Awake()
+        public void MakeColorful()
         {
+            Debug.Log("making colorful");
             foreach (GameObject target in targets)
             {
-                target.GetComponent<Glow>().glowMaterial = glowMaterial;
+                // target.GetComponent<Glow>().GlowOn();
             }
         }
 
-        public void GlowTargets()
+        public void ResetToBlank()
         {
             foreach (GameObject target in targets)
             {
-                target.GetComponent<Glow>().GlowOn();
-            }
-        }
-
-        public void StopGlowTargets()
-        {
-            foreach (GameObject target in targets)
-            {
-                target.GetComponent<Glow>().GlowOff();
+                // target.GetComponent<Glow>().GlowOff();
             }
         }
     }
