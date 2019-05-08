@@ -367,6 +367,8 @@ public class PathBeat : MonoBehaviour
     {
         onReachedEndBad.Invoke();
         Reset();
-        
+        // mark so that we don't immediately fail
+        wasMarked = true;
+        moving = true;
     }
 }
