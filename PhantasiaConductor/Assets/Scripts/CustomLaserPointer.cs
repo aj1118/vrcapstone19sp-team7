@@ -9,8 +9,8 @@ namespace Valve.VR.InteractionSystem
         public SteamVR_Behaviour_Pose pose;
 
         public bool active;
-        public Color color;
-        public float thickness = 0.002f;
+        public Color color = Color.green;
+        public float thickness = 0.006f;
         public Color clickColor = Color.green;
         public GameObject holder;
         public GameObject pointer;
@@ -27,7 +27,7 @@ namespace Valve.VR.InteractionSystem
         {
             if (pose == null)
                 pose = this.GetComponent<SteamVR_Behaviour_Pose>();
-            if (pose == null)
+            if (pose != null)
                 Debug.LogError("No SteamVR_Behaviour_Pose component found on this object");
 
             holder = new GameObject();
@@ -60,6 +60,7 @@ namespace Valve.VR.InteractionSystem
             Material newMaterial = new Material(Shader.Find("Unlit/Color"));
             newMaterial.SetColor("_Color", color);
             pointer.GetComponent<MeshRenderer>().material = newMaterial;
+            pointer.SetActive(active);
         }
 
         public virtual void OnPointerIn(PointerEventArgs e)
@@ -83,11 +84,11 @@ namespace Valve.VR.InteractionSystem
 
         private void Update()
         {
+            // this.transform.GetChild(0).gameObject.SetActive(active);
+            pointer.SetActive(active);
+
             if (active)
             {
-                this.transform.GetChild(0).gameObject.SetActive(active);
-                pointer.SetActive(active);
-
                 float dist = 100f;
 
                 Ray raycast = new Ray(transform.position, transform.forward);
@@ -127,6 +128,13 @@ namespace Valve.VR.InteractionSystem
                 pointer.GetComponent<MeshRenderer>().material.color = color;
 
                 pointer.transform.localPosition = new Vector3(0f, 0f, dist / 2f);
+            } else if (previousContact != null)
+            {
+                PointerEventArgs args = new PointerEventArgs();
+                args.flags = 0;
+                args.target = previousContact;
+                OnPointerOut(args);
+                previousContact = null;
             }
         }
     }

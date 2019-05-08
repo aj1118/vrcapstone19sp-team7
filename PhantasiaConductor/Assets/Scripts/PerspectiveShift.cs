@@ -7,6 +7,8 @@ namespace Valve.VR.InteractionSystem
 {
     public class PerspectiveShift : MonoBehaviour
     {
+        public bool MOUSE_DEBUG = false;
+
         public SteamVR_Action_Boolean teleportAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("Teleport");
        
         public Hand leftHand;
@@ -28,8 +30,6 @@ namespace Valve.VR.InteractionSystem
         private CustomLaserPointer leftLaser;
         private CustomLaserPointer rightLaser;
 
-        private bool MOUSE_DEBUG = true;
-
         void Awake()
         {
             leftLaser = leftHand.GetComponent<CustomLaserPointer>();
@@ -42,7 +42,7 @@ namespace Valve.VR.InteractionSystem
             rightLaser.active = false;
             rightLaser.PointerIn += onPointerIn;
             rightLaser.PointerOut += onPointerOut;
-        }
+        } 
 
         // Start is called before the first frame update
         void Start()
@@ -64,6 +64,8 @@ namespace Valve.VR.InteractionSystem
                     {
                         teleporting = false;
                         motionOverlay.SetActive(false);
+                        // leftHand.transform.rotation = target.transform.rotation;
+                        // rightHand.transform.rotation = target.transform.rotation;
 
                         onReachDestination.Invoke();
                     }
@@ -93,20 +95,20 @@ namespace Valve.VR.InteractionSystem
                 if (WasTeleportButtonReleased(leftHand))
                 {
                     teleport(leftHand);
-                    leftHand.GetComponent<CustomLaserPointer>().active = false;
+                    leftLaser.active = false;
                 }
                 else if (WasTeleportButtonReleased(rightHand))
                 {
                     teleport(rightHand);
-                    rightHand.GetComponent<CustomLaserPointer>().active = false;
+                    rightLaser.active = false;
                 }
                 else if (IsTeleportButtonDown(leftHand) && !IsTeleportButtonDown(rightHand))
                 {
-                    leftHand.GetComponent<CustomLaserPointer>().active = true; 
+                    leftLaser.active = true; 
                 }
                 else if (IsTeleportButtonDown(rightHand) && !IsTeleportButtonDown(leftHand))
                 {
-                    rightHand.GetComponent<CustomLaserPointer>().active = true;
+                    rightLaser.active = true;
                 }
             }
         }
@@ -114,19 +116,17 @@ namespace Valve.VR.InteractionSystem
         private void teleport(Hand hand)
         {
             RaycastHit hit;
-            Ray ray = new Ray(hand.transform.position, hand.transform.rotation * transform.forward);
-
+            Ray ray = new Ray(hand.transform.position, hand.transform.forward);
+            
             if (MOUSE_DEBUG)
             {
                 ray = playerCamera.ScreenPointToRay(Input.mousePosition);
             }
 
             Debug.Log("ray " + ray);
-            Debug.Log(Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 2)));
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 2)))
             {
-                Debug.Log("hit something");
                 if (string.Equals(hit.collider.tag, "teleportDest"))
                 {
                     teleporting = true;
@@ -150,7 +150,7 @@ namespace Valve.VR.InteractionSystem
             }
             else
             {
-                return teleportAction.GetStateUp(hand.handType);
+                return teleportAction.GetStateDown(hand.handType);
             }
         }
 
