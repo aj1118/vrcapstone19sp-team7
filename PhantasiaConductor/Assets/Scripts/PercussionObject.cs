@@ -44,7 +44,15 @@ public class PercussionObject : MonoBehaviour
         beatBlinkController.beatInfo = beatInfo;
     }
 
-    
+    public void NewLoop()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            beatBlinkController.NewLoop();
+            loopSource.Play();
+        }
+    }
+
     public void Unlock()
     {
     	Invoke("LoopSourceOn", hitClip.length + .1f);
@@ -54,10 +62,5 @@ public class PercussionObject : MonoBehaviour
     	loopSource.volume = 1.0f;
     }
 
-    public void NewLoop()
-    {
-        beatBlinkController.NewLoop();
-        loopSource.Play();
- 
-    }
+    
 }

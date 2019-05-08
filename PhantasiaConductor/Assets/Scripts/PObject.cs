@@ -36,7 +36,9 @@ public class PObject : MonoBehaviour
 
     public void Alive()
     {
+        
         GetComponent<Renderer>().enabled = true;
+
         // shape.GetComponent<Renderer>().enabled = true;
         alive = true;
 
@@ -46,7 +48,9 @@ public class PObject : MonoBehaviour
     public void Dead()
     {
         // shape.GetComponent<Renderer>().enabled = false;
+        
         GetComponent<Renderer>().enabled = false;
+
         alive = false;
 
         SendMessage("OnDead", SendMessageOptions.DontRequireReceiver);
