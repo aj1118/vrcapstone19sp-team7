@@ -55,7 +55,6 @@ namespace Valve.VR.InteractionSystem
         {
             if (teleporting)
             {
-
                 if (transform.position == target.transform.position) // reached destination
                 {
                     if (transform.rotation == target.transform.rotation) // stopped
@@ -127,6 +126,8 @@ namespace Valve.VR.InteractionSystem
                 {
                     teleporting = true;
                     motionOverlay.SetActive(true);
+                    Debug.Log(hit);
+                    Debug.Log(hit.collider);
                     target = hit.collider.gameObject;
 
                     Debug.Log("hit " + hit.collider.gameObject.name);

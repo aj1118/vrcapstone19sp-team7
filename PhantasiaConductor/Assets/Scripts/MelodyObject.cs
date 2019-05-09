@@ -29,6 +29,23 @@ public class MelodyObject : MonoBehaviour
         loopSource.clip = loopClip;
         loopSource.pitch = loopClip.length / MasterLoop.loopTime;
         loopSource.spatialBlend = 1.0f;
+        
+        loopSource.clip = loopClip;
+        
+        hittable = GetComponent<Hittable>();
+        
+    }
+    private void Update()
+    {
+        if (!unlocked)
+        {
+        }
+    }
+
+    public void OnTriggerEnter()
+    {
+        loopSource.volume = 1;
+        inContact = true;
     }
 
     private void Start()
@@ -58,6 +75,8 @@ public class MelodyObject : MonoBehaviour
             loopSource.volume = 0;
             TurnOff();
         }
+        rend.enabled = true;
+        coll.enabled = true;
     }
 
     private void EndPlay()
@@ -74,6 +93,7 @@ public class MelodyObject : MonoBehaviour
             unlocked = true;
             //puzzleSequence.NextPuzzle();
         }
+
     }
 
     private void TurnOn()
