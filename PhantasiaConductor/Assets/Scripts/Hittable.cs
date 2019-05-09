@@ -9,12 +9,9 @@ public class Hittable : MonoBehaviour
 
     public UnityEvent onHitOnce;
     public UnityEvent onUnlock;
-
     public UnityEvent onPinched;
-
     public UnityEvent onTracked;
     
-
     public bool canHit;
 
     public bool preventRepeated = true;    

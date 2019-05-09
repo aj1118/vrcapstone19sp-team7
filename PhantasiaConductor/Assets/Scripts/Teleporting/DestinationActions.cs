@@ -50,7 +50,7 @@ namespace Valve.VR.InteractionSystem
 
                 child.gameObject.SetActive(true); // should probably animate
 
-                child.GetComponent<AddColor>().SetColor();
+                // child.GetComponent<AddColor>().SetColor();
             }
 
             yield return new WaitForSeconds(returnDelay);

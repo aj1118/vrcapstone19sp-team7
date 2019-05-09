@@ -15,6 +15,10 @@ namespace Valve.VR.InteractionSystem
 
         public LineRenderer lineRenderer;
 
+        public LineRenderer curvedLineRenderer;
+
+        public BezierCurve curveFitter;
+
         public GameObject centerPoint;
 
         public float radiusFromCenter = 25;
@@ -108,6 +112,23 @@ namespace Valve.VR.InteractionSystem
             vertexCount = vertexCount + 1;
             lineRenderer.SetPosition(vertexCount - 1, dir * radiusFromCenter + centerPoint.transform.position);
 
+            if (curveFitter != null && (vertexCount == 4 || ((vertexCount - 4) % 3) == 0) && vertexCount > 3) {
+                Vector3[] ps = positions;
+                List<Vector3> points = new List<Vector3>();
+
+                for (int i = ps.Length - 4; i < ps.Length; i++) {
+                    points.Add(ps[i]);
+                }
+
+                List<Vector3> transformed = curveFitter.TransformPointsCubic(points);
+
+                foreach (var v in transformed) {
+                    curvedLineRenderer.positionCount++;
+                    curvedLineRenderer.SetPosition(curvedLineRenderer.positionCount - 1, v);
+                }
+
+            }
+
             if (vertexCount > 1)
             {
                 var startPos = lineRenderer.GetPosition(vertexCount - 2);
@@ -116,6 +137,8 @@ namespace Valve.VR.InteractionSystem
 
                 float length = Vector3.Distance(startPos, endPos);
                 var offset = dif.normalized * length / 2;
+
+
 
                 // GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 // BoxCollider collider = cube.AddComponent<BoxCollider>();

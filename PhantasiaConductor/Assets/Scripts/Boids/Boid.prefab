@@ -99,6 +99,17 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:PhantasiaConductor/Assets/Prefabs/HitObject.prefab
+  m_GameObject: {fileID: 5453616291278403646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a4deabe986a78c42880ae0c185a1fe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkOnTime: 1
+  blinkOffTime: 1
+--- !u!114 &5453616291278403647
+=======
   m_GameObject: {fileID: 2555535886440526972}
   serializedVersion: 2
   m_Mass: 1
@@ -110,6 +121,7 @@ Rigidbody:
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &511909930300042978
+>>>>>>> 62210296fa62636516e69f9744acc917a291cad7:PhantasiaConductor/Assets/Scripts/Boids/Boid.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,6 +133,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b473c466cf9a3aa4199d5c72ba7ffb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD:PhantasiaConductor/Assets/Prefabs/HitObject.prefab
+  creationTime: 0
+  elapsedTime: 0
+--- !u!135 &5453616291278403617
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453616291278403646}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &5453616291278403616
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453616291278403646}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+=======
   minVelocity: 0
   maxVelocity: 0
   randomness: 0
@@ -131,3 +168,4 @@ MonoBehaviour:
   - {r: 0.9411765, g: 0.5411765, b: 0.3647059, a: 0}
   - {r: 0.72156864, g: 0.23137255, b: 0.36862746, a: 0}
   - {r: 0.41568628, g: 0.17254902, b: 0.4392157, a: 0}
+>>>>>>> 62210296fa62636516e69f9744acc917a291cad7:PhantasiaConductor/Assets/Scripts/Boids/Boid.prefab
