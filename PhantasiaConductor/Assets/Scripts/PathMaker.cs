@@ -112,17 +112,20 @@ namespace Valve.VR.InteractionSystem
             vertexCount = vertexCount + 1;
             lineRenderer.SetPosition(vertexCount - 1, dir * radiusFromCenter + centerPoint.transform.position);
 
-            if (curveFitter != null && (vertexCount == 4 || ((vertexCount - 4) % 3) == 0) && vertexCount > 3) {
+            if (curveFitter != null && (vertexCount == 4 || ((vertexCount - 4) % 3) == 0) && vertexCount > 3)
+            {
                 Vector3[] ps = positions;
                 List<Vector3> points = new List<Vector3>();
 
-                for (int i = ps.Length - 4; i < ps.Length; i++) {
+                for (int i = ps.Length - 4; i < ps.Length; i++)
+                {
                     points.Add(ps[i]);
                 }
 
                 List<Vector3> transformed = curveFitter.TransformPointsCubic(points);
 
-                foreach (var v in transformed) {
+                foreach (var v in transformed)
+                {
                     curvedLineRenderer.positionCount++;
                     curvedLineRenderer.SetPosition(curvedLineRenderer.positionCount - 1, v);
                 }
@@ -155,17 +158,32 @@ namespace Valve.VR.InteractionSystem
 
         void SavePath()
         {
-            string path = "Assets/Paths/path.txt";
 
-            StreamWriter writer = new StreamWriter(path, false);
-            Vector3[] vertices = positions;
-
-            foreach (var vertex in vertices)
-            {
-                writer.WriteLine(vertex.x + "," + vertex.y + "," + vertex.z);
+            List<string> paths = new List<string>();
+            paths.Add("Assets/Paths/path.txt");
+            if (curvedLineRenderer != null) {
+                paths.Add("Assets/Paths/bezierpath.txt");
             }
 
-            writer.Close();
+            Vector3[][] ps = {positions, bezierPositions};
+            int i = 0;
+            
+            foreach (var p in paths)
+            {
+                string path = p;
+
+                StreamWriter writer = new StreamWriter(path, false);
+                Vector3[] vertices = ps[i];
+
+                foreach (var vertex in vertices)
+                {
+                    writer.WriteLine(vertex.x + "," + vertex.y + "," + vertex.z);
+                }
+
+                writer.Close();
+                i++;
+            }
+            Debug.Log("path saved");
         }
 
         public Vector3[] positions
@@ -176,6 +194,18 @@ namespace Valve.VR.InteractionSystem
                 Vector3[] p = new Vector3[count];
 
                 lineRenderer.GetPositions(p);
+                return p;
+            }
+        }
+
+        public Vector3[] bezierPositions
+        {
+            get
+            {
+                int count = curvedLineRenderer.positionCount;
+                Vector3[] p = new Vector3[count];
+
+                curvedLineRenderer.GetPositions(p);
                 return p;
             }
         }

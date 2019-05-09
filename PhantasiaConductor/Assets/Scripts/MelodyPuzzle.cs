@@ -17,7 +17,7 @@ public class MelodyPuzzle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var path = CreateAndSetupPath("path", 10);
+        var path = CreateAndSetupPath("bezierpath", 10);
         // path.gameObject.SetActive(true);
         var path1 = CreateAndSetupPath("path1", 10);
         path1.gameObject.SetActive(false);

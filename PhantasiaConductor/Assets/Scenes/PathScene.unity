@@ -296,6 +296,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2349265327486729079, guid: efedbcab771c64f4d88948dfa2538960,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349265327486729079, guid: efedbcab771c64f4d88948dfa2538960,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349265327486729079, guid: efedbcab771c64f4d88948dfa2538960,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efedbcab771c64f4d88948dfa2538960, type: 3}
 --- !u!1 &901753175 stripped
@@ -382,6 +397,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
         type: 3}
+      propertyPath: boidPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
+        type: 3}
       propertyPath: chasee
       value: 
       objectReference: {fileID: 5785976660760724659}
@@ -390,6 +410,12 @@ PrefabInstance:
       propertyPath: flockSize
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
+        type: 3}
+      propertyPath: boidPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1509598871792621677, guid: 5e24121c7b3b85c4587142d3ed4d42a1,
+        type: 3}
     - target: {fileID: 124335380267662659, guid: cadb5e4850a2d124a9928d7659861958,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -550,6 +576,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1752831521 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2349265327485128813, guid: efedbcab771c64f4d88948dfa2538960,
+    type: 3}
+  m_PrefabInstance: {fileID: 757103625}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1904444809
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +684,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MelodyPuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 4226425933831056, guid: 401fbddef9dc6eb43a1aeab8c9251ef2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4226425933831062, guid: 401fbddef9dc6eb43a1aeab8c9251ef2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -703,7 +739,7 @@ PrefabInstance:
     - target: {fileID: 4226425933831063, guid: 401fbddef9dc6eb43a1aeab8c9251ef2, type: 3}
       propertyPath: melodyPrefab
       value: 
-      objectReference: {fileID: 7237045370968523031, guid: 9b6afb276487eac409d86e72578efddc,
+      objectReference: {fileID: 3279572442281290039, guid: 9b6afb276487eac409d86e72578efddc,
         type: 3}
     - target: {fileID: 4226425933831063, guid: 401fbddef9dc6eb43a1aeab8c9251ef2, type: 3}
       propertyPath: boidEmitterPrefab
@@ -877,7 +913,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerCamera
       value: 
-      objectReference: {fileID: 541940247}
+      objectReference: {fileID: 1752831521}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e270c8974f5391a489d349cf22569143, type: 3}
 --- !u!1 &5785976660760724659 stripped
