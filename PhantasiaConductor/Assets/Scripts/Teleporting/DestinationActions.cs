@@ -9,10 +9,12 @@ namespace Valve.VR.InteractionSystem
         public GameObject puzzlePrefab;
         public GameObject startingPosition;
         public int returnDelay = 1;
+        public GameObject[] nextActive;
+        public Material[] colorMaterials;
 
         private GameObject instruments;
         private GameObject teleportIndicator;
-        private int puzzleHeight = 2;
+        private float puzzleHeight = 1.5f;
 
         void Awake() {
             instruments = transform.Find("Instruments").gameObject;
@@ -57,17 +59,25 @@ namespace Valve.VR.InteractionSystem
 
             puzzlePrefab.transform.position = newPos;
 
-            int childCount = instruments.transform.childCount;
-            for (int i = 0; i < childCount; i++)
+            Renderer[] renderers = instruments.GetComponentsInChildren<Renderer>();
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                renderers[i].material = colorMaterials[i];
+            }
+
+            for (int i = 0; i < renderers.Length; i++)
             {
                 Transform child = transform.GetChild(i);
 
                 child.gameObject.SetActive(true); // should probably animate
-
-                child.GetComponent<AddColor>().SetColor();
             }
             Player.instance.GetComponent<PerspectiveShift>().TeleportTo(startingPosition);
             startingPosition.GetComponent<Glow>().GlowOff();
+
+            foreach (GameObject next in nextActive)
+            {
+                next.SetActive(true);
+            }
         }
     }
 }

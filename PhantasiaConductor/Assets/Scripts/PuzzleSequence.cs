@@ -42,7 +42,7 @@ namespace Valve.VR.InteractionSystem
         }
         
         public void NextPuzzle() {
-            if (currentPuzzle < puzzles.Length - 3)
+            if (currentPuzzle < puzzles.Length - 1)
             {
                 currentPuzzle++;
                 puzzles[currentPuzzle].SetActive(true);
