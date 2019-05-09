@@ -3,28 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.IO;
+using System;
 
 public class BezierCurve : MonoBehaviour
 {
     public int pointDensity = 4;
 
-    public string inFile = "path";
-    public string outFile = "bezierpath";
+    public string inFile;
+    public string outFile;
 
     private float delta;
 
     private string directory = "Assets/Paths/";
+
+    private delegate List<Vector3> PointsTransform(List<Vector3> points);
 
     // Start is called before the first frame update
     void Start()
     {
         delta = 1f / pointDensity;
 
-        TransformFromFile(inFile, outFile);
-        Debug.Log("finished path transform");
+        if (!string.IsNullOrEmpty(inFile) && !string.IsNullOrEmpty(outFile))
+        {
+            TransformFromFile(inFile, outFile, TransformPointsCubic);
+        }
     }
 
-    void TransformFromFile(string inFileName, string outFileName)
+    void TransformFromFile(string inFileName, string outFileName, PointsTransform func)
     {
         string path = directory + inFileName + ".txt";
 
@@ -43,7 +48,7 @@ public class BezierCurve : MonoBehaviour
         }
         reader.Close();
 
-        List<Vector3> transformed = TransformPointsQuad(fileVertices);
+        List<Vector3> transformed = func(fileVertices);
 
         StreamWriter writer = new StreamWriter(directory + outFileName + ".txt", false);
         foreach (var v in transformed)
@@ -54,15 +59,14 @@ public class BezierCurve : MonoBehaviour
         writer.Close();
     }
 
-
-    Vector3 QuadraticTransform(Vector3 p1, Vector3 p2, Vector3 p3, float t)
+    public Vector3 QuadraticTransform(Vector3 p1, Vector3 p2, Vector3 p3, float t)
     {
         Vector3 l1 = Vector3.Lerp(p1, p2, t);
         Vector3 l2 = Vector3.Lerp(p2, p3, t);
         return Vector3.Lerp(l1, l2, t);
     }
 
-    Vector3 CubicTransform(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4, float t)
+    public Vector3 CubicTransform(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4, float t)
     {
         Vector3 m1 = Vector3.Lerp(p1, p2, t);
         Vector3 m2 = Vector3.Lerp(p2, p3, t);
@@ -90,5 +94,24 @@ public class BezierCurve : MonoBehaviour
         return res;
     }
 
+    public List<Vector3> TransformPointsCubic(List<Vector3> points)
+    {
+        List<Vector3> res = new List<Vector3>();
 
+        for (int i = 0; i < points.Count - 3; i += 3)
+        {
+            Vector3 p1 = points[i];
+            Vector3 p2 = points[i + 1];
+            Vector3 p3 = points[i + 2];
+            Vector3 p4 = points[i + 3];
+
+            for (int j = 0; j < pointDensity; j++)
+            {
+                float t = j * delta;
+                res.Add(CubicTransform(p1, p2, p3, p4, t));
+            }
+        }
+
+        return res;
+    }
 }
