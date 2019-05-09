@@ -62,12 +62,14 @@ public class MelodyObject : MonoBehaviour
 
     private void EndPlay()
     {
+        Debug.Log("AAAAAZZZAAA");
         if (unlocked)
         {
             TurnOff();
         }
         else if (inContact)
         {
+            Debug.Log("AAAAAAAAAAAA");
             TurnOff();
             unlocked = true;
             //puzzleSequence.NextPuzzle();
