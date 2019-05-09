@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:PhantasiaConductor/Assets/Audio/trad_kick_01_C.wav.meta
+<<<<<<< HEAD
+guid: 58cd6a7476986584dbec24fd6740320a
+=======
+guid: 7259c5259a7cedc4e9a23fcfcff20e40
+>>>>>>> 91b0a7e939c63d99af92c8dcd73905524bcd6bd6
+=======
+guid: 401bf00575f4a984fa21d8e90efa03a6
+>>>>>>> 62210296fa62636516e69f9744acc917a291cad7:PhantasiaConductor/Assets/Sound/Harmony/bass_loop.aif.meta
+AudioImporter:
+  externalObjects: {}
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  preloadAudioData: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

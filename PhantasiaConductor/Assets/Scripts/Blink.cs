@@ -1,40 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Blink : MonoBehaviour
 {
-
-    // public float blinkTime;
-    public float blinkOnTime = 1;
-    public float blinkOffTime = 1;
-    // Start is called before the first frame update
+    public UnityEvent onBlinkOn;
+    public UnityEvent onBlinkOff;
+    
+    // when blink change change state on/off
+    public UnityEvent onBlinkOnToOff;
+    public UnityEvent onBlinkOffToOn;
 
     // true is on, false is off
-    private bool blinkState;
+    private bool blinkState = true;
+    private bool unlocked = false;
 
 
-    void BlinkOn() {
-        blinkState = true;
-        
-        Invoke("BlinkOff", blinkOffTime);
-        PObject pObj = gameObject.GetComponent<PObject>();
-        pObj.Alive();
-        pObj.SendMessage("OnBlinkOn", SendMessageOptions.DontRequireReceiver);
+    public void BlinkOnOnce()
+    {
+        if (!unlocked)
+        {
+            if (!blinkState)
+            {
+                onBlinkOffToOn.Invoke();
+            }
+            blinkState = true;
+
+            PObject pObj = gameObject.GetComponent<PObject>();
+            pObj.Alive();
+            onBlinkOn.Invoke();
+            // pObj.SendMessage(onEventName, SendMessageOptions.DontRequireReceiver);
+        }
     }
 
-    void BlinkOff() {
-        blinkState = false;
+    public void BlinkOffOnce()
+    {
         
-        Invoke("BlinkOn", blinkOnTime);
+        if (blinkState)
+        {
+            onBlinkOnToOff.Invoke();
+        }
+        blinkState = false;
+
         PObject pObj = gameObject.GetComponent<PObject>();
         pObj.Dead();
-        pObj.SendMessage("OnBlinkOff", SendMessageOptions.DontRequireReceiver);
+        onBlinkOff.Invoke();
+        // pObj.SendMessage(offEventName, SendMessageOptions.DontRequireReceiver);
     }
+    
 
-    void OnEnable()
-    {
-        Invoke("BlinkOn", blinkOnTime);
-        // InvokeRepeating("DoBlink", blinkTime, blinkTime);
-    }
 }

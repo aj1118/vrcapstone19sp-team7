@@ -1,20 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Hittable : MonoBehaviour
 {
+    public uint hitsToUnlock;
 
-    public uint hitsBeforeBroadcast;
+    public UnityEvent onHitOnce;
+    public UnityEvent onUnlock;
+
+    public UnityEvent onPinched;
+
+    public UnityEvent onTracked;
+    
+
+    public bool canHit;
+
+    public bool preventRepeated = true;    
+
+    // keep track of hit counts
     private uint hitCount;
 
-    public bool broadcastUp = false;
-    private bool canHit = true;
+    // use hit flag to keep track of hits
+    private bool hitFlag;
+
+
 
     void Start()
     {
-        if (GetComponent<PObject>() != null) {
-            canHit = GetComponent<PObject>().IsAlive();
+        if (GetComponent<PObject>() != null)
+        {
+            // canHit = GetComponent<PObject>().IsAlive();
         }
     }
 
@@ -22,23 +39,90 @@ public class Hittable : MonoBehaviour
     {
         if (canHit)
         {
-            hitCount++;
-            if (hitCount % hitsBeforeBroadcast == 0)
-            {
-                BroadcastMessage("ObjectHit", SendMessageOptions.DontRequireReceiver);
+            if (preventRepeated) {
+                canHit = false;
             }
-            Debug.Log("i was hit " + hitCount + " times");
-        }
 
+            onHitOnce.Invoke();
+            hitCount++;
+            //Debug.Log(hitCount + "       " + hitsToUnlock);
+            if (hitCount == hitsToUnlock)
+            {
+                onUnlock.Invoke();
+            }
+
+            
+            HitFlag = true;
+        }
     }
+
+    void OnPinched() 
+    {
+        onPinched.Invoke();
+    }
+
+    void OnTracked() {
+        onTracked.Invoke();
+    }
+
 
     void OnAlive()
     {
-        canHit = true;
+        // CanHit = true;
     }
 
     void OnDead()
     {
+        // CanHit = false;
+    }
+
+    public void StopHit()
+    {
         canHit = false;
+    }
+
+    public bool CanHit
+    {
+        get
+        {
+            return canHit;
+        }
+        set
+        {
+            canHit = value;
+        }
+    }
+
+    // Resets the hit count if the hitflag is not set
+    public void ResetIfHitFlagNotSet() {
+        if (hitCount != 0) {
+            Debug.Log("BadSoundEffect");
+        }
+        if (!HitFlag) {
+            HitCount = 0;
+        }
+    }
+
+    public bool HitFlag
+    {
+        get
+        {
+            return hitFlag;
+        }
+
+        set
+        {
+            hitFlag = value;
+        }
+    }
+
+    public uint HitCount {
+        get {
+            return hitCount;
+        }
+
+        set {
+            hitCount = value;
+        }
     }
 }

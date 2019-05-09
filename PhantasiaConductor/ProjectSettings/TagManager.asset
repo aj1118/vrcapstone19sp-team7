@@ -5,9 +5,19 @@ TagManager:
   serializedVersion: 2
   tags:
   - BeatObject
+<<<<<<< HEAD
   - projectile
   - FxTemporaire
   - Hand
+=======
+  - teleportDest
+  - projectile
+  - FxTemporaire
+  - t1
+  - shpere
+  - t2
+  - t3
+>>>>>>> 62210296fa62636516e69f9744acc917a291cad7
   layers:
   - Default
   - TransparentFX
