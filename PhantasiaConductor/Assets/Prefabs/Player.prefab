@@ -363,7 +363,7 @@ MonoBehaviour:
   noSteamVRFallbackCamera: {fileID: 0}
   noSteamVRFallbackMaxDistanceNoItem: 10
   noSteamVRFallbackMaxDistanceWithItem: 0.5
-  renderModelPrefab: {fileID: 1000011547835092, guid: d5082f7d9f947374197e0a97786f4e40,
+  renderModelPrefab: {fileID: 5091653097936800336, guid: c167e04ba92848441ad6e850d4b6592c,
     type: 3}
   showDebugText: 0
   spewDebugText: 0
@@ -667,7 +667,7 @@ MonoBehaviour:
   noSteamVRFallbackCamera: {fileID: 0}
   noSteamVRFallbackMaxDistanceNoItem: 10
   noSteamVRFallbackMaxDistanceWithItem: 0.5
-  renderModelPrefab: {fileID: 1000012617731570, guid: 837f93beb9a614743ae3a2c0ada7c388,
+  renderModelPrefab: {fileID: 5091653097936800336, guid: c167e04ba92848441ad6e850d4b6592c,
     type: 3}
   showDebugText: 0
   spewDebugText: 0
@@ -1151,7 +1151,7 @@ Transform:
   m_GameObject: {fileID: 2349265327486634767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.58, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 2349265327486772435}
   - {fileID: 2349265327486667765}

@@ -20,4 +20,5 @@ public class HandCollider : MonoBehaviour
     {
         other.SendMessage("OnHit");
     }
+    
 }
