@@ -25,6 +25,7 @@ namespace Valve.VR.InteractionSystem
         private bool teleporting;
 
         private GameObject target;
+        private Vector3 targetPosition;
         private CustomLaserPointer leftLaser;
         private CustomLaserPointer rightLaser;
 
@@ -55,14 +56,14 @@ namespace Valve.VR.InteractionSystem
         {
             if (teleporting)
             {
-                if (transform.position == target.transform.position) // reached destination
+                if (transform.position == targetPosition) // reached destination
                 {
                     if (transform.rotation == target.transform.rotation) // stopped
                     {
                         teleporting = false;
                         motionOverlay.SetActive(false);
 
-                        target.transform.parent.transform.parent.transform.GetComponent<DestinationActions>().onArrive();
+                        target.transform.parent.transform.GetComponent<DestinationActions>().onArrive();
                     }
                     else // rotate 
                     {
@@ -77,8 +78,7 @@ namespace Valve.VR.InteractionSystem
                 else // still moving
                 {
                     float step = speed * Time.deltaTime;
-                    transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
-                   
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
                     Vector3 overlayPos = playerCamera.transform.forward * 2 + playerCamera.transform.position;
 
                     motionOverlay.transform.position = overlayPos;
@@ -126,14 +126,14 @@ namespace Valve.VR.InteractionSystem
                 {
                     teleporting = true;
                     motionOverlay.SetActive(true);
-                    Debug.Log(hit);
-                    Debug.Log(hit.collider);
+
                     target = hit.collider.gameObject;
+                    targetPosition = new Vector3(target.transform.position.x, target.transform.position.y - 1.5f, target.transform.position.z);
 
                     Debug.Log("hit " + hit.collider.gameObject.name);
 
                     float step = speed * Time.deltaTime;
-                    transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
                 }
 
             }
@@ -190,6 +190,7 @@ namespace Valve.VR.InteractionSystem
 
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+            targetPosition = target.transform.position;
         }
     }
 }
