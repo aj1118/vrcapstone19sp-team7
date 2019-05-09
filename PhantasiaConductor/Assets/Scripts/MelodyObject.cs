@@ -11,30 +11,23 @@ public class MelodyObject : MonoBehaviour
     public float endTime;
     public float windowLength;
     public bool unlocked;
+    public PuzzleSequence puzzleSequence;
 
-    // Start is called before the first frame update
-    
     private AudioSource loopSource;
-    private Hittable hittable;
+    private Collider coll;
+    private MeshRenderer rend;
     private bool inWindow;
-
     private bool inContact;
 
-    //0 - inactive
-    //1 - start window
-    //2 - in play
-    //3 - unlocked
-
-
-    // We can remove this and set values in the prefab
     void Awake()
     {
+        coll = GetComponent<Collider>();
+        rend = GetComponent<MeshRenderer>();
+        loopSource = GetComponent<AudioSource>();
         inContact = false;
-        GetComponent<MeshRenderer>().enabled = false;
-        loopSource = transform.parent.transform.Find("LoopSource").GetComponent<AudioSource>();
+        inWindow = false;
+        loopSource.clip = loopClip;
         loopSource.pitch = loopClip.length / MasterLoop.loopTime;
-        
-        //adds 3d(ish) sound
         loopSource.spatialBlend = 1.0f;
         
         loopSource.clip = loopClip;
@@ -51,53 +44,90 @@ public class MelodyObject : MonoBehaviour
 
     public void OnTriggerEnter()
     {
-        // if ()
+        loopSource.volume = 1;
+        inContact = true;
+    }
+
+    private void Start()
+    {
+        TurnOff();
+    }
+
+    public void NewLoop()
+    {
+        loopSource.Play();
+        Invoke("StartWindow", MasterLoop.loopTime * startTime);
+        Invoke("StartPlay", MasterLoop.loopTime * (startTime + windowLength));
+        Invoke("EndPlay", MasterLoop.loopTime * endTime);
+    }
+    
+    private void StartWindow()
+    {
+        TurnOn();
+        inWindow = true;
+    }
+
+    private void StartPlay()
+    {
+        inWindow = false;
+        if (!inContact)
+        {
+            loopSource.volume = 0;
+            TurnOff();
+        }
+        rend.enabled = true;
+        coll.enabled = true;
+    }
+
+    private void EndPlay()
+    {
+        Debug.Log("AAAAAZZZAAA");
+        if (unlocked)
+        {
+            TurnOff();
+        }
+        else if (inContact)
+        {
+            Debug.Log("AAAAAAAAAAAA");
+            TurnOff();
+            unlocked = true;
+            //puzzleSequence.NextPuzzle();
+        }
+
+    }
+
+    private void TurnOn()
+    {
+        if (!unlocked)
+        {
+            coll.enabled = true;
+        }
+        rend.enabled = true;
+    }
+
+    private void TurnOff()
+    {
+        if (!unlocked)
+        {
+            coll.enabled = false;
+        }
+        rend.enabled = false;
+    }
+
+    public void OnTriggerEnter()
+    {
         loopSource.volume = 1;
         inContact = true;
     }
 
     public void OnTriggerExit()
     {
-        loopSource.volume = 0;
         inContact = false;
-    }
-    
 
-    public void NewLoop()
-    {
-        loopSource.Play();
-
-        Invoke("StartWindow", MasterLoop.loopTime * startTime);
-        Invoke("EndWindow", MasterLoop.loopTime * (startTime + windowLength));
-
-    }
-
-    private void StartWindow()
-    {
-        GetComponent<MeshRenderer>().enabled = true;
-    }
-
-    private void StartPlay()
-    {
-        // windowLength = false;
-        GetComponent<MeshRenderer>().enabled = true;
-        GetComponent<Collider>().enabled = true;
-    }
-
-
-    private void EndPlay()
-    {
-        // if 
-    }
-
-    private void TurnOn()
-    {
-
-    }
-
-    private void TurnOff()
-    {
-        GetComponent<MeshRenderer>().enabled = false;
-        GetComponent<Collider>().enabled = false;
+        if (!inWindow)
+        {
+            loopSource.volume = 0;
+            TurnOff();
+        }
     }
 }
