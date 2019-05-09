@@ -11,13 +11,15 @@ public class MelodyObject : MonoBehaviour
     public float endTime;
     public float windowLength;
     public bool unlocked;
-    public PuzzleSequence puzzleSequence;
+    public Valve.VR.InteractionSystem.PuzzleSequence puzzleSequence;
 
     private AudioSource loopSource;
     private Collider coll;
     private MeshRenderer rend;
     private bool inWindow;
     private bool inContact;
+
+    private Hittable hittable;
 
     void Awake()
     {
@@ -112,12 +114,6 @@ public class MelodyObject : MonoBehaviour
             coll.enabled = false;
         }
         rend.enabled = false;
-    }
-
-    public void OnTriggerEnter()
-    {
-        loopSource.volume = 1;
-        inContact = true;
     }
 
     public void OnTriggerExit()
