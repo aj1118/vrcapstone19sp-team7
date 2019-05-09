@@ -51,7 +51,7 @@ public class MelodyObject : MonoBehaviour
 
     public void OnTriggerEnter()
     {
-        if ()
+        // if ()
         loopSource.volume = 1;
         inContact = true;
     }
@@ -79,7 +79,7 @@ public class MelodyObject : MonoBehaviour
 
     private void StartPlay()
     {
-        windowLength = false;
+        // windowLength = false;
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<Collider>().enabled = true;
     }
@@ -87,7 +87,7 @@ public class MelodyObject : MonoBehaviour
 
     private void EndPlay()
     {
-        if 
+        // if 
     }
 
     private void TurnOn()
