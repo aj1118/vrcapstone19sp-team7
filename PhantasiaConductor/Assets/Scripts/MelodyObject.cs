@@ -44,11 +44,6 @@ public class MelodyObject : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter()
-    {
-        loopSource.volume = 1;
-        inContact = true;
-    }
 
     private void Start()
     {
@@ -62,7 +57,6 @@ public class MelodyObject : MonoBehaviour
         Invoke("StartPlay", MasterLoop.loopTime * (startTime + windowLength));
         Invoke("EndPlay", MasterLoop.loopTime * endTime);
     }
-    
     private void StartWindow()
     {
         TurnOn();
@@ -77,20 +71,16 @@ public class MelodyObject : MonoBehaviour
             loopSource.volume = 0;
             TurnOff();
         }
-        rend.enabled = true;
-        coll.enabled = true;
     }
 
     private void EndPlay()
     {
-        Debug.Log("AAAAAZZZAAA");
         if (unlocked)
         {
             TurnOff();
         }
         else if (inContact)
         {
-            Debug.Log("AAAAAAAAAAAA");
             TurnOff();
             unlocked = true;
             //puzzleSequence.NextPuzzle();
@@ -109,6 +99,7 @@ public class MelodyObject : MonoBehaviour
 
     private void TurnOff()
     {
+        Debug.Log("OFFN");
         if (!unlocked)
         {
             coll.enabled = false;
@@ -116,10 +107,15 @@ public class MelodyObject : MonoBehaviour
         rend.enabled = false;
     }
 
+    public void OnTriggerEnter()
+    {
+        loopSource.volume = 1;
+        inContact = true;
+    }
     public void OnTriggerExit()
     {
         inContact = false;
-
+        Debug.Log("EXIT");
         if (!inWindow)
         {
             loopSource.volume = 0;

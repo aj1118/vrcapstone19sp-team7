@@ -18,7 +18,7 @@ public class HandCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        other.SendMessage("OnHit");
+        other.SendMessage("OnHit", SendMessageOptions.DontRequireReceiver);
     }
     
 }
