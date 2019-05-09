@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzlePrefab: {fileID: 0}
   startingPosition: {fileID: 0}
-  returnDelay: 1
+  returnDelay: 2
 --- !u!1 &6630393062013959778
 GameObject:
   m_ObjectHideFlags: 0

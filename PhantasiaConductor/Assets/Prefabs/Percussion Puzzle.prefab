@@ -87,6 +87,11 @@ MonoBehaviour:
   - {fileID: 5314219861648694834}
   - {fileID: 5314219859954110248}
   currentPuzzle: 0
+  onPuzzleComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &2486190803165590410
 GameObject:
   m_ObjectHideFlags: 0
