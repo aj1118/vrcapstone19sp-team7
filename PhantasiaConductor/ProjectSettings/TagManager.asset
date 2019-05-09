@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - BeatObject
+  - projectile
+  - FxTemporaire
+  - Hand
   layers:
   - Default
   - TransparentFX
@@ -15,9 +18,9 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
+  - Hand
+  - GameObject
+  - BeatObject
   - 
   - 
   - 
