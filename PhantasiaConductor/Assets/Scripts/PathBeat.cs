@@ -43,6 +43,8 @@ public class PathBeat : MonoBehaviour
 
     public bool isRenderingLine;
 
+    public bool startLooping = false;
+
     public string fileName;
 
     float timeElapsed;
@@ -65,6 +67,10 @@ public class PathBeat : MonoBehaviour
         lineVisible = isRenderingLine;
         if (!string.IsNullOrEmpty(fileName)) {
             LoadFromFile(fileName);
+        }
+
+        if (startLooping) {
+            Begin();
         }
     }
 
