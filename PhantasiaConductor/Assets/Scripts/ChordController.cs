@@ -4,132 +4,119 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ChordController : MonoBehaviour
+namespace Valve.VR.InteractionSystem
 {
-    public GameObject[] targets;
-    public int[] numBeats;
-
-    public UnityEvent onCompleteChord;
-
-    public Material Glow;
-    public Material Hit;
-    public Material Default;
-    private BeatInfo beatInfo;
-    private int[] beatCount;
-    private int beatIndex = -1;
-    private int targetIndex = 0;
-    private int hitCount = 0;
-    public float wait = 5f;
-    private bool waitForLoop = false;
-    private bool notePlaying = false;
-    private bool complete = false;
-    private bool invokeComplete = false;
-
-    private void Awake()
+    public class ChordController : MonoBehaviour
     {
-        beatInfo = transform.Find("BeatInfo").GetComponent<BeatInfo>();
-        beatCount = new int[targets.Length];
-    }
+        public GameObject target;
+        public GameObject throwObjPrefab;
+        public Hand leftHand;
+        public Hand rightHand;
 
-    private void OnEnable()
-    {
-        waitForLoop = true;
-        RunTarget();
-    }
+        public Material targetOn;
+        public Material targetOff;
 
-    private void OnDisable()
-    {
-        CancelInvoke();
-    }
+        public UnityEvent onCompleteChord;
 
-    public void NewLoop()
-    {
-        if (!complete)
+        private BeatInfo beatInfo;
+        private CustomSpawnAndAttachToHand spawning;
+        private int beatIndex = -1;
+        private GameObject currentThrowObjL;
+        private GameObject currentThrowObjR;
+
+        private bool waitForLoop = false;
+        private bool notePlaying = false;
+        private bool complete = false;
+        private bool invokeComplete = false;
+
+        private void Awake()
         {
-            beatIndex = -1;
-            targetIndex = 0;
-            waitForLoop = false;
-            for (int i = 0; i < beatCount.Length; i++)
-            {
-                beatCount[i] = 0;
-            }
-        } else if (invokeComplete)
-        {
-            invokeComplete = false;
-            onCompleteChord.Invoke();
+            beatInfo = transform.Find("BeatInfo").GetComponent<BeatInfo>();
+            spawning = GetComponent<CustomSpawnAndAttachToHand>();
         }
-        
-    }
 
-    private void RunTarget()
-    {
-        if (!waitForLoop)
+        private void OnEnable()
         {
-            bool nextBeat = beatInfo.beats[(beatIndex + 1) % beatInfo.beats.Length];
-            beatIndex++;
+            waitForLoop = true;
 
-            if (nextBeat)
+            Debug.Log("instantiating");
+            currentThrowObjL = Instantiate(throwObjPrefab, transform.position, Quaternion.identity);
+            Debug.Log("spawning");
+            spawning.SpawnAndAttach(leftHand, throwObjPrefab);
+
+            Debug.Log("instantiating right");
+            currentThrowObjR = Instantiate(throwObjPrefab, transform.position, Quaternion.identity);
+            Debug.Log("spawning right");
+            spawning.SpawnAndAttach(rightHand, currentThrowObjR);
+
+            RunTarget();
+        }
+
+        private void OnDisable()
+        {
+            CancelInvoke();
+        }
+
+        public void NewLoop()
+        {
+            if (!complete)
             {
-                // Start glowing target
-                if (!notePlaying)
+                beatIndex = -1;
+            } else if (invokeComplete)
+            {
+                invokeComplete = false;
+                onCompleteChord.Invoke();
+            }
+
+        }
+
+        private void RunTarget()
+        {
+            if (!waitForLoop)
+            {
+                bool nextBeat = beatInfo.beats[(beatIndex + 1) % beatInfo.beats.Length];
+                beatIndex++;
+
+                if (nextBeat)
                 {
-                    //targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = true;
-                    targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().material = Glow;
-                    notePlaying = true;
-                    Invoke("HitTime", wait);
+
+                    if (!notePlaying)
+                    {
+                        target.GetComponent<Renderer>().material = targetOn;
+
+                        // Right Hand
+                        currentThrowObjR.GetComponent<Renderer>().material = targetOn;
+                        StartCoroutine(LateDetach(rightHand, currentThrowObjR));
+                        notePlaying = true;
+                    }
+                }
+                else if (notePlaying)
+                {
+                    notePlaying = false;
+                    target.GetComponent<Renderer>().material = targetOff;
+
+                    // Right hand
+                    currentThrowObjR = Instantiate(throwObjPrefab, transform.position, Quaternion.identity);
+                    spawning.SpawnAndAttach(rightHand, currentThrowObjR);
                 }
             }
-            else if (notePlaying)
+            if (beatIndex < beatInfo.beats.Length)
             {
-                // Stop glowing target 
-                // Invoke("GlowOff", beatInfo.beatTime * beatInfo.hittableAfter);
-                //targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = false;
-                targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().material = Default;
-                // increment target index
-                beatCount[targetIndex]++;
-                notePlaying = false;
-  
-                if (beatCount[targetIndex] == numBeats[targetIndex])
-                {
-                    // targetIndex++;
-                    targetIndex = (targetIndex + 1) % targets.Length;
-                }   
-            }
-
-            // May need to move this to beginning of method
-            if (targetIndex == targets.Length)
-            {
-                complete = true;
-                invokeComplete = true;
+                Invoke("RunTarget", beatInfo.beatTime);
             }
         }
-        if (targetIndex < targets.Length)
+
+        private IEnumerator LateDetach(Hand hand, GameObject gameObject)
         {
-            Invoke("RunTarget", beatInfo.beatTime);
-        }
-    }
+            yield return new WaitForEndOfFrame();
 
-    /*void GlowOn()
-    {
-        targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = true;
-    }
-
-    void GlowOff()
-    {
-        targets[targetIndex].transform.Find("TargetObject").GetComponent<Renderer>().enabled = false;
-    }*/
-    public void ResetTargets()
-    {
-        NewLoop();
-        waitForLoop = true;
-    }
-    private void HitTime()
-    {
-        if(targets[targetIndex].GetComponent<Collision>().contactCount != hitCount)
-        {
-
+            hand.DetachObject(gameObject, false);
         }
 
+        public void ResetTargets()
+        {
+            NewLoop();
+            waitForLoop = true;
+        }
     }
-    
 }

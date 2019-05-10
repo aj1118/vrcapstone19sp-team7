@@ -15,8 +15,7 @@ GameObject:
   - component: {fileID: 7486442418421631891}
   - component: {fileID: 3373429805413652040}
   - component: {fileID: 2644541165875685307}
-  - component: {fileID: 7962461804441615116}
-  - component: {fileID: 6526245532212278420}
+  - component: {fileID: 3540769246579857455}
   m_Layer: 0
   m_Name: Throw_obj
   m_TagString: Untagged
@@ -178,7 +177,7 @@ MonoBehaviour:
   velocityAverageFrames: 5
   angularVelocityAverageFrames: 11
   estimateOnAwake: 0
---- !u!114 &7962461804441615116
+--- !u!114 &3540769246579857455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,7 +186,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5464823566153457631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffefbea063cab884ca33e5a449e5c22c, type: 3}
+  m_Script: {fileID: 11500000, guid: f9638953ab3307148ac58310e8878ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentFlags: 8
@@ -195,7 +194,7 @@ MonoBehaviour:
   catchingSpeedThreshold: -1
   releaseVelocityStyle: 1
   releaseVelocityTimeOffset: -0.011
-  scaleReleaseVelocity: 1
+  scaleReleaseVelocity: 2
   restoreOriginalParent: 1
   onPickUp:
     m_PersistentCalls:
@@ -204,31 +203,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   onDetachFromHand:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   interactable: {fileID: 0}
---- !u!114 &6526245532212278420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5464823566153457631}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2395371cde435e640b6d9246cfb9eeb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  location: {x: 0, y: 0, z: 0}
