@@ -1015,6 +1015,11 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1752831521}
+    - target: {fileID: 3913596181071325279, guid: e270c8974f5391a489d349cf22569143,
+        type: 3}
+      propertyPath: timeDraw
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e270c8974f5391a489d349cf22569143, type: 3}
 --- !u!1 &5785976660760724659 stripped

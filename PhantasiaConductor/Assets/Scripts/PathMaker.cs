@@ -32,10 +32,18 @@ namespace Valve.VR.InteractionSystem
 
         public Camera playerCamera;
 
+        public AudioSource audioSync;
+
+        public float timeDraw = -1;
+
+        private float timeCounter = 0;
+
 
         private bool tracking = false;
 
         private float acc;
+
+        
 
         private SteamVR_Action_Boolean gripAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
         private SteamVR_Action_Boolean pinchAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");
@@ -60,6 +68,11 @@ namespace Valve.VR.InteractionSystem
                 AddVertexFromHand();
             }
 
+            if (timeDraw > 0 && timeCounter > timeDraw) {
+                tracking = false;
+            }
+            
+
             if (tracking)
             {
                 if (acc > refreshRate)
@@ -67,13 +80,19 @@ namespace Valve.VR.InteractionSystem
                     AddVertexFromHand();
                     acc -= refreshRate;
                 }
+
                 acc += Time.deltaTime;
+                timeCounter += Time.deltaTime;
             }
 
 
             if (gripAction.GetStateUp(hand.handType))
             {
+                if (!tracking && audioSync != null) {
+                    audioSync.Play();
+                }
                 tracking = !tracking;
+                timeCounter = 0;
             }
 
             // make vertex with mouse
