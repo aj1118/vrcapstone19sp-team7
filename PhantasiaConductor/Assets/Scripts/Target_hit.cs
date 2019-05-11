@@ -26,12 +26,8 @@ using UnityEngine;
                 GetComponent<AudioSource>().Play();
                 Invoke("goBack", 0.2f);
             }
-           
-            /* if (GetComponent<Renderer>().material.shader.name == "Glow")
-             {
-                 GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
-             }*/
         }
+
         void goBack()
         {
             GetComponent<Renderer>().material = def;
