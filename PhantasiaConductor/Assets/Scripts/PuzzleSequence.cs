@@ -30,9 +30,6 @@ namespace Valve.VR.InteractionSystem
             {
                 puzzles[i].SetActive(false);
             }
-            Debug.Log("CP" + currentPuzzle);
-            Debug.Log("CLLL" + puzzles.Length);
-
         }
         /*
         public void OnEnable() {
@@ -48,19 +45,12 @@ namespace Valve.VR.InteractionSystem
 
         public void NextPuzzle() {
             currentPuzzle++;
-            Debug.Log("CP" + currentPuzzle);
-            Debug.Log("CLLL" + puzzles.Length);
-            Debug.Log(puzzles.Length + "HIIIIIZZZZZZZZZZZ" + currentPuzzle);
-            GetComponent<AudioSource>().Play();
             if (currentPuzzle < puzzles.Length - 1)
             {
-                //currentPuzzle++;
                 puzzles[currentPuzzle].SetActive(true);
-                Debug.Log("HIIIII" + currentPuzzle);
             } else {
                 //leftHand.renderModelPrefab = leftOriginalPrefab;
                 //rightHand.renderModelPrefab = rightOriginalPrefab;
-
                 onPuzzleComplete.Invoke();
             }
         }
