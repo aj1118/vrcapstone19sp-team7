@@ -132,8 +132,8 @@ public class MelodyObject : MonoBehaviour
 
     public void ObjectFailed()
     {
-        rend.material = GetWindowMaterial();
         pathBeat.Reset();
+        rend.material = GetWindowMaterial();
     }
 
 }
