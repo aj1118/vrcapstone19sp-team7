@@ -20,7 +20,7 @@ public class HarmonyObject : MonoBehaviour
     	Color color = Color.HSVToRGB(transform.position.y % 1f,1f,1f);
     	color.a = .5f;
     	GetComponent<Renderer>().material.color = color;
-    	transform.position.y = hand.GetComponent<transform>().position.y;
+    	// transform.position.y = hand.GetComponent<transform>().position.y;
     }
 
 }

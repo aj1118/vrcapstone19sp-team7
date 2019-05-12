@@ -76,11 +76,9 @@ public class MelodyObject : MonoBehaviour
 
             // if still locked and not moving then handle the window indicator
 
-            if (!pathBeat.moving)
-            {
-                WindowOn();
-                Invoke("WindowOff", windowLength);
-            }
+            WindowOn();
+            Invoke("WindowOff", windowLength);
+
         }
 
 
@@ -104,9 +102,14 @@ public class MelodyObject : MonoBehaviour
 
     public void WindowOn()
     {
+        // we need to keep the window status up to date incase the player fails
         windowStatus = true;
-        rend.material = windowOnMat;
-        hittable.canInteract = true;
+        if (!pathBeat.moving)
+        {
+            rend.material = windowOnMat;
+            hittable.canInteract = true;
+        }
+
     }
 
     public void WindowOff()
@@ -120,7 +123,8 @@ public class MelodyObject : MonoBehaviour
         }
     }
 
-    public Material GetWindowMaterial() {
+    public Material GetWindowMaterial()
+    {
         return windowStatus ? windowOnMat : windowOffMat;
     }
 
@@ -129,7 +133,8 @@ public class MelodyObject : MonoBehaviour
         unlocked = true;
     }
 
-    public void ObjectFailed() {
+    public void ObjectFailed()
+    {
         rend.material = GetWindowMaterial();
         pathBeat.Reset();
     }

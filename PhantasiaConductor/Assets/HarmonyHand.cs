@@ -14,8 +14,8 @@ public class HarmonyHand : MonoBehaviour
     void Update()
     {
 
-    	GetComponent<Renderer>().material.color = Color.HSVToRGB(transform.position.y % 1f,.3f,1f);
-    	transform.position.y = hand.GetComponent<transform>().position.y;
+    	// GetComponent<Renderer>().material.color = Color.HSVToRGB(transform.position.y % 1f,.3f,1f);
+    	// transform.position.y = hand.GetComponent<Transform>().position.y;
     }
 
 }
