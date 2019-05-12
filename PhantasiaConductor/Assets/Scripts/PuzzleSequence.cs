@@ -9,7 +9,7 @@ namespace Valve.VR.InteractionSystem
     {
 
         public GameObject[] puzzles;
-        public int currentPuzzle;
+        private int currentPuzzle;
 
         public Hand leftHand;
         public Hand rightHand;
@@ -30,8 +30,11 @@ namespace Valve.VR.InteractionSystem
             {
                 puzzles[i].SetActive(false);
             }
-        }
+            Debug.Log("CP" + currentPuzzle);
+            Debug.Log("CLLL" + puzzles.Length);
 
+        }
+        /*
         public void OnEnable() {
             // set hands
             leftOriginalPrefab = leftHand.renderModelPrefab;
@@ -40,15 +43,23 @@ namespace Valve.VR.InteractionSystem
             leftHand.renderModelPrefab = handObject;
             rightHand.renderModelPrefab = handObject;
         }
+        */
         
+
         public void NextPuzzle() {
+            currentPuzzle++;
+            Debug.Log("CP" + currentPuzzle);
+            Debug.Log("CLLL" + puzzles.Length);
+            Debug.Log(puzzles.Length + "HIIIIIZZZZZZZZZZZ" + currentPuzzle);
+            GetComponent<AudioSource>().Play();
             if (currentPuzzle < puzzles.Length - 1)
             {
-                currentPuzzle++;
+                //currentPuzzle++;
                 puzzles[currentPuzzle].SetActive(true);
+                Debug.Log("HIIIII" + currentPuzzle);
             } else {
-                leftHand.renderModelPrefab = leftOriginalPrefab;
-                rightHand.renderModelPrefab = rightOriginalPrefab;
+                //leftHand.renderModelPrefab = leftOriginalPrefab;
+                //rightHand.renderModelPrefab = rightOriginalPrefab;
 
                 onPuzzleComplete.Invoke();
             }

@@ -12,6 +12,7 @@ public class BeatInfo : MonoBehaviour
 
     
     public bool[] beats = {true, false, true, false, false, false, true, false};
+    public Vector3[] offsets;
 
     public float beatTime;
 

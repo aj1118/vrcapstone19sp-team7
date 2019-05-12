@@ -12,6 +12,7 @@ public class Hittable : MonoBehaviour
     public UnityEvent onPinched;
     public UnityEvent onTracked;
     
+    
     public bool canHit;
 
     public bool preventRepeated = true;    
@@ -32,7 +33,7 @@ public class Hittable : MonoBehaviour
         }
     }
 
-    void OnHit()
+    void OnTriggerEnter()
     {
         if (canHit)
         {
@@ -93,7 +94,7 @@ public class Hittable : MonoBehaviour
     // Resets the hit count if the hitflag is not set
     public void ResetIfHitFlagNotSet() {
         if (hitCount != 0) {
-            Debug.Log("BadSoundEffect");
+            //Play miss sound?
         }
         if (!HitFlag) {
             HitCount = 0;
