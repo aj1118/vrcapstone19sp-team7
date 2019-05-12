@@ -330,7 +330,7 @@ public class PathBeat : MonoBehaviour
         }
     }
 
-    private bool moving {
+    public bool moving {
         get {
             return isMoving;
         }

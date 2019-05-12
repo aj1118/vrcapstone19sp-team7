@@ -4,123 +4,134 @@ using UnityEngine;
 
 public class MelodyObject : MonoBehaviour
 {
-    
+
     public AudioClip loopClip;
 
-    public float startTime;
-    public float endTime;
-    public float windowLength;
-    public bool unlocked;
+    public Material windowOnMat;
+
+    public Material windowOffMat;
+
+
+    // mat to use while successfully following
+    public Material trackingMat;
+
+    // mat to use after failed
+    public Material failMat;
+
+    public PathBeat pathBeat;
+
+    // public float startTime;
+    // public float endTime;
+    public float windowLength = 1f;
+    public bool unlocked = false;
     public Valve.VR.InteractionSystem.PuzzleSequence puzzleSequence;
 
     private AudioSource loopSource;
     private Collider coll;
     private MeshRenderer rend;
-    private bool inWindow;
-    private bool inContact;
 
     private Hittable hittable;
+
+    private bool windowStatus = false;
+
+    private bool isMoving;
+
 
     void Awake()
     {
         coll = GetComponent<Collider>();
         rend = GetComponent<MeshRenderer>();
         loopSource = GetComponent<AudioSource>();
-        inContact = false;
-        inWindow = false;
-        loopSource.clip = loopClip;
-        loopSource.pitch = loopClip.length / MasterLoop.loopTime;
-        loopSource.spatialBlend = 1.0f;
-        
-        loopSource.clip = loopClip;
-        
+
+        isMoving = false;
+
+        // loopSource.clip = loopClip;
+        // loopSource.pitch = loopClip.length / MasterLoop.loopTime;
+        // loopSource.spatialBlend = 1.0f;
+        // loopSource.clip = loopClip;
+
         hittable = GetComponent<Hittable>();
-        
+
+
     }
-    private void Update()
+
+    void Start()
     {
-        if (!unlocked)
+        hittable.canInteract = false;
+        if (gameObject.activeInHierarchy)
         {
+            rend.enabled = true;
         }
-    }
-
-
-    private void Start()
-    {
-        TurnOff();
     }
 
     public void NewLoop()
     {
-        loopSource.Play();
-        Invoke("StartWindow", MasterLoop.loopTime * startTime);
-        Invoke("StartPlay", MasterLoop.loopTime * (startTime + windowLength));
-        Invoke("EndPlay", MasterLoop.loopTime * endTime);
-    }
-    private void StartWindow()
-    {
-        TurnOn();
-        inWindow = true;
+        if (gameObject.activeInHierarchy)
+        {
+            // just keep looping if unlocked
+            if (unlocked)
+            {
+                pathBeat.ResetPosition();
+            }
+
+            // if still locked and not moving then handle the window indicator
+
+            if (!pathBeat.moving)
+            {
+                WindowOn();
+                Invoke("WindowOff", windowLength);
+            }
+        }
+
+
+        // if (gameObject.activeInHierarchy) {
+        //     Debug.Log("new melody object loop");
+        //     rend.enabled = !rend.enabled;
+        //     windowStatus = !windowStatus;
+
+        //     if (windowStatus) {
+        //         rend.material = windowOnMat;
+        //     } else {
+        //         rend.material = windowOffMat;
+        //     }
+        // }
+
+        // loopSource.Play();
+        // Invoke("StartWindow", MasterLoop.loopTime * startTime);
+        // Invoke("StartPlay", MasterLoop.loopTime * (startTime + windowLength));
+        // Invoke("EndPlay", MasterLoop.loopTime * endTime);
     }
 
-    private void StartPlay()
+    public void WindowOn()
     {
-        inWindow = false;
-        if (!inContact)
+        windowStatus = true;
+        rend.material = windowOnMat;
+        hittable.canInteract = true;
+    }
+
+    public void WindowOff()
+    {
+        windowStatus = false;
+        // only if  not moving
+        if (!pathBeat.moving)
         {
-            loopSource.volume = 0;
-            TurnOff();
+            rend.material = windowOffMat;
+            hittable.canInteract = false;
         }
     }
 
-    private void EndPlay()
-    {
-        if (unlocked)
-        {
-            TurnOff();
-        }
-        else if (inContact)
-        {
-            TurnOff();
-            unlocked = true;
-            //puzzleSequence.NextPuzzle();
-        }
-
+    public Material GetWindowMaterial() {
+        return windowStatus ? windowOnMat : windowOffMat;
     }
 
-    private void TurnOn()
+    public void UnlockObject()
     {
-        if (!unlocked)
-        {
-            coll.enabled = true;
-        }
-        rend.enabled = true;
+        unlocked = true;
     }
 
-    private void TurnOff()
-    {
-        Debug.Log("OFFN");
-        if (!unlocked)
-        {
-            coll.enabled = false;
-        }
-        rend.enabled = false;
+    public void ObjectFailed() {
+        rend.material = GetWindowMaterial();
+        pathBeat.Reset();
     }
 
-    public void OnTriggerEnter()
-    {
-        loopSource.volume = 1;
-        inContact = true;
-    }
-    
-    public void OnTriggerExit()
-    {
-        inContact = false;
-        Debug.Log("EXIT");
-        if (!inWindow)
-        {
-            loopSource.volume = 0;
-            TurnOff();
-        }
-    }
 }
