@@ -7,10 +7,7 @@ namespace Valve.VR.InteractionSystem
     public class CustomSpawnAndAttachToHand : MonoBehaviour
     {
 
-         public Hand hand;
         public GameObject prefab;
-
-		public GameObject obj;
 
         [EnumFlags]
         public Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand | Hand.AttachmentFlags.TurnOnKinematic | Hand.AttachmentFlags.SnapOnAttach;
@@ -31,8 +28,6 @@ namespace Valve.VR.InteractionSystem
             // obj.transform.parent = transform;
             
             h.AttachObject(prefabObject, GrabTypes.None, attachmentFlags);
-            Debug.Log(h.currentAttachedObject + " info " + h.currentAttachedObjectInfo);
-
             return prefabObject;
         }
 

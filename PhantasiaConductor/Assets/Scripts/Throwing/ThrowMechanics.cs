@@ -6,7 +6,6 @@ namespace Valve.VR.InteractionSystem
 {
     public class ThrowMechanics : MonoBehaviour
     {
-    
         public SteamVR_Action_Boolean releaseAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");
         public Hand leftHand;
         public Hand rightHand;
@@ -30,17 +29,19 @@ namespace Valve.VR.InteractionSystem
 
         void FixedUpdate()
         {
-            if (IsButtonDown(leftHand)) {
+            if (leftObj ==  null && IsButtonDown(leftHand)) {
                 leftObj = spawn.SpawnAndAttach(leftHand);
             }
-            if (IsButtonDown(rightHand)) {
+            if (rightObj == null && IsButtonDown(rightHand)) {
                 rightObj = spawn.SpawnAndAttach(rightHand);
             }
             if (WasButtonReleased(leftHand)) {
                 leftHand.DetachObject(leftObj);
+                leftObj = null;
             }
             if (WasButtonReleased(rightHand)) {
                 rightHand.DetachObject(rightObj);
+                rightObj = null;
             }
         }
 

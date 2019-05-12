@@ -1,36 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
     public class Target_hit : MonoBehaviour
     {
         public Material Glow;
         public Material def;
-        public AudioClip chord1;
-        bool hitTarget = false;
+
+        public UnityEvent onHit;
+        private bool canHit;
 
         void Start()
         {
             GetComponent<Renderer>().material = def;
             GetComponent<AudioSource>().playOnAwake = false;
-            GetComponent<AudioSource>().clip = chord1;
-
         }
         void OnCollisionEnter(Collision col)
         {
-            hitTarget = !hitTarget;
-            if (hitTarget)
+            if (canHit)
             {
-                GetComponent<Renderer>().material = Glow;
-                GetComponent<AudioSource>().Play();
-                Invoke("goBack", 0.2f);
+                playTarget();
+                onHit.Invoke();
             }
         }
 
         void goBack()
         {
             GetComponent<Renderer>().material = def;
-            hitTarget = !hitTarget;
+        }
+
+        public void playTarget() {
+            GetComponent<Renderer>().material = Glow;
+            GetComponent<AudioSource>().Play();
+            Invoke("goBack", 0.2f);
+        }
+
+        public bool CanHit
+        {
+        get
+        {
+            return canHit;
+        }
+        set
+        {
+            canHit = value;
+        }
         }
     }

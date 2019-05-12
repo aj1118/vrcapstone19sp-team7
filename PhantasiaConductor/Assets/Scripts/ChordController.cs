@@ -8,10 +8,7 @@ namespace Valve.VR.InteractionSystem
 {
     public class ChordController : MonoBehaviour
     {
-        public GameObject target;
-        public GameObject throwObjPrefab;
-        public Hand leftHand;
-        public Hand rightHand;
+        public GameObject[] targets;
 
         public Material targetOn;
         public Material targetOff;
@@ -21,9 +18,11 @@ namespace Valve.VR.InteractionSystem
         private BeatInfo beatInfo;
         private CustomSpawnAndAttachToHand spawning;
         private int beatIndex = -1;
+        private int targetIndex = 0; 
         private GameObject leftObj;
         private GameObject rightObj;
 
+        private bool[] completed;
         private bool waitForLoop = false;
         private bool notePlaying = false;
         private bool complete = false;
@@ -33,17 +32,14 @@ namespace Valve.VR.InteractionSystem
         {
             beatInfo = transform.Find("BeatInfo").GetComponent<BeatInfo>();
             spawning = GetComponent<CustomSpawnAndAttachToHand>();
+            completed = new bool[targets.Length];
         }
 
         private void OnEnable()
         {
-            waitForLoop = false;
-
-           
-            // leftObj = spawning.SpawnAndAttach(leftHand);
-
-            // rightObj = spawning.SpawnAndAttach(rightHand);
-
+            waitForLoop = true;
+            beatIndex = -1;
+            targetIndex = 0;
             RunTarget();
         }
 
@@ -57,6 +53,9 @@ namespace Valve.VR.InteractionSystem
             if (!complete)
             {
                 beatIndex = -1;
+                targetIndex = 0;
+                waitForLoop = false;
+                notePlaying = false;
             } else if (invokeComplete)
             {
                 invokeComplete = false;
@@ -71,53 +70,56 @@ namespace Valve.VR.InteractionSystem
             {
                 bool nextBeat = beatInfo.beats[(beatIndex + 1) % beatInfo.beats.Length];
                 beatIndex++;
+                Debug.Log(targetIndex);
+                Debug.Log(completed[targetIndex]);
+                Debug.Log("next beat " + beatIndex);
 
-                if (nextBeat)
-                {
-
-                    if (!notePlaying)
-                    {
-                        target.GetComponent<Renderer>().material = targetOn;
-
-                        // Right Hand
-                        // Debug.Log("changing material");
-                        // rightObj.GetComponent<Renderer>().material = targetOn;
-                        // StartCoroutine(LateDetach(rightHand, rightObj));
-                        notePlaying = true;
-                    }
+                if (beatIndex  != 0 && beatInfo.beats[(beatIndex - 1) % beatInfo.beats.Length] 
+                        && completed[targetIndex]) {
+                    targets[targetIndex].GetComponent<Target_hit>().playTarget();
+                    targetIndex++;
                 }
-                else if (notePlaying)
+                if (nextBeat && !completed[targetIndex])
                 {
-                    notePlaying = false;
-                    target.GetComponent<Renderer>().material = targetOff;
-
-                    // Right hand
-                    // rightObj = spawning.SpawnAndAttach(rightHand);
-                    // Debug.Log("new right object " + rightObj);
+                    targets[targetIndex].GetComponent<Renderer>().material = targetOn;
+                    targets[targetIndex].GetComponent<Target_hit>().CanHit = true;   
+                    notePlaying = true;
+                }
+                else if (!nextBeat && notePlaying)
+                {
+                    Invoke("HitWindowOff", beatInfo.hittableAfter * beatInfo.beatTime);
                 }
             }
-            // if (beatIndex < beatInfo.beats.Length)
-            // {
+            if (targetIndex < targets.Length)
+            {
                 Invoke("RunTarget", beatInfo.beatTime);
-            // }
+            } else {
+                complete = true;
+                invokeComplete = true;
+            }
         }
 
-        private IEnumerator LateDetach(Hand hand, GameObject gameObject)
-        {
-            yield return new WaitForEndOfFrame();
-
-            // Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-            hand.DetachObject(gameObject, false);
-            // rb.velocity = hand.GetTrackedObjectVelocity(-0.011f) * 4;
-            // rb.angularVelocity = hand.GetTrackedObjectAngularVelocity(-0.011f);
-            
-            Debug.Log("velocity " + gameObject.GetComponent<Rigidbody>().velocity);
+        private void HitWindowOff() {
+            targets[targetIndex].GetComponent<Renderer>().material = targetOff;
+            targets[targetIndex].GetComponent<Target_hit>().CanHit = false;
+            if (!completed[targetIndex]) {
+                waitForLoop = true;
+            }
+            notePlaying = false;
+            targetIndex++;
         }
 
         public void ResetTargets()
         {
             NewLoop();
             waitForLoop = true;
+        }
+
+        public void HitNote() {
+            if (targetIndex == 0 || completed[targetIndex - 1]) {
+                targets[targetIndex].GetComponent<Target_hit>().CanHit = false;
+                completed[targetIndex] = true;
+            }
         }
     }
 }
