@@ -28,8 +28,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1714766202605959495}
-  m_RootOrder: 1
+  m_Father: {fileID: 4026090742114099901}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2421413794154763847
 AudioSource:
@@ -155,8 +155,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1714766202605959495}
-  m_RootOrder: 2
+  m_Father: {fileID: 4026090742114099901}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2421413794170871676
 AudioSource:
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 1999884331102483725}
   - component: {fileID: 7989146467858553148}
   - component: {fileID: 3279794329725738266}
-  - component: {fileID: 425904746}
+  - component: {fileID: 2515879973125839074}
   m_Layer: 0
   m_Name: HitAnimation
   m_TagString: Untagged
@@ -286,8 +286,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1714766202605959495}
-  m_RootOrder: 4
+  m_Father: {fileID: 4026090742114099901}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &634313788554258858
 MeshRenderer:
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   animationName: Bounce
---- !u!111 &425904746
+--- !u!111 &2515879973125839074
 Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -377,7 +377,8 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: c6321c9997b4391469ddb489abf983f2, type: 2}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: c6321c9997b4391469ddb489abf983f2, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -416,7 +417,11 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2421413794154763840}
+  - {fileID: 2421413794170871677}
+  - {fileID: 3933046324723421186}
+  - {fileID: 735685506930203728}
   m_Father: {fileID: 1714766202605959495}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -513,7 +518,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2486190802393312402, guid: fc8db40cdea324349aed0f6c741f61a9,
+          type: 3}
         m_MethodName: NextPuzzle
         m_Mode: 1
         m_Arguments:
@@ -526,8 +532,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onPinched:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onTracked:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   canHit: 0
-  broadcastUp: 0
+  preventRepeated: 1
 --- !u!23 &7793390075119463934
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -732,10 +748,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4026090742114099901}
-  - {fileID: 2421413794154763840}
-  - {fileID: 2421413794170871677}
-  - {fileID: 3933046324723421186}
-  - {fileID: 735685506930203728}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -767,8 +779,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1714766202605959495}
-  m_RootOrder: 3
+  m_Father: {fileID: 4026090742114099901}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8615102722194774919
 MonoBehaviour:

@@ -5,23 +5,23 @@ using UnityEngine;
 public class HitAnimation : MonoBehaviour
 {
     public float speed;
-	Animator anim;
     public string animationName;
-    Animation animClip;
+    Animation anim;
 
     // Start is called before the first frame update
     void Awake()
     {
-       
-    	anim = GetComponent<Animator>();
-        anim.speed = speed;
-        animClip = GetComponent<Animation>();
+        anim = GetComponent<Animation>();
+        foreach (AnimationState state in anim)
+        {
+            state.speed = speed;
+        }
     }
 
     void OnEnable() {
-        anim.Play(animationName);
-        Invoke("GoodbyeCruelWorld", animClip.clip.length / speed);
-    }
+        anim.Play();
+        Invoke("GoodbyeCruelWorld", anim.clip.length / speed);
+    }   
 
     void GoodbyeCruelWorld() {
         gameObject.SetActive(false);

@@ -11,11 +11,14 @@ public class BeatBlinkController : MonoBehaviour
     public BeatInfo beatInfo;
     public bool unlocked;
     private int beatCount = 0;
+    private int hitCount = 0;
+    private Vector3 originalPos;
 
     void Awake()
     {
         unlocked = false;
         blink = GetComponent<Blink>();
+        originalPos = transform.position;
     }
 
     public void Unlock()
@@ -31,32 +34,41 @@ public class BeatBlinkController : MonoBehaviour
  
     void RunBeat()
     {
-        
+
         beatCount++;
-        if (beatCount < beatInfo.beats.Length - 1)
+        bool isHit = beatInfo.beats[beatCount];
+        bool isNextHit = beatInfo.beats[(beatCount + 1) % beatInfo.beats.Length];
+        
+
+        if (beatInfo.offsets.Length > 0)
         {
-            Invoke("RunBeat", beatInfo.beatTime);
+            transform.position += beatInfo.offsets[0];
         }
+
         if (unlocked)
         {
-            if (beatInfo.beats[beatCount])
+            if (isHit)
             {
+                updateOffset();
                 onHitUnlocked.Invoke();
             }
         }
         else
         {
-            bool nextBeat = beatInfo.beats[(beatCount + 1) % beatInfo.beats.Length];
-            if (nextBeat)
+            if (isNextHit)
             {
                 Invoke("BlinkOn", beatInfo.beatTime - (beatInfo.beatTime * beatInfo.hittableBefore));
             }
-            else
+            if (isHit)
             {
                 Invoke("BlinkOff", beatInfo.beatTime * beatInfo.hittableAfter);
             }
         }
-        
+
+        if (beatCount < beatInfo.beats.Length - 1)
+        {
+            Invoke("RunBeat", beatInfo.beatTime);
+        }
     }
     
     void BlinkOn()
@@ -67,6 +79,21 @@ public class BeatBlinkController : MonoBehaviour
     void BlinkOff()
     {
         blink.BlinkOffOnce();
+        updateOffset();
+    }
+
+    private void updateOffset()
+    {
+        if (beatInfo.offsets.Length != 0)
+        {
+            hitCount++;
+            if (hitCount == beatInfo.offsets.Length)
+            {
+                hitCount = 0;
+            }
+            transform.position = originalPos + beatInfo.offsets[hitCount];
+            
+        }
     }
 
     void OnDisable()
