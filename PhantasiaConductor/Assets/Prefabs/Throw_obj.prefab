@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7486442418421631891}
   - component: {fileID: 3373429805413652040}
   - component: {fileID: 2644541165875685307}
-  - component: {fileID: 3540769246579857455}
+  - component: {fileID: 164002987860486405}
   m_Layer: 0
   m_Name: Throw_obj
   m_TagString: Untagged
@@ -30,9 +30,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5464823566153457631}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6021656, y: 0, z: 2.203125}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.32650566, y: -0.21263102, z: 0.6272114, w: 0.67437977}
+  m_LocalPosition: {x: 0.051999986, y: -0.015699983, z: -0.11630082}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
   velocityAverageFrames: 5
   angularVelocityAverageFrames: 11
   estimateOnAwake: 0
---- !u!114 &3540769246579857455
+--- !u!114 &164002987860486405
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,13 +189,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9638953ab3307148ac58310e8878ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachmentFlags: 8
+  attachmentFlags: 44
   attachmentOffset: {fileID: 0}
   catchingSpeedThreshold: -1
-  releaseVelocityStyle: 1
+  releaseVelocityStyle: 3
   releaseVelocityTimeOffset: -0.011
-  scaleReleaseVelocity: 2
-  restoreOriginalParent: 1
+  scaleReleaseVelocity: 5
+  restoreOriginalParent: 0
   onPickUp:
     m_PersistentCalls:
       m_Calls: []

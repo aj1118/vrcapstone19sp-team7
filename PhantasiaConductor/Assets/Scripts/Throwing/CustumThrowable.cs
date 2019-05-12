@@ -73,16 +73,10 @@ namespace Valve.VR.InteractionSystem
 
         }
 
-        protected virtual void OnHandHoverBegin(Hand hand)
-        { 
-            return;
-        }
-
         //-------------------------------------------------
         protected virtual void OnAttachedToHand(Hand hand)
         {
             //Debug.Log("<b>[SteamVR Interaction]</b> Pickup: " + hand.GetGrabStarting().ToString());
-
             hadInterpolation = this.rigidbody.interpolation;
 
             attached = true;
