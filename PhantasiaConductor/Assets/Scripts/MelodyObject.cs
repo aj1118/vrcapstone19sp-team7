@@ -34,16 +34,13 @@ public class MelodyObject : MonoBehaviour
 
     private bool windowStatus = false;
 
-    private bool isMoving;
-
 
     void Awake()
     {
         coll = GetComponent<Collider>();
         rend = GetComponent<MeshRenderer>();
         loopSource = GetComponent<AudioSource>();
-
-        isMoving = false;
+        
 
         // loopSource.clip = loopClip;
         // loopSource.pitch = loopClip.length / MasterLoop.loopTime;
