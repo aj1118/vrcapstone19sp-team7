@@ -21,8 +21,8 @@ namespace Valve.VR.InteractionSystem
         private BeatInfo beatInfo;
         private CustomSpawnAndAttachToHand spawning;
         private int beatIndex = -1;
-        private GameObject currentThrowObjL;
-        private GameObject currentThrowObjR;
+        private GameObject leftObj;
+        private GameObject rightObj;
 
         private bool waitForLoop = false;
         private bool notePlaying = false;
@@ -37,17 +37,12 @@ namespace Valve.VR.InteractionSystem
 
         private void OnEnable()
         {
-            waitForLoop = true;
+            waitForLoop = false;
 
-            Debug.Log("instantiating");
-            currentThrowObjL = Instantiate(throwObjPrefab, transform.position, Quaternion.identity);
-            Debug.Log("spawning");
-            spawning.SpawnAndAttach(leftHand, throwObjPrefab);
+           
+            // leftObj = spawning.SpawnAndAttach(leftHand);
 
-            Debug.Log("instantiating right");
-            currentThrowObjR = Instantiate(throwObjPrefab, transform.position, Quaternion.identity);
-            Debug.Log("spawning right");
-            spawning.SpawnAndAttach(rightHand, currentThrowObjR);
+            // rightObj = spawning.SpawnAndAttach(rightHand);
 
             RunTarget();
         }
@@ -85,8 +80,9 @@ namespace Valve.VR.InteractionSystem
                         target.GetComponent<Renderer>().material = targetOn;
 
                         // Right Hand
-                        currentThrowObjR.GetComponent<Renderer>().material = targetOn;
-                        StartCoroutine(LateDetach(rightHand, currentThrowObjR));
+                        // Debug.Log("changing material");
+                        // rightObj.GetComponent<Renderer>().material = targetOn;
+                        // StartCoroutine(LateDetach(rightHand, rightObj));
                         notePlaying = true;
                     }
                 }
@@ -96,21 +92,26 @@ namespace Valve.VR.InteractionSystem
                     target.GetComponent<Renderer>().material = targetOff;
 
                     // Right hand
-                    currentThrowObjR = Instantiate(throwObjPrefab, transform.position, Quaternion.identity);
-                    spawning.SpawnAndAttach(rightHand, currentThrowObjR);
+                    // rightObj = spawning.SpawnAndAttach(rightHand);
+                    // Debug.Log("new right object " + rightObj);
                 }
             }
-            if (beatIndex < beatInfo.beats.Length)
-            {
+            // if (beatIndex < beatInfo.beats.Length)
+            // {
                 Invoke("RunTarget", beatInfo.beatTime);
-            }
+            // }
         }
 
         private IEnumerator LateDetach(Hand hand, GameObject gameObject)
         {
             yield return new WaitForEndOfFrame();
 
+            // Rigidbody rb = gameObject.GetComponent<Rigidbody>();
             hand.DetachObject(gameObject, false);
+            // rb.velocity = hand.GetTrackedObjectVelocity(-0.011f) * 4;
+            // rb.angularVelocity = hand.GetTrackedObjectAngularVelocity(-0.011f);
+            
+            Debug.Log("velocity " + gameObject.GetComponent<Rigidbody>().velocity);
         }
 
         public void ResetTargets()

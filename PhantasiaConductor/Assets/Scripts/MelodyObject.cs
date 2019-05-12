@@ -112,6 +112,7 @@ public class MelodyObject : MonoBehaviour
         loopSource.volume = 1;
         inContact = true;
     }
+    
     public void OnTriggerExit()
     {
         inContact = false;
