@@ -20,10 +20,13 @@ namespace Valve.VR.InteractionSystem
 
         private GameObject leftOriginalPrefab;
         private GameObject rightOriginalPrefab;
+        private AudioSource source;
 
         // Start is called before the first frame update
         void Awake()
         {
+            source = GetComponent<AudioSource>();
+
             currentPuzzle = 0;
             puzzles[0].SetActive(true);
             for (int i = 1; i < puzzles.Length; i++)
@@ -44,10 +47,12 @@ namespace Valve.VR.InteractionSystem
         
 
         public void NextPuzzle() {
+            source.Play();
             currentPuzzle++;
-            if (currentPuzzle < puzzles.Length - 1)
+            if (currentPuzzle < puzzles.Length)
             {
                 puzzles[currentPuzzle].SetActive(true);
+
             } else {
                 //leftHand.renderModelPrefab = leftOriginalPrefab;
                 //rightHand.renderModelPrefab = rightOriginalPrefab;
