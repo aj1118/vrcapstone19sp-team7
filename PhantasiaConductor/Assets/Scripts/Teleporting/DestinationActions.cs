@@ -7,7 +7,7 @@ namespace Valve.VR.InteractionSystem
     public class DestinationActions : MonoBehaviour
     {
         // Start is called before the first frame update
-        public GameObject puzzlePrefab;
+        public GameObject puzzleObj;
         public GameObject startingPosition;
         public int returnDelay = 1;
         public GameObject[] nextActive;
@@ -32,7 +32,7 @@ namespace Valve.VR.InteractionSystem
         }
 
         public void onArrive() {
-            if (puzzlePrefab != null) 
+            if (puzzleObj != null) 
             {
                 int childCount = instruments.transform.childCount;
                 for (int i = 0; i < childCount; i++) {
@@ -45,12 +45,12 @@ namespace Valve.VR.InteractionSystem
                     teleportIndicator.SetActive(false);
                 }
 
-                puzzlePrefab.SetActive(true);
+                puzzleObj.SetActive(true);
             }
         }
 
         public void onPrepareToLeave() {
-            if (puzzlePrefab != null)
+            if (puzzleObj != null)
             { 
                 StartCoroutine(glowIndicator());
             }
@@ -62,10 +62,10 @@ namespace Valve.VR.InteractionSystem
             yield return new WaitForSeconds(returnDelay);
 
             // puzzlePrefab.SetActive(false);
-            Vector3 newPos = puzzlePrefab.transform.position;
+            Vector3 newPos = puzzleObj.transform.position;
             newPos.y += puzzleHeight;
 
-            puzzlePrefab.transform.position = newPos;
+            puzzleObj.transform.position = newPos;
 
             Renderer[] renderers = instruments.GetComponentsInChildren<Renderer>();
             for (int i = 0; i < renderers.Length; i++)

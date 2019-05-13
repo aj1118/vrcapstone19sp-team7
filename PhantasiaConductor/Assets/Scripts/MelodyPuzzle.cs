@@ -28,6 +28,7 @@ public class MelodyPuzzle : MonoBehaviour
         
 
         var path = CreateAndSetupPath("p1", MasterLoop.loopTime);
+        path.gameObject.SetActive(false);
         // path.gameObject.SetActive(true);
         var path1 = CreateAndSetupPath("p2", MasterLoop.loopTime);
         path1.gameObject.SetActive(false);
@@ -120,5 +121,9 @@ public class MelodyPuzzle : MonoBehaviour
 
         go.transform.position = path.obj.transform.position;
         return emitter;
+    }
+
+    void OnEnable() {
+        allPaths[0].gameObject.SetActive(true);
     }
 }
