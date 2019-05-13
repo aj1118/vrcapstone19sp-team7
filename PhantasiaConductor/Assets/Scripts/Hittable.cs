@@ -12,9 +12,7 @@ public class Hittable : MonoBehaviour
     public UnityEvent onPinched;
     public UnityEvent onTracked;
     
-    
     public bool canHit;
-
     public bool preventRepeated = true;    
 
     // keep track of hit counts
@@ -22,7 +20,6 @@ public class Hittable : MonoBehaviour
 
     // use hit flag to keep track of hits
     private bool hitFlag;
-
 
 
     void Start()

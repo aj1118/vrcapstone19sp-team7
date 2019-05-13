@@ -31,12 +31,10 @@ public class MelodyObject : MonoBehaviour
         loopSource.clip = loopClip;
         loopSource.pitch = loopClip.length / MasterLoop.loopTime;
         loopSource.spatialBlend = 1.0f;
-        
         loopSource.clip = loopClip;
-        
         hittable = GetComponent<Hittable>();
-        
     }
+
     private void Update()
     {
         if (!unlocked)
@@ -57,6 +55,7 @@ public class MelodyObject : MonoBehaviour
         Invoke("StartPlay", MasterLoop.loopTime * (startTime + windowLength));
         Invoke("EndPlay", MasterLoop.loopTime * endTime);
     }
+    
     private void StartWindow()
     {
         TurnOn();
