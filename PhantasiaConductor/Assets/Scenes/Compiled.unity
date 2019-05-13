@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 81f714daf7144784b8a2f42f1cd30927, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -417,16 +417,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 440702616}
     m_Modifications:
-    - target: {fileID: 2486190801299894929, guid: fc8db40cdea324349aed0f6c741f61a9,
-        type: 3}
-      propertyPath: m_Name
-      value: Percussion Puzzle
-      objectReference: {fileID: 0}
-    - target: {fileID: 2486190801299894929, guid: fc8db40cdea324349aed0f6c741f61a9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2486190802393312402, guid: fc8db40cdea324349aed0f6c741f61a9,
         type: 3}
       propertyPath: onPuzzleComplete.m_PersistentCalls.m_Calls.Array.size
@@ -541,6 +531,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894929, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_Name
+      value: Percussion Puzzle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486190801299894929, guid: fc8db40cdea324349aed0f6c741f61a9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 324266899973986145, guid: fc8db40cdea324349aed0f6c741f61a9,
         type: 3}
@@ -788,6 +788,27 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 324170383}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &590267781 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 181182, guid: e0997c221c562d84b8cc52d50272577f,
+    type: 3}
+  m_PrefabInstance: {fileID: 490500721}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &590267786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590267781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da21a01d8c5d1944cbda9cf2eb8d0a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degPerSecond: 5
+  amp: 0.25
+  freq: 0.8
 --- !u!1001 &611678657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1532,6 +1553,27 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1962078159}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1231763695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 199496, guid: cf64eccfce7ebf34e9114180bc1c3112,
+    type: 3}
+  m_PrefabInstance: {fileID: 869430783}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1231763700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231763695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da21a01d8c5d1944cbda9cf2eb8d0a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degPerSecond: 9
+  amp: 0.25
+  freq: 1
 --- !u!1 &1360650521
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,6 +2242,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blank: {fileID: 2100000, guid: c6e81f6212067344883e275ed332f31c, type: 2}
   color: {fileID: 2100000, guid: d48ec04860db1c94d96f4c132388508e, type: 2}
+--- !u!114 &1612164986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612164980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da21a01d8c5d1944cbda9cf2eb8d0a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degPerSecond: 8
+  amp: 0.25
+  freq: 0.9
 --- !u!1 &1631055757
 GameObject:
   m_ObjectHideFlags: 0
