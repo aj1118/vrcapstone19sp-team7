@@ -79,7 +79,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -124,7 +124,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!1 &9193321259803914114
 GameObject:
@@ -205,7 +205,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -250,7 +250,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!1 &9193321259980964580
 GameObject:
@@ -277,7 +277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9193321259980964580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3848877, y: 0.33011603, z: -0.95223975}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9193321259803914115}
@@ -300,5 +300,6 @@ MonoBehaviour:
   debugMode: 1
   leftHand: {fileID: 0}
   rightHand: {fileID: 0}
-  leftLineRenderer: {fileID: 0}
-  rightLineRenderer: {fileID: 0}
+  leftLineRenderer: {fileID: 9193321259268468719}
+  rightLineRenderer: {fileID: 9193321259803914116}
+  extraRays: 0
