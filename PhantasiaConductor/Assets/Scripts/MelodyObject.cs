@@ -60,6 +60,20 @@ public class MelodyObject : MonoBehaviour
         {
             rend.enabled = true;
         }
+
+        // right now just hardcode the default masterloop time of 4.0f
+        float delta = 4.0f / beatInfo.numBeats;
+        int i = 0;
+
+        // find the first beat and use that as the offset
+        foreach (var b in beatInfo.beats) {
+            if (b) {
+                break;
+            }
+            i++;
+        }
+
+        beatOffset = i * delta;
     }
 
     public void NewLoop()

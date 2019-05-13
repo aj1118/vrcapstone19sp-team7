@@ -402,6 +402,33 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
+        type: 3}
+      propertyPath: boidPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
+        type: 3}
+      propertyPath: chasee
+      value: 
+      objectReference: {fileID: 5785976660760724659}
+    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
+        type: 3}
+      propertyPath: flockSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
+        type: 3}
+      propertyPath: boidPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1509598871792621677, guid: 5e24121c7b3b85c4587142d3ed4d42a1,
+        type: 3}
+    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
+        type: 3}
+      propertyPath: boidPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 3504914274265399056, guid: da4ece4239b4e254087749690ca292aa,
+        type: 3}
     - target: {fileID: 124335380267662659, guid: cadb5e4850a2d124a9928d7659861958,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -457,33 +484,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
-        type: 3}
-      propertyPath: boidPrefabs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
-        type: 3}
-      propertyPath: chasee
-      value: 
-      objectReference: {fileID: 5785976660760724659}
-    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
-        type: 3}
-      propertyPath: flockSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
-        type: 3}
-      propertyPath: boidPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 1509598871792621677, guid: 5e24121c7b3b85c4587142d3ed4d42a1,
-        type: 3}
-    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
-        type: 3}
-      propertyPath: boidPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 3504914274265399056, guid: da4ece4239b4e254087749690ca292aa,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cadb5e4850a2d124a9928d7659861958, type: 3}
 --- !u!1 &1451662862
@@ -562,6 +562,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
+        type: 3}
+      propertyPath: flockSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
+        type: 3}
+      propertyPath: chasee
+      value: 
+      objectReference: {fileID: 273300230}
     - target: {fileID: 124335380267662659, guid: cadb5e4850a2d124a9928d7659861958,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -617,16 +627,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
-        type: 3}
-      propertyPath: flockSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
-        type: 3}
-      propertyPath: chasee
-      value: 
-      objectReference: {fileID: 273300230}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cadb5e4850a2d124a9928d7659861958, type: 3}
 --- !u!1 &1691096466
@@ -828,6 +828,10 @@ PrefabInstance:
     - target: {fileID: 4226425933831062, guid: 401fbddef9dc6eb43a1aeab8c9251ef2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4226425933831063, guid: 401fbddef9dc6eb43a1aeab8c9251ef2, type: 3}
+      propertyPath: beatInfos.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4226425933831063, guid: 401fbddef9dc6eb43a1aeab8c9251ef2, type: 3}
       propertyPath: flock

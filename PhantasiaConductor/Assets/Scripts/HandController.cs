@@ -27,6 +27,13 @@ namespace Valve.VR.InteractionSystem
         public LineRenderer leftLineRenderer;
         public LineRenderer rightLineRenderer;
 
+        public bool extraRays = false;
+
+        // for extra help with raycasting
+        private List<LineRenderer> leftExtraLineRenderers;
+        private List<LineRenderer> rightExtraLineRenderers;
+
+
         private SteamVR_Action_Boolean gripAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
         private SteamVR_Action_Boolean pinchAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");
 
@@ -47,7 +54,13 @@ namespace Valve.VR.InteractionSystem
             interactedLastFrame[rightHand] = false;
             interactedLastFrame[leftHand] = false;
 
+            leftExtraLineRenderers = new List<LineRenderer>();
+            rightExtraLineRenderers = new List<LineRenderer>();
 
+            for (var i = 0; i < 4; i++) {
+                // leftExtraLineRenderers.Add(gameObject.AddComponent<LineRenderer>());
+                // rightExtraLineRenderers.Add(gameObject.AddComponent<LineRenderer>());
+            }
         }
 
 
