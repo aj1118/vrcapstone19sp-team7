@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -12,17 +13,25 @@ namespace Valve.VR.InteractionSystem
         public GameObject[] nextActive;
         public Material[] colorMaterials;
 
+        public UnityEvent LoadPuzzle;
+        public UnityEvent OnDepart;
+
         private GameObject instruments;
         private GameObject teleportIndicator;
         private float puzzleHeight = 1.5f;
+        private Color alphaColor;
 
         void Awake() {
             instruments = transform.Find("Instruments").gameObject;
             teleportIndicator = transform.Find("TeleportInd").gameObject;
         }
 
+        private void Update()
+        {
+            
+        }
+
         public void onArrive() {
-            Debug.Log("called onArrive");
             if (puzzlePrefab != null) 
             {
                 int childCount = instruments.transform.childCount;
@@ -36,7 +45,6 @@ namespace Valve.VR.InteractionSystem
                     teleportIndicator.SetActive(false);
                 }
 
-                Debug.Log("setting puzzle active");
                 puzzlePrefab.SetActive(true);
             }
         }

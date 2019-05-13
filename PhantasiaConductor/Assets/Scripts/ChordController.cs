@@ -17,6 +17,7 @@ namespace Valve.VR.InteractionSystem
 
         public UnityEvent onCompleteChord;
 
+        private AudioSource loopSource;
         private BeatInfo beatInfo;
         private CustomSpawnAndAttachToHand spawning;
         private int beatIndex = -1;
@@ -32,6 +33,7 @@ namespace Valve.VR.InteractionSystem
 
         private void Awake()
         {
+            loopSource = loopSource = transform.Find("LoopSource").GetComponent<AudioSource>();
             beatInfo = transform.Find("BeatInfo").GetComponent<BeatInfo>();
             spawning = GetComponent<CustomSpawnAndAttachToHand>();
             completed = new bool[targets.Length];
@@ -52,16 +54,27 @@ namespace Valve.VR.InteractionSystem
 
         public void NewLoop()
         {
-            if (!complete)
+            if (gameObject.activeInHierarchy)
             {
-                beatIndex = -1;
                 targetIndex = 0;
-                waitForLoop = false;
-                notePlaying = false;
-            } else if (invokeComplete)
-            {
-                invokeComplete = false;
-                onCompleteChord.Invoke();
+                beatIndex = -1;
+                loopSource.Play();
+
+                if (!complete)
+                {
+                    waitForLoop = false;
+                    notePlaying = false;
+                }
+                else if (invokeComplete)
+                {
+                    invokeComplete = false;
+                    onCompleteChord.Invoke();
+                    foreach (GameObject target in targets) {
+                        target.GetComponent<Target_hit>().Complete = true;
+                        target.GetComponent<Target_hit>().CanHit = false;
+                    }
+                    PlayAnimation();
+                } 
             }
 
         }
@@ -72,9 +85,6 @@ namespace Valve.VR.InteractionSystem
             {
                 bool nextBeat = beatInfo.beats[(beatIndex + 1) % beatInfo.beats.Length];
                 beatIndex++;
-                Debug.Log(targetIndex);
-                Debug.Log(completed[targetIndex]);
-                Debug.Log("next beat " + beatIndex);
 
                 if (beatIndex  != 0 && beatInfo.beats[(beatIndex - 1) % beatInfo.beats.Length] 
                         && completed[targetIndex]) {
@@ -89,7 +99,7 @@ namespace Valve.VR.InteractionSystem
                 }
                 else if (!nextBeat && notePlaying)
                 {
-                    Invoke("HitWindowOff", beatInfo.hittableAfter * beatInfo.beatTime);
+                    StartCoroutine(HitWindowOff(targetIndex));
                 }
             }
             if (targetIndex < targets.Length)
@@ -101,14 +111,34 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
-        private void HitWindowOff() {
-            targets[targetIndex].GetComponent<Renderer>().material = targetOff;
-            targets[targetIndex].GetComponent<Target_hit>().CanHit = false;
-            if (!completed[targetIndex]) {
+        private void PlayAnimation()
+        {
+            bool nextBeat = beatInfo.beats[(beatIndex + 1) % beatInfo.beats.Length];
+            beatIndex++;
+
+            if (beatIndex != 0 && beatInfo.beats[(beatIndex - 1) % beatInfo.beats.Length])
+            {
+                targets[targetIndex].GetComponent<Target_hit>().playTarget();
+                targetIndex++;
+            }
+
+            Invoke("PlayAnimation", beatInfo.beatTime);
+        }
+
+        private IEnumerator HitWindowOff(int index) {
+            yield return new WaitForSeconds(beatInfo.hittableAfter * beatInfo.beatTime);
+
+            targets[index].GetComponent<Renderer>().material = targetOff;
+            targets[index].GetComponent<Target_hit>().CanHit = false;
+            if (!completed[index]) {
                 waitForLoop = true;
             }
             notePlaying = false;
-            targetIndex++;
+            Debug.Log(index);
+            if (index == targetIndex)
+            {
+                targetIndex++;
+            }
         }
 
         public void ResetTargets()
