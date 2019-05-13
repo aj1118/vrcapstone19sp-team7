@@ -20,20 +20,19 @@ public class MelodyObject : MonoBehaviour
 
     public PathBeat pathBeat;
 
-    // public float startTime;
-    // public float endTime;
+    // only for determining when it starts currently
+    public BeatInfo beatInfo;
+
+    
     public float windowLength = 1f;
     public bool unlocked = false;
-    public Valve.VR.InteractionSystem.PuzzleSequence puzzleSequence;
+
+    public float beatOffset = 0;
 
     private AudioSource loopSource;
     private Collider coll;
     private MeshRenderer rend;
 
-    public float endTime;
-    public float startTime;
-    public bool inWindow;
-    public bool inContact;
     private Hittable hittable;
 
     private bool windowStatus = false;
@@ -44,32 +43,18 @@ public class MelodyObject : MonoBehaviour
         coll = GetComponent<Collider>();
         rend = GetComponent<MeshRenderer>();
         loopSource = GetComponent<AudioSource>();
-        inContact = false;
-        inWindow = false;
-        loopSource.clip = loopClip;
-        loopSource.pitch = loopClip.length / MasterLoop.loopTime;
-        loopSource.spatialBlend = 1.0f;
-        loopSource.clip = loopClip;
+        
+
+        // loopSource.clip = loopClip;
+        // loopSource.pitch = loopClip.length / MasterLoop.loopTime;
+        // loopSource.spatialBlend = 1.0f;
+        // loopSource.clip = loopClip;
+
         hittable = GetComponent<Hittable>();
-    }
-
-    private void Update()
-    {
-
     }
 
     void Start()
     {
-        loopSource.Play();
-        Invoke("StartWindow", MasterLoop.loopTime * startTime);
-        Invoke("StartPlay", MasterLoop.loopTime * (startTime + windowLength));
-        Invoke("EndPlay", MasterLoop.loopTime * endTime);
-    }
-    
-    private void StartWindow()
-    {
-        //TurnOn();
-        inWindow = true;
         hittable.canInteract = false;
         if (gameObject.activeInHierarchy)
         {
@@ -88,24 +73,10 @@ public class MelodyObject : MonoBehaviour
             }
 
             // if still locked and not moving then handle the window indicator
-
-            WindowOn();
-            Invoke("WindowOff", windowLength);
-
+            Invoke("WindowOn", beatOffset);
+            Invoke("WindowOff", windowLength + beatOffset);
         }
 
-
-        // if (gameObject.activeInHierarchy) {
-        //     Debug.Log("new melody object loop");
-        //     rend.enabled = !rend.enabled;
-        //     windowStatus = !windowStatus;
-
-        //     if (windowStatus) {
-        //         rend.material = windowOnMat;
-        //     } else {
-        //         rend.material = windowOffMat;
-        //     }
-        // }
 
         // loopSource.Play();
         // Invoke("StartWindow", MasterLoop.loopTime * startTime);
@@ -128,6 +99,7 @@ public class MelodyObject : MonoBehaviour
     public void WindowOff()
     {
         windowStatus = false;
+
         // only if  not moving
         if (!pathBeat.moving)
         {

@@ -100,6 +100,7 @@ public class PathBeat : MonoBehaviour
             }
 
             float completion = timeElapsed / t;
+            // Debug.Log("completion" + completion + "time elapsed" + timeElapsed + " t" + t);
 
             v = Vector3.Lerp(lineRenderer.GetPosition(index),
                              lineRenderer.GetPosition(index + 1),
@@ -111,6 +112,7 @@ public class PathBeat : MonoBehaviour
             {
                 timeElapsed -= t;
                 index++;
+                // Debug.Log("move index" + index);
 
                 if (!canMoveForward)
                 {
@@ -162,13 +164,13 @@ public class PathBeat : MonoBehaviour
     {
         index = 0;
         obj.transform.localPosition = lineRenderer.GetPosition(index);
+        timeElapsed = 0;
     }
 
     // resets to a state as if it was never started
     public void Reset()
     {
-        index = 0;
-        obj.transform.localPosition = lineRenderer.GetPosition(index);
+        ResetPosition();
         moving = false;
         hasFailed = false;
 

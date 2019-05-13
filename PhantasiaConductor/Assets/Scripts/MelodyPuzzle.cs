@@ -27,7 +27,7 @@ public class MelodyPuzzle : MonoBehaviour
         // var loopTime = masterLoop.loopTime;
         // var loopTime = 10;
 
-        var path = CreateAndSetupPath("bezierpath", 10);
+        var path = CreateAndSetupPath("bezierpath", 4);
         // path.gameObject.SetActive(true);
         var path1 = CreateAndSetupPath("path1", 10);
         path1.gameObject.SetActive(false);
@@ -87,7 +87,7 @@ public class MelodyPuzzle : MonoBehaviour
     PathBeat CreateAndSetupPath(string fileName, float t = 3)
     {
         PathBeat pathBeat = InstantiatePath(fileName, t);
-        BoidEmitter emitter = AddBoidEmitter(pathBeat);
+        // BoidEmitter emitter = AddBoidEmitter(pathBeat);
 
         pathBeat.onReachedEnd.AddListener(delegate ()
         {
@@ -97,7 +97,7 @@ public class MelodyPuzzle : MonoBehaviour
         pathBeat.onSuccessful.AddListener(delegate ()
         {
             Debug.Log("successfully completed");
-            emitter.EmitBoids(6);
+            // emitter.EmitBoids(6);
         });
 
         pathBeat.onFailed.AddListener(delegate ()
