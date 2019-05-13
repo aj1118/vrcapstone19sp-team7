@@ -65,11 +65,13 @@ public class PathBeat : MonoBehaviour
     void Start()
     {
         lineVisible = isRenderingLine;
-        if (!string.IsNullOrEmpty(fileName)) {
+        if (!string.IsNullOrEmpty(fileName))
+        {
             LoadFromFile(fileName);
         }
 
-        if (startLooping) {
+        if (startLooping)
+        {
             Begin();
         }
     }
@@ -330,12 +332,15 @@ public class PathBeat : MonoBehaviour
         }
     }
 
-    private bool moving {
-        get {
+    public bool moving
+    {
+        get
+        {
             return isMoving;
         }
 
-        set {
+        set
+        {
             isMoving = value;
         }
     }
@@ -356,31 +361,37 @@ public class PathBeat : MonoBehaviour
     private void OnFailed()
     {
         hasFailed = true;
-        onFailed.Invoke();
+
 
         Renderer renderer = obj.GetComponent<Renderer>();
         if (renderer != null)
         {
             renderer.material = failedMat;
         }
+
+        onFailed.Invoke();
     }
 
     private void OnSuccess()
     {
-        onSuccessful.Invoke();
+
         Renderer renderer = obj.GetComponent<Renderer>();
         var color = renderer.material.color;
         renderer.material.color = new Color(color.r, color.g, color.b, 1);
 
         hasSuccessfullyCompleted = true;
+
+        onSuccessful.Invoke();
     }
 
     private void OnReachedEndBad()
     {
-        onReachedEndBad.Invoke();
+        
         Reset();
         // mark so that we don't immediately fail
         wasMarked = true;
         moving = true;
+
+        onReachedEndBad.Invoke();
     }
 }

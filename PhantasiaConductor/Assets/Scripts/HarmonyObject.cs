@@ -123,5 +123,4 @@ public class HarmonyObject : MonoBehaviour
 	  	loopSource.volume = 1;
 	  	onUnlock.Invoke();
 	}
-
 }

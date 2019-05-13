@@ -4,8 +4,10 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 namespace Valve.VR.InteractionSystem
 {
+    [RequireComponent (typeof(CustomSpawnAndAttachToHand))]
     public class ChordController : MonoBehaviour
     {
         public GameObject[] targets;

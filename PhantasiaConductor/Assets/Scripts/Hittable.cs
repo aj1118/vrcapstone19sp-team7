@@ -11,15 +11,19 @@ public class Hittable : MonoBehaviour
     public UnityEvent onUnlock;
     public UnityEvent onPinched;
     public UnityEvent onTracked;
+
+    public bool inContact;
     
     public bool canHit;
-    public bool preventRepeated = true;    
+    public bool canInteract;
+    public bool preventRepeated = true;
 
     // keep track of hit counts
     private uint hitCount;
 
     // use hit flag to keep track of hits
     private bool hitFlag;
+
 
 
     void Start()
@@ -34,7 +38,8 @@ public class Hittable : MonoBehaviour
     {
         if (canHit)
         {
-            if (preventRepeated) {
+            if (preventRepeated)
+            {
                 canHit = false;
             }
 
@@ -46,18 +51,25 @@ public class Hittable : MonoBehaviour
                 onUnlock.Invoke();
             }
 
-            
+
             HitFlag = true;
         }
     }
 
-    void OnPinched() 
+    void OnPinched()
     {
-        onPinched.Invoke();
+        if (canInteract)
+        {
+            onPinched.Invoke();
+        }
     }
 
-    void OnTracked() {
-        onTracked.Invoke();
+    void OnTracked()
+    {
+        if (canInteract)
+        {
+            onTracked.Invoke();
+        }
     }
 
 
@@ -89,11 +101,14 @@ public class Hittable : MonoBehaviour
     }
 
     // Resets the hit count if the hitflag is not set
-    public void ResetIfHitFlagNotSet() {
-        if (hitCount != 0) {
+    public void ResetIfHitFlagNotSet()
+    {
+        if (hitCount != 0)
+        {
             //Play miss sound?
         }
-        if (!HitFlag) {
+        if (!HitFlag)
+        {
             HitCount = 0;
         }
     }
@@ -111,12 +126,15 @@ public class Hittable : MonoBehaviour
         }
     }
 
-    public uint HitCount {
-        get {
+    public uint HitCount
+    {
+        get
+        {
             return hitCount;
         }
 
-        set {
+        set
+        {
             hitCount = value;
         }
     }

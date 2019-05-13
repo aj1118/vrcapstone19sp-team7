@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MasterLoop))]
 public class MelodyPuzzle : MonoBehaviour
 {
 
@@ -13,10 +14,19 @@ public class MelodyPuzzle : MonoBehaviour
 
     public GameObject boidEmitterPrefab;
 
+    public MasterLoop masterLoop;
+
+    private List<PathBeat> allPaths;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        allPaths = new List<PathBeat>();
+
+        // var loopTime = masterLoop.loopTime;
+        // var loopTime = 10;
+
         var path = CreateAndSetupPath("bezierpath", 10);
         // path.gameObject.SetActive(true);
         var path1 = CreateAndSetupPath("path1", 10);
@@ -27,12 +37,20 @@ public class MelodyPuzzle : MonoBehaviour
 
         var path3 = CreateAndSetupPath("path3", 10);
         path3.gameObject.SetActive(false);
+        
 
+        foreach (var p in allPaths) {
+            var go = p.obj.gameObject;
+            MelodyObject mo = go.GetComponent<MelodyObject>();
+            masterLoop.onNewLoop.AddListener(delegate() {
+                mo.NewLoop();
+            });
+        }
+        
         path.onSuccessful.AddListener(delegate ()
         {
             path1.gameObject.SetActive(true);
             Debug.Log("success");
-
         });
 
         path1.onSuccessful.AddListener(delegate ()
@@ -65,6 +83,7 @@ public class MelodyPuzzle : MonoBehaviour
         return pathBeat;
     }
 
+    // Creates and path and puts it into all paths list
     PathBeat CreateAndSetupPath(string fileName, float t = 3)
     {
         PathBeat pathBeat = InstantiatePath(fileName, t);
@@ -86,7 +105,7 @@ public class MelodyPuzzle : MonoBehaviour
             Debug.Log("failed");
         });
 
-        
+        allPaths.Add(pathBeat);
         return pathBeat;
     }
 

@@ -4,22 +4,40 @@ using UnityEngine;
 
 public class MelodyObject : MonoBehaviour
 {
-    
+
     public AudioClip loopClip;
 
-    public float startTime;
-    public float endTime;
-    public float windowLength;
-    public bool unlocked;
+    public Material windowOnMat;
+
+    public Material windowOffMat;
+
+
+    // mat to use while successfully following
+    public Material trackingMat;
+
+    // mat to use after failed
+    public Material failMat;
+
+    public PathBeat pathBeat;
+
+    // public float startTime;
+    // public float endTime;
+    public float windowLength = 1f;
+    public bool unlocked = false;
     public Valve.VR.InteractionSystem.PuzzleSequence puzzleSequence;
 
     private AudioSource loopSource;
     private Collider coll;
     private MeshRenderer rend;
-    private bool inWindow;
-    private bool inContact;
 
+    public float endTime;
+    public float startTime;
+    public bool inWindow;
+    public bool inContact;
     private Hittable hittable;
+
+    private bool windowStatus = false;
+
 
     void Awake()
     {
@@ -37,18 +55,10 @@ public class MelodyObject : MonoBehaviour
 
     private void Update()
     {
-        if (!unlocked)
-        {
-        }
+
     }
 
-
-    private void Start()
-    {
-        TurnOff();
-    }
-
-    public void NewLoop()
+    void Start()
     {
         loopSource.Play();
         Invoke("StartWindow", MasterLoop.loopTime * startTime);
@@ -58,68 +68,88 @@ public class MelodyObject : MonoBehaviour
     
     private void StartWindow()
     {
-        TurnOn();
+        //TurnOn();
         inWindow = true;
-    }
-
-    private void StartPlay()
-    {
-        inWindow = false;
-        if (!inContact)
+        hittable.canInteract = false;
+        if (gameObject.activeInHierarchy)
         {
-            loopSource.volume = 0;
-            TurnOff();
+            rend.enabled = true;
         }
     }
 
-    private void EndPlay()
+    public void NewLoop()
     {
-        if (unlocked)
+        if (gameObject.activeInHierarchy)
         {
-            TurnOff();
+            // just keep looping if unlocked
+            if (unlocked)
+            {
+                pathBeat.ResetPosition();
+            }
+
+            // if still locked and not moving then handle the window indicator
+
+            WindowOn();
+            Invoke("WindowOff", windowLength);
+
         }
-        else if (inContact)
+
+
+        // if (gameObject.activeInHierarchy) {
+        //     Debug.Log("new melody object loop");
+        //     rend.enabled = !rend.enabled;
+        //     windowStatus = !windowStatus;
+
+        //     if (windowStatus) {
+        //         rend.material = windowOnMat;
+        //     } else {
+        //         rend.material = windowOffMat;
+        //     }
+        // }
+
+        // loopSource.Play();
+        // Invoke("StartWindow", MasterLoop.loopTime * startTime);
+        // Invoke("StartPlay", MasterLoop.loopTime * (startTime + windowLength));
+        // Invoke("EndPlay", MasterLoop.loopTime * endTime);
+    }
+
+    public void WindowOn()
+    {
+        // we need to keep the window status up to date incase the player fails
+        windowStatus = true;
+        if (!pathBeat.moving)
         {
-            TurnOff();
-            unlocked = true;
-            //puzzleSequence.NextPuzzle();
+            rend.material = windowOnMat;
+            hittable.canInteract = true;
         }
 
     }
 
-    private void TurnOn()
+    public void WindowOff()
     {
-        if (!unlocked)
+        windowStatus = false;
+        // only if  not moving
+        if (!pathBeat.moving)
         {
-            coll.enabled = true;
+            rend.material = windowOffMat;
+            hittable.canInteract = false;
         }
-        rend.enabled = true;
     }
 
-    private void TurnOff()
+    public Material GetWindowMaterial()
     {
-        Debug.Log("OFFN");
-        if (!unlocked)
-        {
-            coll.enabled = false;
-        }
-        rend.enabled = false;
+        return windowStatus ? windowOnMat : windowOffMat;
     }
 
-    public void OnTriggerEnter()
+    public void UnlockObject()
     {
-        loopSource.volume = 1;
-        inContact = true;
+        unlocked = true;
     }
-    
-    public void OnTriggerExit()
+
+    public void ObjectFailed()
     {
-        inContact = false;
-        Debug.Log("EXIT");
-        if (!inWindow)
-        {
-            loopSource.volume = 0;
-            TurnOff();
-        }
+        pathBeat.Reset();
+        rend.material = GetWindowMaterial();
     }
+
 }
