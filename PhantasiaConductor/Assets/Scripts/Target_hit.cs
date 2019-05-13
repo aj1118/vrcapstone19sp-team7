@@ -4,41 +4,45 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-    public class Target_hit : MonoBehaviour
+public class Target_hit : MonoBehaviour
+{
+    public Material Glow;
+    public Material def;
+
+    public UnityEvent onHit;
+    private bool canHit;
+    private bool complete = false;
+
+    void Start()
     {
-        public Material Glow;
-        public Material def;
-
-        public UnityEvent onHit;
-        private bool canHit;
-
-        void Start()
+        GetComponent<Renderer>().material = def;
+        GetComponent<AudioSource>().playOnAwake = false;
+    }
+    void OnCollisionEnter(Collision col)
+    {
+        if (canHit)
         {
-            GetComponent<Renderer>().material = def;
-            GetComponent<AudioSource>().playOnAwake = false;
+            playTarget();
+            onHit.Invoke();
         }
-        void OnCollisionEnter(Collision col)
-        {
-            if (canHit)
-            {
-                playTarget();
-                onHit.Invoke();
-            }
-        }
+    }
 
-        void goBack()
-        {
-            GetComponent<Renderer>().material = def;
-        }
+    void goBack()
+    {
+        GetComponent<Renderer>().material = def;
+    }
 
-        public void playTarget() {
-            GetComponent<Renderer>().material = Glow;
+    public void playTarget() {
+        GetComponent<Renderer>().material = Glow;
+        if (!complete)
+        { 
             GetComponent<AudioSource>().Play();
-            Invoke("goBack", 0.2f);
         }
+        Invoke("goBack", 0.2f);
+    }
 
-        public bool CanHit
-        {
+    public bool CanHit
+    {
         get
         {
             return canHit;
@@ -47,5 +51,17 @@ using UnityEngine.Events;
         {
             canHit = value;
         }
+     }
+
+     public bool Complete
+     {
+        get
+        {
+            return complete;
+        }
+        set
+        {
+            canHit = value;
         }
     }
+}

@@ -25,7 +25,7 @@ namespace Valve.VR.InteractionSystem
         // Start is called before the first frame update
         void Awake()
         {
-            source = GetComponent<AudioSource>();
+            // source = GetComponent<AudioSource>();
 
             currentPuzzle = 0;
             puzzles[0].SetActive(true);
@@ -47,9 +47,9 @@ namespace Valve.VR.InteractionSystem
         
 
         public void NextPuzzle() {
-            source.Play();
+            // source.Play();
             currentPuzzle++;
-            if (currentPuzzle < puzzles.Length)
+            if (currentPuzzle < puzzles.Length - 2)
             {
                 puzzles[currentPuzzle].SetActive(true);
 

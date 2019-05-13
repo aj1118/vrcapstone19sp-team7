@@ -407,5 +407,21 @@ PrefabInstance:
       propertyPath: rightHand
       value: 
       objectReference: {fileID: 1165597880}
+    - target: {fileID: 8539504379476011112, guid: e54f43290dbb04748afa31ccc1baf045,
+        type: 3}
+      propertyPath: scaleReleaseVelocity
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539504379476011114, guid: e54f43290dbb04748afa31ccc1baf045,
+        type: 3}
+      propertyPath: onCompleteChord.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539504379476011113, guid: e54f43290dbb04748afa31ccc1baf045,
+        type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 5206375682768712628, guid: f0486aae4f0f5294191689733bac1c32,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e54f43290dbb04748afa31ccc1baf045, type: 3}
