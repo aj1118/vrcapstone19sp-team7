@@ -7,13 +7,21 @@ namespace Valve.VR.InteractionSystem
     public class Glow : MonoBehaviour
     {
         public Material glowMaterial;
+        public float blinkFreq = 1f;
 
         private Material originalMaterial;
+        private int glowCount = -1;
 
         void Awake()
         {
 
             originalMaterial = GetComponent<Renderer>().material;
+        }
+
+        public void GlowBlink()
+        {
+            
+
         }
 
         public void GlowOn()

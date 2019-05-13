@@ -32,18 +32,25 @@ namespace Valve.VR.InteractionSystem
         }
 
         public void onArrive() {
+            if (teleportIndicator != null)
+            {
+                teleportIndicator.SetActive(false);
+            }
+
             if (puzzleObj != null) 
             {
+                startingPosition.SetActive(false);
+
                 int childCount = instruments.transform.childCount;
-                for (int i = 0; i < childCount; i++) {
+                for (int i = 0; i < childCount; i++)
+                {
                     // should probably animate this 
                     transform.GetChild(i).gameObject.SetActive(false);
                 }
 
-                if (teleportIndicator != null)
-                {
-                    teleportIndicator.SetActive(false);
-                }
+                // LoadPuzzle.Invoke();
+
+                Player.instance.GetComponent<PerspectiveShift>().teleportEnabled = false;
 
                 puzzleObj.SetActive(true);
             }
@@ -51,7 +58,9 @@ namespace Valve.VR.InteractionSystem
 
         public void onPrepareToLeave() {
             if (puzzleObj != null)
-            { 
+            {
+                Player.instance.GetComponent<PerspectiveShift>().teleportEnabled = true;
+                startingPosition.SetActive(true);
                 StartCoroutine(glowIndicator());
             }
         }

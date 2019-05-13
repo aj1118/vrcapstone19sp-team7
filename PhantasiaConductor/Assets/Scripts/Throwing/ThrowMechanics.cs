@@ -13,6 +13,7 @@ namespace Valve.VR.InteractionSystem
         public float releaseVelocityTimeOffset = -0.011f;
 
         public float scaleReleaseVelocity = 1.1f;
+        public bool throwEnabled;
 
         public bool MOUSE_DEBUG = false;
 
@@ -29,19 +30,26 @@ namespace Valve.VR.InteractionSystem
 
         void FixedUpdate()
         {
-            if (leftObj ==  null && IsButtonDown(leftHand)) {
-                leftObj = spawn.SpawnAndAttach(leftHand);
-            }
-            if (rightObj == null && IsButtonDown(rightHand)) {
-                rightObj = spawn.SpawnAndAttach(rightHand);
-            }
-            if (WasButtonReleased(leftHand)) {
-                leftHand.DetachObject(leftObj);
-                leftObj = null;
-            }
-            if (WasButtonReleased(rightHand)) {
-                rightHand.DetachObject(rightObj);
-                rightObj = null;
+            if (throwEnabled)
+            {
+                if (leftObj == null && IsButtonDown(leftHand))
+                {
+                    leftObj = spawn.SpawnAndAttach(leftHand);
+                }
+                if (rightObj == null && IsButtonDown(rightHand))
+                {
+                    rightObj = spawn.SpawnAndAttach(rightHand);
+                }
+                if (WasButtonReleased(leftHand))
+                {
+                    leftHand.DetachObject(leftObj);
+                    leftObj = null;
+                }
+                if (WasButtonReleased(rightHand))
+                {
+                    rightHand.DetachObject(rightObj);
+                    rightObj = null;
+                }
             }
         }
 
@@ -65,6 +73,18 @@ namespace Valve.VR.InteractionSystem
             else
             {
                 return releaseAction.GetStateUp(hand.handType);
+            }
+        }
+
+        public bool ThrowEnabled
+        {
+            set
+            {
+                throwEnabled = value;
+            }
+            get
+            {
+                return throwEnabled;
             }
         }
     }

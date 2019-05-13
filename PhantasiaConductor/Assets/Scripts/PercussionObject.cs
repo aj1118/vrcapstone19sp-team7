@@ -9,22 +9,25 @@ public class PercussionObject : MonoBehaviour
     public AudioClip loopClip;
 
     public uint hitsToUnlock;
+    public Animation hitAnim;
+    public Animation loopAnim;
     // Start is called before the first frame update
 
+    
+    
     private BeatBlinkController beatBlinkController;
     private AudioSource hitSource;
     private AudioSource loopSource;
     private Hittable hittable;
     private BeatInfo beatInfo;
 
-    private Animator anim;
     // We can remove this and set values in the prefab
     void Awake()
     {
         beatBlinkController = GetComponent<BeatBlinkController>();
   	
-        hitSource = transform.Find("HitSource").GetComponent<AudioSource>();
-        loopSource = transform.Find("LoopSource").GetComponent<AudioSource>();
+        hitSource = transform.parent.transform.Find("HitSource").GetComponent<AudioSource>();
+        loopSource = transform.parent.transform.Find("LoopSource").GetComponent<AudioSource>();
         loopSource.pitch = loopClip.length / MasterLoop.loopTime;
         
         //adds 3d(ish) sound
@@ -37,11 +40,10 @@ public class PercussionObject : MonoBehaviour
 
         hittable = GetComponent<Hittable>();
         
-        beatInfo = transform.Find("BeatInfo").GetComponent<BeatInfo>();
+        beatInfo = transform.parent.transform.Find("BeatInfo").GetComponent<BeatInfo>();
 
         hittable.hitsToUnlock = hitsToUnlock;
         beatBlinkController.beatInfo = beatInfo;
-        anim = GetComponent<Animator>();
     }
 
     public void NewLoop()
@@ -51,15 +53,11 @@ public class PercussionObject : MonoBehaviour
             beatBlinkController.NewLoop();
             loopSource.Play();
         }
-        if (anim)
-        {
-            anim.Play("Loop");
-        }
     }
 
     public void Unlock()
     {
-    	Invoke("LoopSourceOn", hitClip.length);
+    	Invoke("LoopSourceOn", hitClip.length + .1f);
     }
 
     void LoopSourceOn(){
