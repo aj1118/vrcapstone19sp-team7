@@ -10,18 +10,33 @@ namespace Valve.VR.InteractionSystem
         public float blinkFreq = 1f;
 
         private Material originalMaterial;
-        private int glowCount = -1;
+        private bool blink;
 
         void Awake()
         {
-
             originalMaterial = GetComponent<Renderer>().material;
         }
 
-        public void GlowBlink()
+        public void GlowBlinkOn()
         {
-            
+            blink = true;
+            StartCoroutine(GlowBlink()); 
+        }
 
+        public void GlowBlinkOff()
+        {
+            blink = false;
+        }
+
+        private IEnumerator GlowBlink()
+        {
+            while (blink)
+            {
+                GlowOn();
+                yield return new WaitForSeconds(blinkFreq);
+                GlowOff();
+                yield return new WaitForSeconds(blinkFreq);
+            }
         }
 
         public void GlowOn()
