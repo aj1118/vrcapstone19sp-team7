@@ -415,6 +415,7 @@ MonoBehaviour:
   rightHand: {fileID: 2070088668}
   leftLineRenderer: {fileID: 0}
   rightLineRenderer: {fileID: 0}
+  extraRays: 0
 --- !u!114 &465180767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &821537024
 Transform:
   m_ObjectHideFlags: 0
@@ -1044,6 +1045,8 @@ MonoBehaviour:
   - {fileID: 7728000567174510995}
   - {fileID: 7728000567661127817}
   - {fileID: 7728000566787584340}
+  winClip: {fileID: 0}
+  currentPuzzle: 0
   leftHand: {fileID: 889385702}
   rightHand: {fileID: 2070088668}
   handObject: {fileID: 5091653097936800336, guid: c167e04ba92848441ad6e850d4b6592c,
@@ -1632,7 +1635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1364657381
 Animator:
   serializedVersion: 3
@@ -2294,7 +2297,7 @@ PrefabInstance:
     - target: {fileID: 7728000566945804249, guid: 57408575f948fcf47b1fc2a1d72032a1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5605145439435445700, guid: 57408575f948fcf47b1fc2a1d72032a1,
         type: 3}
@@ -2314,12 +2317,12 @@ PrefabInstance:
     - target: {fileID: 1714766202605959495, guid: 57408575f948fcf47b1fc2a1d72032a1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 0.452
       objectReference: {fileID: 0}
     - target: {fileID: 1714766202605959495, guid: 57408575f948fcf47b1fc2a1d72032a1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.867
       objectReference: {fileID: 0}
     - target: {fileID: 1714766202605959495, guid: 57408575f948fcf47b1fc2a1d72032a1,
         type: 3}
@@ -2381,6 +2384,11 @@ PrefabInstance:
         type: 3}
       propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: NextPuzzle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7793390075119463934, guid: 57408575f948fcf47b1fc2a1d72032a1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2421413794154763847, guid: 57408575f948fcf47b1fc2a1d72032a1,
         type: 3}
