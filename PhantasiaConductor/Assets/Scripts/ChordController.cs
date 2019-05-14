@@ -99,7 +99,10 @@ namespace Valve.VR.InteractionSystem
                 }
                 else if (!nextBeat && notePlaying)
                 {
-                    StartCoroutine(HitWindowOff(targetIndex));
+                    if (targetIndex < targets.Length)
+                    {
+                        StartCoroutine(HitWindowOff(targetIndex));
+                    }
                 }
             }
             if (targetIndex < targets.Length)
@@ -134,7 +137,7 @@ namespace Valve.VR.InteractionSystem
                 waitForLoop = true;
             }
             notePlaying = false;
-            Debug.Log(index);
+
             if (index == targetIndex)
             {
                 targetIndex++;

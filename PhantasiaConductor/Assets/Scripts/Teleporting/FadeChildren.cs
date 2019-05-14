@@ -105,13 +105,13 @@ public class FadeChildren : MonoBehaviour
 
     public void FadeIn(float newFadeTime)
     {
-        StopAllCoroutines();
+        // StopAllCoroutines();
         StartCoroutine("FadeSequence", newFadeTime);
     }
 
     public void FadeOut(float newFadeTime)
     {
-        StopAllCoroutines();
+        // StopAllCoroutines();
         StartCoroutine("FadeSequence", -newFadeTime);
     }
 }
