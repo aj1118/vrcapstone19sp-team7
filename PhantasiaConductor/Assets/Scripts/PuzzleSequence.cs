@@ -29,6 +29,7 @@ namespace Valve.VR.InteractionSystem
         {
             winSource = GetComponent<AudioSource>();
             winSource.clip = winClip;
+            winSource.volume = .75f;
             currentPuzzle = 0;
             puzzles[0].SetActive(true);
             for (int i = 1; i < puzzles.Length; i++)

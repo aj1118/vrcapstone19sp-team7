@@ -482,6 +482,16 @@ PrefabInstance:
       propertyPath: hand
       value: 
       objectReference: {fileID: 1079478163}
+    - target: {fileID: 304781953150799474, guid: 138177e7863b85945bcf2d498a5fe4bf,
+        type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 1079478163}
+    - target: {fileID: 304781953150799474, guid: 138177e7863b85945bcf2d498a5fe4bf,
+        type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 1426859244}
     - target: {fileID: 4017269307956213656, guid: 138177e7863b85945bcf2d498a5fe4bf,
         type: 3}
       propertyPath: hand

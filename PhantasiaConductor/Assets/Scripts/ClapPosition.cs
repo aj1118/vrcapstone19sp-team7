@@ -21,6 +21,5 @@ public class ClapPosition : MonoBehaviour
         float z = (leftHand.transform.position.z + rightHand.transform.position.z) / 2.0f;
         Vector3 temp = new Vector3(x, y, z);
         transform.position = temp;
-
     }
 }
