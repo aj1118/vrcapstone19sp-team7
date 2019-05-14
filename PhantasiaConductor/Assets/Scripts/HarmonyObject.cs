@@ -36,7 +36,7 @@ public class HarmonyObject : MonoBehaviour
         loopSource.clip = loopClip;
 		beatTime = MasterLoop.loopTime / notes.Length;
 		positionGoal = ((float)notes[beatCount]) / notesPerOctave;
-		transform.position = new Vector3(0, positionGoal, 0);
+		transform.localPosition = new Vector3(0, positionGoal, 0);
 	}
 
 	void OnEnable(){
@@ -59,7 +59,7 @@ public class HarmonyObject : MonoBehaviour
         Color color;
 
         if (unlocked || inContact) {
-            color = Color.HSVToRGB(transform.position.y % 1f, 1f, 1f);
+            color = Color.HSVToRGB(transform.localPosition.y % 1f, 1f, 1f);
             color.a = .75f - fadeIn;
 
 		} else {
@@ -69,18 +69,18 @@ public class HarmonyObject : MonoBehaviour
 		GetComponent<Renderer>().material.color = color;
 
 		if (moving) {
-			if (Math.Abs(positionGoal - transform.position.y) < threshold) {
-				transform.position = new Vector3(0, positionGoal, 0);
+			if (Math.Abs(positionGoal - transform.localPosition.y) < threshold) {
+				transform.localPosition = new Vector3(0, positionGoal, 0);
 				moving = false;
 			} else {
-				velocityGoal = (positionGoal - transform.position.y) / 20f;
+				velocityGoal = (positionGoal - transform.localPosition.y) / 20f;
 				if (velocity > velocityGoal) {
 					velocity -= speed;
 				} else {
 					velocity += speed;
 				}
 				Vector3 delta = new Vector3(0, velocity, 0) ;
-				transform.position += delta;
+				transform.localPosition += delta;
 			}
 		}
 	}

@@ -30,7 +30,7 @@ public class PianoDestinationActions : MonoBehaviour
 
     public void Depart()
     {
-        transform.position = newPosition;
+        transform.localPosition = newPosition;
         transform.rotation = newRotation;
         transform.localScale = newScale;
     }

@@ -37,28 +37,31 @@ namespace Valve.VR.InteractionSystem
                 puzzles[i].SetActive(false);
             }
         }
-        /*
+        
         public void OnEnable() {
             // set hands
             leftOriginalPrefab = leftHand.renderModelPrefab;
             rightOriginalPrefab = rightHand.renderModelPrefab;
 
-            leftHand.renderModelPrefab = handObject;
-            rightHand.renderModelPrefab = handObject;
+            leftHand.SetRenderModel(handObject);
+            rightHand.SetRenderModel(handObject);
+
+            // DEBUG RETURN FROM PUZZLE
+            // onPuzzleComplete.Invoke();
         }
-        */
+       
         
 
         public void NextPuzzle() {
             winSource.Play();
             currentPuzzle++;
-            if (currentPuzzle < puzzles.Length - 6)
+            if (currentPuzzle < puzzles.Length)
             {
                 puzzles[currentPuzzle].SetActive(true);
 
             } else {
-                //leftHand.renderModelPrefab = leftOriginalPrefab;
-                //rightHand.renderModelPrefab = rightOriginalPrefab;
+                leftHand.SetRenderModel(leftOriginalPrefab);
+                rightHand.SetRenderModel(rightOriginalPrefab);
 
                 onPuzzleComplete.Invoke();
             }
