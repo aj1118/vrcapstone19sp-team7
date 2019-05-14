@@ -27,8 +27,8 @@ public class Blink : MonoBehaviour
             }
             blinkState = true;
 
-            PObject pObj = gameObject.GetComponent<PObject>();
-            pObj.Alive();
+
+            GetComponent<Renderer>().enabled = true;
             onBlinkOn.Invoke();
             // pObj.SendMessage(onEventName, SendMessageOptions.DontRequireReceiver);
         }
@@ -43,11 +43,12 @@ public class Blink : MonoBehaviour
         }
         blinkState = false;
 
-        PObject pObj = gameObject.GetComponent<PObject>();
-        pObj.Dead();
+        GetComponent<Renderer>().enabled = false;
+
         onBlinkOff.Invoke();
         // pObj.SendMessage(offEventName, SendMessageOptions.DontRequireReceiver);
     }
-    
+
+
 
 }
