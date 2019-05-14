@@ -81,6 +81,7 @@ namespace Valve.VR.InteractionSystem
 
         private void RunTarget()
         {
+            Debug.Log("RT");
             if (!waitForLoop)
             {
                 bool nextBeat = beatInfo.beats[(beatIndex + 1) % beatInfo.beats.Length];
