@@ -1475,6 +1475,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 841581930304435835, guid: e54f43290dbb04748afa31ccc1baf045,
+        type: 3}
+      propertyPath: flock
+      value: 
+      objectReference: {fileID: 2087472150}
+    - target: {fileID: 841581930588018118, guid: e54f43290dbb04748afa31ccc1baf045,
+        type: 3}
+      propertyPath: flock
+      value: 
+      objectReference: {fileID: 2087472150}
+    - target: {fileID: 841581930726655808, guid: e54f43290dbb04748afa31ccc1baf045,
+        type: 3}
+      propertyPath: flock
+      value: 
+      objectReference: {fileID: 1906802791}
+    - target: {fileID: 841581930908227262, guid: e54f43290dbb04748afa31ccc1baf045,
+        type: 3}
+      propertyPath: flock
+      value: 
+      objectReference: {fileID: 2087472150}
+    - target: {fileID: 841581931155365279, guid: e54f43290dbb04748afa31ccc1baf045,
+        type: 3}
+      propertyPath: flock
+      value: 
+      objectReference: {fileID: 1906802791}
+    - target: {fileID: 841581931411683086, guid: e54f43290dbb04748afa31ccc1baf045,
+        type: 3}
+      propertyPath: flock
+      value: 
+      objectReference: {fileID: 1906802791}
+    - target: {fileID: 8025356506096174824, guid: e54f43290dbb04748afa31ccc1baf045,
+        type: 3}
+      propertyPath: flock
+      value: 
+      objectReference: {fileID: 1906802791}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e54f43290dbb04748afa31ccc1baf045, type: 3}
 --- !u!1 &754715403 stripped
