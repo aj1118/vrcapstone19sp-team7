@@ -134,7 +134,8 @@ namespace Valve.VR.InteractionSystem
         private GameObject PerformRaycast(Hand hand)
         {
             RaycastHit hit;
-            LayerMask layerMask = ~(1 << 2);
+            // LayerMask layerMask = ~(1 << 2);
+            LayerMask layerMask = LayerMask.GetMask("Interactable");
             if (Physics.Raycast(hand.transform.position, hand.transform.rotation * transform.forward, out hit, Mathf.Infinity, layerMask))
             {
                 GameObject obj = hit.collider.gameObject;
