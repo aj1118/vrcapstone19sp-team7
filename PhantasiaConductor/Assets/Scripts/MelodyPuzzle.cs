@@ -25,7 +25,7 @@ public class MelodyPuzzle : MonoBehaviour
  
     }
 
-    PathBeat InstantiatePath(string fileName, float t = 3)
+    PathBeat InstantiatePath(string fileName, float t = 3, float beatOffset = 0)
     {
         GameObject go = Instantiate(melodyPrefab, transform);
 
@@ -33,16 +33,18 @@ public class MelodyPuzzle : MonoBehaviour
         PathBeat pathBeat = go.GetComponent<PathBeat>();
         pathBeat.LoadFromFile(fileName);
 
-        monitor.Register(pathBeat.onReachedEnd);
+        monitor.Register(pathBeat.onSuccessful);
 
         pathBeat.SetCompletionTime(t);
+        GameObject melodyObject = pathBeat.transform.Find("MelodyObject").gameObject;
+        melodyObject.GetComponent<MelodyObject>().beatOffset = beatOffset;
         return pathBeat;
     }
 
     // Creates and path and puts it into all paths list
-    PathBeat CreateAndSetupPath(string fileName, float t = 3)
+    PathBeat CreateAndSetupPath(string fileName, float t = 3, float beatOffset = 0)
     {
-        PathBeat pathBeat = InstantiatePath(fileName, t);
+        PathBeat pathBeat = InstantiatePath(fileName, t, beatOffset);
         
         // BoidEmitter emitter = AddBoidEmitter(pathBeat);
 
@@ -83,15 +85,15 @@ public class MelodyPuzzle : MonoBehaviour
 
         // var loopTime = masterLoop.loopTime;
 
-        var path = CreateAndSetupPath("p1", MasterLoop.loopTime);
+        var path = CreateAndSetupPath("p1", MasterLoop.loopTime, 0);
         // path.gameObject.SetActive(true);
-        var path1 = CreateAndSetupPath("p2", MasterLoop.loopTime);
+        var path1 = CreateAndSetupPath("p2", MasterLoop.loopTime, 1);
         path1.gameObject.SetActive(false);
 
-        var path2 = CreateAndSetupPath("p3", MasterLoop.loopTime);
+        var path2 = CreateAndSetupPath("p3", MasterLoop.loopTime, 2);
         path2.gameObject.SetActive(false);
 
-        var path3 = CreateAndSetupPath("p4", MasterLoop.loopTime);
+        var path3 = CreateAndSetupPath("p4", MasterLoop.loopTime, 2.5f);
         path3.gameObject.SetActive(false);
         
 

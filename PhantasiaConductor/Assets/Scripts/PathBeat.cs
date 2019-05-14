@@ -248,6 +248,9 @@ public class PathBeat : MonoBehaviour
             hittable.onTracked.AddListener(delegate ()
             {
                 markAsHit();
+                if (!isMoving) {
+                    Begin();
+                }
             });
         }
     }
