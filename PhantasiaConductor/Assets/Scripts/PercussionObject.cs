@@ -26,8 +26,8 @@ public class PercussionObject : MonoBehaviour
     {
         beatBlinkController = GetComponent<BeatBlinkController>();
   	
-        hitSource = transform.parent.transform.Find("HitSource").GetComponent<AudioSource>();
-        loopSource = transform.parent.transform.Find("LoopSource").GetComponent<AudioSource>();
+        hitSource = transform.Find("HitSource").GetComponent<AudioSource>();
+        loopSource = transform.Find("LoopSource").GetComponent<AudioSource>();
         loopSource.pitch = loopClip.length / MasterLoop.loopTime;
         
         //adds 3d(ish) sound
@@ -40,7 +40,7 @@ public class PercussionObject : MonoBehaviour
 
         hittable = GetComponent<Hittable>();
         
-        beatInfo = transform.parent.transform.Find("BeatInfo").GetComponent<BeatInfo>();
+        beatInfo = transform.Find("BeatInfo").GetComponent<BeatInfo>();
 
         hittable.hitsToUnlock = hitsToUnlock;
         beatBlinkController.beatInfo = beatInfo;

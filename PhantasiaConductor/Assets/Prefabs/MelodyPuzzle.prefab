@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d03a765c2cf550d459d8d0baa79c5a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  melodyPrefab: {fileID: 627143754716700714, guid: e87baf91d5401564e9928acde63051ba,
+  melodyPrefab: {fileID: 3279572442281290039, guid: 9b6afb276487eac409d86e72578efddc,
     type: 3}
   monitor: {fileID: 4226425878852379}
   flock: {fileID: 0}

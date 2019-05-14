@@ -129,6 +129,7 @@ namespace Valve.VR.InteractionSystem
 
                     target = hit.collider.gameObject;
                     targetPosition = new Vector3(target.transform.position.x, target.transform.position.y - 1.5f, target.transform.position.z);
+                    
                     // hide the target when start moving
                     target.gameObject.SetActive(false);
 

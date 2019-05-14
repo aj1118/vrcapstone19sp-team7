@@ -43,7 +43,7 @@ public class MelodyObject : MonoBehaviour
         coll = GetComponent<Collider>();
         rend = GetComponent<MeshRenderer>();
         loopSource = GetComponent<AudioSource>();
-        
+        rend.material = windowOffMat;
 
         // loopSource.clip = loopClip;
         // loopSource.pitch = loopClip.length / MasterLoop.loopTime;
@@ -62,18 +62,19 @@ public class MelodyObject : MonoBehaviour
         }
 
         // right now just hardcode the default masterloop time of 4.0f
-        float delta = 4.0f / beatInfo.numBeats;
-        int i = 0;
+        // float delta = 4.0f / beatInfo.numBeats;
+        // int i = 0;
 
         // find the first beat and use that as the offset
-        foreach (var b in beatInfo.beats) {
-            if (b) {
-                break;
-            }
-            i++;
-        }
+        // foreach (var b in beatInfo.beats) {
+        //     if (b) {
+        //         break;
+        //     }
+        //     i++;
+        // }
 
-        beatOffset = i * delta;
+        // when using beat infos
+        // beatOffset = i * delta;
     }
 
     public void NewLoop()
@@ -83,9 +84,9 @@ public class MelodyObject : MonoBehaviour
             // just keep looping if unlocked
             if (unlocked)
             {
-                pathBeat.ResetPosition();
+                pathBeat.Invoke("ResetPosition", beatOffset);
             }
-
+            
             // if still locked and not moving then handle the window indicator
             Invoke("WindowOn", beatOffset);
             Invoke("WindowOff", windowLength + beatOffset);

@@ -7,22 +7,24 @@ using System;
 public class HarmonyObject : MonoBehaviour
 {
 	public AudioSource loopSource;
-	public UnityEvent onUnlock;
+    public AudioClip loopClip;
+    public UnityEvent onUnlock;
 	public int[] notes;
 	public bool unlocked;
-	public float earlyStart = .1f;
+	public float earlyStart = .15f;
 	public float threshold = .01f;
-	public float speed= .001f;
+	public float speed = .0001f;
+    public float cheatTime = .1f;  //master loop time - cheat time required to beat level
 	public int notesPerOctave = 12;
 
 	private float fadeIn = 1;
-	public float velocityGoal = 0;
-	public float velocity = 0;
-	public int beatCount = 0;
-	public float positionGoal = 0;
-	public bool inContact = false;
-	public bool moving = false;
-	public float beatTime;
+    private float velocityGoal = 0;
+	private float velocity = 0;
+	private int beatCount = 0;
+	private float positionGoal = 0;
+	private bool inContact = false;
+	private bool moving = false;
+	private float beatTime;
 
     // Start is called before the first frame update
     
@@ -30,10 +32,11 @@ public class HarmonyObject : MonoBehaviour
 	{
 		loopSource = GetComponent<AudioSource>();
 		loopSource.volume = 0;
+        loopSource.spatialBlend = 1;
+        loopSource.clip = loopClip;
 		beatTime = MasterLoop.loopTime / notes.Length;
 		positionGoal = ((float)notes[beatCount]) / notesPerOctave;
 		transform.position = new Vector3(0, positionGoal, 0);
-		Debug.Log("HI");
 	}
 
 	void OnEnable(){
@@ -53,11 +56,15 @@ public class HarmonyObject : MonoBehaviour
 	void Update()
 	{
 
-		Color color = Color.HSVToRGB(transform.position.y % 1f,1f,1f);
-		if (unlocked || inContact) {
-			color.a = .5f - fadeIn;
+        Color color;
+
+        if (unlocked || inContact) {
+            color = Color.HSVToRGB(transform.position.y % 1f, 1f, 1f);
+            color.a = .75f - fadeIn;
+
 		} else {
-			color.a = .2f - fadeIn;
+            color = Color.HSVToRGB(0, 0, 1);
+            color.a = .75f - fadeIn;
 		}
 		GetComponent<Renderer>().material.color = color;
 
@@ -78,16 +85,14 @@ public class HarmonyObject : MonoBehaviour
 		}
 	}
 
-	//runs slightly before each bit, so harmony object can get a head start
+	//runs slightly before each beat, so harmony object can get a head start moving
 	public void EarlyRunBeat() {
-		Debug.Log("RB");
 		beatCount++;
 		if (beatCount == notes.Length) {
 			beatCount = 0;
 		} else {
 			Invoke("EarlyRunBeat", beatTime);
 		}
-		Debug.Log(beatTime);
 		if (positionGoal != ((float)notes[beatCount]) / notesPerOctave) {
 			positionGoal = ((float)notes[beatCount]) / notesPerOctave;
 			moving = true;
@@ -106,8 +111,7 @@ public class HarmonyObject : MonoBehaviour
 	{
 	  loopSource.volume = 1;
 	  inContact = true;
-	  Invoke("Unlock", MasterLoop.loopTime);
-
+	  Invoke("Unlock", MasterLoop.loopTime - cheatTime);
 	}
 
 	public void OnTriggerExit()

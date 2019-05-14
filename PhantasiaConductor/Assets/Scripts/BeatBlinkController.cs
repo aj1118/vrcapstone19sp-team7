@@ -10,14 +10,13 @@ public class BeatBlinkController : MonoBehaviour
     public UnityEvent onHitUnlocked; // A 'hit' that plays  once a track is unlocked
     private Blink blink;
     public BeatInfo beatInfo;
-    public bool unlocked;
+    public bool unlocked = false;
     private int beatCount = 0;
     private int hitCount = 0;
     private Vector3 originalPos;
 
     void Awake()
     {
-        unlocked = false;
         blink = GetComponent<Blink>();
         originalPos = transform.position;
     }
@@ -35,7 +34,6 @@ public class BeatBlinkController : MonoBehaviour
  
     void RunBeat()
     {
-
         beatCount++;
         bool isHit = beatInfo.beats[beatCount];
         bool isNextHit = beatInfo.beats[(beatCount + 1) % beatInfo.beats.Length];
