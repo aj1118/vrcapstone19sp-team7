@@ -18,14 +18,16 @@ public class HarmonyHand : MonoBehaviour
     void Update()
 	{
 		if (unlocked) {
-            GetComponent<Renderer>().material.color = Color.HSVToRGB(transform.position.y % 1f, .7f, 1f);
+            GetComponent<Renderer>().material.color = Color.HSVToRGB(transform.parent.transform.localPosition.y % 1f, .7f, 1f);
             
             //Cool effect.. but nauseating!
             //transform.rotation = Quaternion.Euler(-90, transform.position.y % 1f * 180, 0);
         } else
         {
-            GetComponent<Renderer>().material.color = Color.HSVToRGB(transform.position.y % 1f, .3f, 1f);
-            transform.position = new Vector3(0, (leftHand.transform.position.y + rightHand.transform.position.y) / 2, 0);
+            GetComponent<Renderer>().material.color = Color.HSVToRGB(transform.localPosition.y % 1f, .3f, 1f);
+            Vector3 newPos = transform.position;
+            newPos.y = (leftHand.transform.position.y + rightHand.transform.position.y) / 2;
+            transform.position = newPos;
         }
 	}
 }
