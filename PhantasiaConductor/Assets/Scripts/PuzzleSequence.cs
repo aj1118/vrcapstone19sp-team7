@@ -52,13 +52,14 @@ namespace Valve.VR.InteractionSystem
         public void NextPuzzle() {
             winSource.Play();
             currentPuzzle++;
-            if (currentPuzzle < puzzles.Length)
+            if (currentPuzzle < puzzles.Length - 6)
             {
                 puzzles[currentPuzzle].SetActive(true);
 
             } else {
                 //leftHand.renderModelPrefab = leftOriginalPrefab;
                 //rightHand.renderModelPrefab = rightOriginalPrefab;
+
                 onPuzzleComplete.Invoke();
             }
         }

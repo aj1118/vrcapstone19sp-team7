@@ -11,24 +11,19 @@ namespace Valve.VR.InteractionSystem
         public GameObject startingPosition;
         public int returnDelay = 1;
         public GameObject[] nextActive;
+        public GameObject[] fadeObjects;
         public Material[] colorMaterials;
+        public float loadDelay = 2f;
 
         public UnityEvent LoadPuzzle;
         public UnityEvent OnDepart;
 
         private GameObject instruments;
         private GameObject teleportIndicator;
-        private float puzzleHeight = 1.5f;
-        private Color alphaColor;
 
         void Awake() {
             instruments = transform.Find("Instruments").gameObject;
             teleportIndicator = transform.Find("TeleportInd").gameObject;
-        }
-
-        private void Update()
-        {
-            
         }
 
         public void onArrive() {
@@ -41,19 +36,16 @@ namespace Valve.VR.InteractionSystem
             {
                 startingPosition.SetActive(false);
 
-                int childCount = instruments.transform.childCount;
-                for (int i = 0; i < childCount; i++)
+                instruments.GetComponent<FadeChildren>().FadeOut();
+
+                foreach (GameObject obj in fadeObjects)
                 {
-                    // should probably animate this 
-                    transform.GetChild(i).gameObject.SetActive(false);
+                    obj.GetComponent<FadeChildren>().FadeOut();
                 }
 
-                // LoadPuzzle.Invoke();
-
                 Player.instance.GetComponent<PerspectiveShift>().teleportEnabled = false;
-
-                puzzleObj.SetActive(true);
-            }
+                StartCoroutine(DelayedLoad());
+            } 
         }
 
         public void onPrepareToLeave() {
@@ -65,31 +57,45 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
+        private IEnumerator DelayedLoad()
+        {
+            yield return new WaitForSeconds(loadDelay);
+            LoadPuzzle.Invoke();
+        }
+
         private IEnumerator glowIndicator() {
+
+            OnDepart.Invoke();
+
             startingPosition.GetComponent<Glow>().GlowOn();
 
             yield return new WaitForSeconds(returnDelay);
 
-            // puzzlePrefab.SetActive(false);
-            Vector3 newPos = puzzleObj.transform.position;
-            newPos.y += puzzleHeight;
-
-            puzzleObj.transform.position = newPos;
-
             Renderer[] renderers = instruments.GetComponentsInChildren<Renderer>();
             for (int i = 0; i < renderers.Length; i++)
             {
-                renderers[i].material = colorMaterials[i];
+                Color origColor = colorMaterials[i].color;
+                Color newColor = new Color(origColor.r, origColor.g, origColor.b, 0.0f);
+
+                Material newMaterial = colorMaterials[i];
+                newMaterial.color = newColor;
+
+                renderers[i].material = newMaterial;
             }
 
-            for (int i = 0; i < renderers.Length; i++)
-            {
-                Transform child = transform.GetChild(i);
-
-                child.gameObject.SetActive(true); // should probably animate
-            }
             Player.instance.GetComponent<PerspectiveShift>().TeleportTo(startingPosition);
             startingPosition.GetComponent<Glow>().GlowOff();
+
+            yield return new WaitForSeconds(1);
+
+            // Fade in
+            instruments.GetComponent<FadeChildren>().FadeIn();
+
+            foreach (GameObject obj in fadeObjects)
+            {
+                obj.GetComponent<FadeChildren>().FadeIn();
+            }
+
 
             foreach (GameObject next in nextActive)
             {
