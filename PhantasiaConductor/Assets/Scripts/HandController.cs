@@ -14,6 +14,8 @@ namespace Valve.VR.InteractionSystem
         // private int lastInstanceIdLeft;
         // private bool interactedLastFrameLeft;
 
+        public bool renderingLines = true;
+
         private Dictionary<Hand, int> lastInstanceIds = new Dictionary<Hand, int>();
 
         private Dictionary<Hand, bool> interactedLastFrame = new Dictionary<Hand, bool>();
@@ -57,7 +59,8 @@ namespace Valve.VR.InteractionSystem
             leftExtraLineRenderers = new List<LineRenderer>();
             rightExtraLineRenderers = new List<LineRenderer>();
 
-            for (var i = 0; i < 4; i++) {
+            for (var i = 0; i < 4; i++)
+            {
                 // leftExtraLineRenderers.Add(gameObject.AddComponent<LineRenderer>());
                 // rightExtraLineRenderers.Add(gameObject.AddComponent<LineRenderer>());
             }
@@ -111,23 +114,26 @@ namespace Valve.VR.InteractionSystem
                 Debug.DrawRay(leftHand.transform.position, leftHand.transform.rotation * transform.forward * 1000, Color.green);
                 Debug.DrawRay(rightHand.transform.position, rightHand.transform.rotation * transform.forward * 1000, Color.blue);
             }
-
-            if (leftLineRenderer != null)
+            
+            if (renderingLines)
             {
-                Vector3 start = leftHand.transform.position;
-                Vector3 end = leftHand.transform.rotation * transform.forward * 1000 + start;
+                if (leftLineRenderer != null)
+                {
+                    Vector3 start = leftHand.transform.position;
+                    Vector3 end = leftHand.transform.rotation * transform.forward * 1000 + start;
 
-                leftLineRenderer.SetPosition(0, start);
-                leftLineRenderer.SetPosition(1, end);
-            }
+                    leftLineRenderer.SetPosition(0, start);
+                    leftLineRenderer.SetPosition(1, end);
+                }
 
-            if (rightLineRenderer != null)
-            {
-                Vector3 start = rightHand.transform.position;
-                Vector3 end = rightHand.transform.rotation * transform.forward * 1000 + start;
+                if (rightLineRenderer != null)
+                {
+                    Vector3 start = rightHand.transform.position;
+                    Vector3 end = rightHand.transform.rotation * transform.forward * 1000 + start;
 
-                rightLineRenderer.SetPosition(0, start);
-                rightLineRenderer.SetPosition(1, end);
+                    rightLineRenderer.SetPosition(0, start);
+                    rightLineRenderer.SetPosition(1, end);
+                }
             }
         }
 
