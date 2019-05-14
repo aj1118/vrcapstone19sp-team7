@@ -19,6 +19,6 @@ public class ScheduledDestroy : MonoBehaviour
     }
 
     void OnEnable() {
-        Debug.Log("Schedule Destroy enabled");
+        // Debug.Log("Schedule Destroy enabled");
     }
 }
