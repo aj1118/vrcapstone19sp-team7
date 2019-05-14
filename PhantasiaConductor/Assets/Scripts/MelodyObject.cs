@@ -43,7 +43,7 @@ public class MelodyObject : MonoBehaviour
         coll = GetComponent<Collider>();
         rend = GetComponent<MeshRenderer>();
         loopSource = GetComponent<AudioSource>();
-        
+        rend.material = windowOffMat;
 
         // loopSource.clip = loopClip;
         // loopSource.pitch = loopClip.length / MasterLoop.loopTime;
