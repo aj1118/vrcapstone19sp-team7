@@ -15,8 +15,9 @@ public class BoidTrail : MonoBehaviour
         tr = GetComponent<TrailRenderer>();
 
         int numColorKeys = Random.Range(2, 8);
-        // Color[] colors = GenerateColors(numColorKeys);
-        Color[] colors = GenerateColorsHsv(numColorKeys);
+        Color[] colors = ColorGenerator.GenerateColors(numColorKeys);
+        // Color[] colors = GenerateColorsHsv(numColorKeys);
+        // Color[] colors = ColorGenerator.GenerateColorsHsv(numColorKeys);
 
         GradientAlphaKey[] alphaKeys = { new GradientAlphaKey(Random.Range(.4f, 1f), 0.0f), new GradientAlphaKey(0.0f, 1.0f) };
         GradientColorKey[] colorKeys = new GradientColorKey[numColorKeys];
@@ -61,49 +62,5 @@ public class BoidTrail : MonoBehaviour
         // TODO maybe average the trail color with the mesh color for more visual coherence
     }
 
-    Color[] GenerateColorsHsv(int n)
-    {
-        Color[] colors = new Color[n];
-        float seed = Random.Range(0f, 1000f);
-        for (var i = 0; i < n; i++)
-        {
-            // float hue = Random.Range(0f, 1f);
-            float hue = Mathf.PerlinNoise(seed + i, seed + i);
-
-            float saturation = Random.Range(.6f, 1f);
-            float value = Random.Range(.5f, 1f);
-            // float value = Random.Range(0f, 1f);
-
-            colors[i] = Color.HSVToRGB(hue, saturation, value);
-        }
-
-        return colors;
-    }
-
-    Color[] GenerateColors(int n)
-    {
-        Color[] colors = new Color[n];
-        for (var i = 0; i < colors.Length; i++)
-        {
-            colors[i] = Color.black;
-        }
-
-        // generate component by component
-        for (var comp = 0; comp < 3; comp++)
-        {
-            // use same time value for components
-            float seed = Random.Range(0f, 1000f);
-
-            for (var i = 0; i < n; i++)
-            {
-                float v = Mathf.PerlinNoise(seed + i * 10, seed + i * 10);
-                // tend towards brighter colors
-                // v = (1 + v) / 2;
-                colors[i][comp] = v;
-            }
-        }
-
-        return colors;
-    }
 
 }
