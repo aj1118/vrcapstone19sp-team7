@@ -13,20 +13,28 @@ namespace Valve.VR.InteractionSystem
         public AudioClip winClip;
 
         public int currentPuzzle;
+        public bool handColliders;
 
-        public Hand leftHand;
-        public Hand rightHand;
+        public GameObject leftHand;
+        public GameObject rightHand;
 
-        public GameObject handObject;
-
+        
         public UnityEvent onPuzzleComplete;
-
-        private GameObject leftOriginalPrefab;
-        private GameObject rightOriginalPrefab;
         
         // Start is called before the first frame update
         void Awake()
         {
+            if (handColliders)
+            {
+                leftHand.GetComponent<Collider>().enabled = true;
+                rightHand.GetComponent<Collider>().enabled = true;
+            } else
+            {
+                leftHand.GetComponent<Collider>().enabled = false;
+                rightHand.GetComponent<Collider>().enabled = false;
+            }
+
+
             winSource = GetComponent<AudioSource>();
             winSource.clip = winClip;
             winSource.volume = .75f;
@@ -38,17 +46,6 @@ namespace Valve.VR.InteractionSystem
             }
         }
         
-        public void OnEnable() {
-            // set hands
-            leftOriginalPrefab = leftHand.renderModelPrefab;
-            rightOriginalPrefab = rightHand.renderModelPrefab;
-
-            leftHand.SetRenderModel(handObject);
-            rightHand.SetRenderModel(handObject);
-
-            // DEBUG RETURN FROM PUZZLE
-            // onPuzzleComplete.Invoke();
-        }
        
         
 
@@ -60,9 +57,6 @@ namespace Valve.VR.InteractionSystem
                 puzzles[currentPuzzle].SetActive(true);
 
             } else {
-                leftHand.SetRenderModel(leftOriginalPrefab);
-                rightHand.SetRenderModel(rightOriginalPrefab);
-
                 onPuzzleComplete.Invoke();
             }
         }
