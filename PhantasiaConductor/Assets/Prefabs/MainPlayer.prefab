@@ -1034,7 +1034,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -1366,14 +1366,8 @@ MonoBehaviour:
   rightHand: {fileID: 3906439871558555271}
   playerCamera: {fileID: 3906439871548940057}
   speed: 4
-  rotateSpeed: 100
   teleportEnabled: 1
   motionOverlay: {fileID: 0}
-  onReachDestination:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!1 &3906439871547820979
 GameObject:
   m_ObjectHideFlags: 0

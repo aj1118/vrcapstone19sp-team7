@@ -13,7 +13,7 @@ public class Starfall : MonoBehaviour
     public Color[] colors;
     
     // star needs gravity enabled
-    public GameObject starPrefab;
+    public GameObject[] starPrefabs;
 
     public void RandomSpawnStar() {
         Vector2 v = Random.insideUnitCircle;
@@ -25,13 +25,14 @@ public class Starfall : MonoBehaviour
         v = v.normalized * spawnRadius;
 
         Vector3 pos = new Vector3(v.x, this.transform.position.y + (Random.value * 50), v.y);
-        GameObject go = Instantiate(starPrefab, pos, Random.rotationUniform);
+        GameObject prefab = starPrefabs[Random.Range(0, starPrefabs.Length)];
+        GameObject go = Instantiate(prefab, pos, Random.rotationUniform);
         go.transform.parent = transform;
         Rigidbody rigidBody = go.GetComponent<Rigidbody>();
         rigidBody.AddRelativeTorque(new Vector3(Random.value, Random.value, Random.value).normalized * torqueIntensity);
 
-        var c = colors[(int)Random.Range(0, colors.Length)];
-        go.GetComponent<Renderer>().material.SetColor("_EmissionColor", c); 
+        // var c = colors[(int)Random.Range(0, colors.Length)];
+        // go.GetComponent<Renderer>().material.SetColor("_EmissionColor", c); 
     }
 
     void OnEnable()
