@@ -387,6 +387,11 @@ PrefabInstance:
       propertyPath: chasee
       value: 
       objectReference: {fileID: 1183042756}
+    - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
+        type: 3}
+      propertyPath: flockSize
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 124335380267662659, guid: cadb5e4850a2d124a9928d7659861958,
         type: 3}
       propertyPath: m_LocalPosition.x
