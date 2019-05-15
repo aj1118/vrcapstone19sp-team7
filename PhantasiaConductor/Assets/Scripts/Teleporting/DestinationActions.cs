@@ -38,7 +38,12 @@ namespace Valve.VR.InteractionSystem
                 /*
                 for (int i = 0; i < makeColorful.Length; i++)
                 {
-                    makeColorful[i].GetComponent<Renderer>().material = colorMaterials[i];
+                    Color orig = colorMaterials[i].color;
+                    Color newColor = new Color(orig.r, orig.g, orig.b, 0.0f);
+                    Material newMaterial = colorMaterials[i];
+                    newMaterial.color = newColor;
+
+                    makeColorful[i].GetComponent<Renderer>().material = newMaterial;
                 } */
 
                 OnDepart.Invoke();

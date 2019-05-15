@@ -51,19 +51,10 @@ public class GameController : MonoBehaviour
     {
         foreach (GameObject obj in fadeObjects)
         {
-            obj.SetActive(true);
+            // obj.SetActive(true);
             if (obj.activeInHierarchy)
             {
-                
-                /*
-                Color orig = obj.GetComponent<Renderer>().material.color;
-                float a = orig.a;
-
-                Color newColor = new Color(orig.r, orig.g, orig.b, 0.0f);
-                obj.GetComponent<Renderer>().material.color = newColor;
-
-                fade.FadeIn(obj, a);
-                */
+                fade.FadeIn(obj);
             }
         }
     }
@@ -74,9 +65,8 @@ public class GameController : MonoBehaviour
         {
             if (obj.activeInHierarchy)
             {
-                Debug.Log("fading " + obj.name);
-                obj.SetActive(false);
-                // fade.FadeOut(obj, 0.0f);
+                // obj.SetActive(false);
+                fade.FadeOut(obj);
             }
         }
     }

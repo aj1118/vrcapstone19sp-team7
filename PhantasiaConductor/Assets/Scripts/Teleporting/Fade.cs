@@ -4,76 +4,43 @@ using UnityEngine;
 
 public class Fade : MonoBehaviour
 {
-    // publically editable speed
-    public float fadeDelay = 0.0f;
     public float fadeTime = 2f;
 
-    // fade sequence
-    IEnumerator FadeSequence(GameObject obj, float targetAlpha, float fadingOutTime)
+    private IEnumerator FadeTo(Material material, float targetOpacity, float duration)
     {
-        // log fading direction, then precalculate fading speed as a multiplier
-        bool fadingOut = (fadingOutTime < 0.0f);
-        float fadingOutSpeed = 1.0f / fadingOutTime;
 
-        // grab all child objects
-        Renderer renderer = obj.GetComponent<Renderer>();
-        Color color = renderer.material.color;
+        // Cache the current color of the material, and its initiql opacity.
+        Color color = material.color;
+        float startOpacity = color.a;
 
-        // make all objects visible
-        renderer.enabled = true;
+        // Track how many seconds we've been fading.
+        float t = 0;
 
-
-        // get current max alpha
-        float alphaValue = color.a;
-
-        // iterate to change alpha value 
-        while ((alphaValue >= targetAlpha && fadingOut) || (alphaValue <= targetAlpha && !fadingOut))
+        while (t < duration)
         {
-            alphaValue += Time.deltaTime * fadingOutSpeed;
+            // Step the fade forward one frame.
+            t += Time.deltaTime;
+            // Turn the time into an interpolation factor between 0 and 1.
+            float blend = Mathf.Clamp01(t / duration);
 
-            Color newColor = (color != null ? color : renderer.material.color);
-            if (fadingOut)
-            {
-                newColor.a = Mathf.Min(newColor.a, alphaValue);
-            } else
-            {
-                newColor.a = Mathf.Max(newColor.a, alphaValue);
-            }
-            newColor.a = Mathf.Clamp(newColor.a, 0.0f, 1.0f);
-            renderer.material.SetColor("_Color", newColor);
+            // Blend to the corresponding opacity between start & target.
+            color.a = Mathf.Lerp(startOpacity, targetOpacity, blend);
 
+            // Apply the resulting color to the material.
+            material.color = color;
+
+            // Wait one frame, and repeat.
             yield return null;
         }
-
-        // turn objects off after fading out
-        if (fadingOut)
-        {
-            renderer.enabled = false;
-        }
-
-        Debug.Log("fade sequence end : " + fadingOut);
     }
 
-
-    public void FadeIn(GameObject obj, float a)
+    public void FadeIn(GameObject obj)
     {
-        FadeIn(obj, a, fadeTime);
+        StartCoroutine(FadeTo(obj.GetComponent<Renderer>().material, 1.0f, fadeTime));
     }
 
-    public void FadeOut(GameObject obj, float a)
+    public void FadeOut(GameObject obj)
     {
-        FadeOut(obj, a, fadeTime);
-    }
-
-    public void FadeIn(GameObject obj, float a, float newFadeTime)
-    {
-        StopAllCoroutines();
-        StartCoroutine(FadeSequence(obj, a, newFadeTime));
-    }
-
-    public void FadeOut(GameObject obj, float a, float newFadeTime)
-    {
-        StopAllCoroutines();
-        StartCoroutine(FadeSequence(obj, a, -newFadeTime));
+        StartCoroutine(FadeTo(obj.GetComponent<Renderer>().material, 0.0f, fadeTime));
     }
 }
