@@ -16,13 +16,13 @@ public class PercussionDestinationActions : MonoBehaviour
 
         gameObject.SetActive(true);
 
-        GetComponent<Fade>().FadeIn(ground, a);
+        // GetComponent<Fade>().FadeIn(ground, a);
     }
 
     public void Depart()
     {
         GameObject ground = transform.Find("Ground").gameObject;
-        GetComponent<Fade>().FadeOut(ground, 0.0f);
+        // GetComponent<Fade>().FadeOut(ground, 0.0f);
 
         StartCoroutine(MoveDelay(GetComponent<Fade>().fadeTime));
     }
