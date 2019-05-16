@@ -68,8 +68,23 @@ namespace Valve.VR.InteractionSystem
                 {
                     waitForLoop = false;
                     notePlaying = false;
+
+                    int finishCount = 0;
+                    foreach (bool finish in completed)
+                    {
+                        if (finish)
+                        {
+                            finishCount++;
+                        }
+                    }
+                    if (finishCount == completed.Length)
+                    {
+                        complete = true;
+                        invokeComplete = true;
+                    }
                 }
-                else if (invokeComplete)
+
+                if (invokeComplete)
                 {
                     invokeComplete = false;
                     onCompleteChord.Invoke();
