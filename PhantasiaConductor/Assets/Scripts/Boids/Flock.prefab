@@ -50,6 +50,8 @@ MonoBehaviour:
   boidPrefabs:
   - {fileID: 1509598871792621677, guid: 5e24121c7b3b85c4587142d3ed4d42a1, type: 3}
   - {fileID: 3504914274265399056, guid: da4ece4239b4e254087749690ca292aa, type: 3}
+  - {fileID: 8151465420365100123, guid: eecec0b33b64be2439b600def647e0fa, type: 3}
+  - {fileID: 4575293893432342171, guid: 2350f35eaa1eaeb4a853d413c56094c6, type: 3}
   chasee: {fileID: 0}
   flockCenter: {x: 0, y: 0, z: 0}
   flockAlignment: {x: 0, y: 0, z: 0}
