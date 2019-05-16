@@ -43,4 +43,21 @@ public class Fade : MonoBehaviour
     {
         StartCoroutine(FadeTo(obj.GetComponent<Renderer>().material, 0.0f, fadeTime));
     }
+
+    public void FadeInAll(GameObject[] objs, float[] alphaValues)
+    {
+        for (int i = 0; i < objs.Length; i++)
+        {
+            Debug.Log("fading in to " + alphaValues[i]);
+            StartCoroutine(FadeTo(objs[i].GetComponent<Renderer>().material, alphaValues[i], fadeTime));
+        }
+    }
+
+    public void FadeOutAll(GameObject[] objs)
+    {
+        for (int i = 0; i < objs.Length; i++)
+        {
+            StartCoroutine(FadeTo(objs[i].GetComponent<Renderer>().material, 0.0f, fadeTime));
+        }
+    }
 }
