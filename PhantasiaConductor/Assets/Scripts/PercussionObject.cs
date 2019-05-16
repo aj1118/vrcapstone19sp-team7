@@ -7,12 +7,11 @@ public class PercussionObject : MonoBehaviour
 
     public AudioClip hitClip;
     public AudioClip loopClip;
-
-    public uint hitsToUnlock;
     public Material unlockMaterial;
-    // Start is called before the first frame update
+    public bool useLoop = true; //if false, will play hitclip on loop instead
+    public uint hitsToUnlock = 4;
+    public bool unlocked = false;
 
-    
     private Renderer hitRenderer;
     private BeatBlinkController beatBlinkController;
     private AudioSource hitSource;
@@ -24,22 +23,26 @@ public class PercussionObject : MonoBehaviour
     void Awake()
     {
         beatBlinkController = GetComponent<BeatBlinkController>();
-  	
-        hitSource = transform.Find("HitSource").GetComponent<AudioSource>();
-        loopSource = transform.Find("LoopSource").GetComponent<AudioSource>();
-        hitRenderer = transform.Find("HitAnimation").GetComponent<Renderer>();
-        loopSource.pitch = loopClip.length / MasterLoop.loopTime;
-        
-        //adds 3d(ish) sound
-        loopSource.spatialBlend = 1.0f;
-        hitSource.spatialBlend = 1.0f;
-        
-        hitSource.clip = hitClip;
-        loopSource.clip = loopClip;
 
+        hitSource = transform.Find("HitSource").GetComponent<AudioSource>();
+        hitRenderer = transform.Find("HitAnimation").GetComponent<Renderer>();
+
+
+        //adds 3d(ish) sound
+
+        hitSource.spatialBlend = 1.0f;
+        hitSource.clip = hitClip;
+
+        if (useLoop)
+        {
+            loopSource = transform.Find("LoopSource").GetComponent<AudioSource>();
+            loopSource.pitch = loopClip.length / MasterLoop.loopTime;
+            loopSource.spatialBlend = 1.0f;
+            loopSource.clip = loopClip;
+        }
 
         hittable = GetComponent<Hittable>();
-        
+
         beatInfo = transform.Find("BeatInfo").GetComponent<BeatInfo>();
 
         hittable.hitsToUnlock = hitsToUnlock;
@@ -51,17 +54,28 @@ public class PercussionObject : MonoBehaviour
         if (gameObject.activeInHierarchy)
         {
             beatBlinkController.NewLoop();
-            loopSource.Play();
+            if (useLoop)
+            {
+                loopSource.Play();
+            }
         }
     }
 
     public void Unlock()
     {
-    	Invoke("LoopSourceOn", hitClip.length + .1f);
+        unlocked = true;
+        Invoke("LoopSourceOn", hitClip.length + .1f);
         hitRenderer.material = unlockMaterial;
         Debug.Log(GetComponent<MeshRenderer>().material);
     }
 
+    public void HitOnce()
+    {
+        if (!unlocked || !useLoop)
+        {
+            hitSource.Play();
+        }
+    }
     void LoopSourceOn()
     {
     	loopSource.volume = 1.0f;
