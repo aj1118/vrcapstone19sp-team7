@@ -12,13 +12,15 @@ public class BeatBlinkController : MonoBehaviour
     public BeatInfo beatInfo;
     public bool unlocked = false;
     private int beatCount = 0;
-    private int hitCount = 0;
+    private int hitCount = -1;
     private Vector3 originalPos;
 
     void Awake()
     {
         blink = GetComponent<Blink>();
         originalPos = transform.localPosition;
+
+        updateOffset();
     }
 
     public void Unlock()
