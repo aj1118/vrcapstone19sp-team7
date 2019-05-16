@@ -17,6 +17,7 @@ namespace Valve.VR.InteractionSystem
 
         public float speed;
         public bool teleportEnabled;
+        public float fadeTime = 1.0f;
 
         // to prevent motion sickness
         public GameObject motionOverlay;
@@ -59,9 +60,7 @@ namespace Valve.VR.InteractionSystem
                 if (transform.position == targetPosition && transform.rotation == target.transform.rotation) // reached destination
                 {
                     teleporting = false;
-                    motionOverlay.SetActive(false);
-
-                    target.transform.parent.transform.GetComponent<DestinationActions>().onArrive();
+                    StartCoroutine(FadeThenFinish());
                 }
                 else // still moving
                 {
@@ -116,9 +115,6 @@ namespace Valve.VR.InteractionSystem
             {
                 if (string.Equals(hit.collider.tag, "teleportDest"))
                 {
-                    teleporting = true;
-                    motionOverlay.SetActive(true);
-
                     target = hit.collider.gameObject;
                     targetPosition = new Vector3(target.transform.position.x, target.transform.position.y - 1.5f, target.transform.position.z);
                     
@@ -127,17 +123,61 @@ namespace Valve.VR.InteractionSystem
 
                     Debug.Log("hit " + hit.collider.gameObject.name);
 
-                    float time = 1.0f * Vector3.Distance(transform.position, target.transform.position) / speed;
-                    rotateSpeed = Quaternion.Angle(transform.rotation, target.transform.rotation) / time;
-
-                    float step = speed * Time.deltaTime;
-                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
-
-                    float rotateStep = rotateSpeed * Time.deltaTime;
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, target.transform.rotation, rotateStep);
+                    StartCoroutine(FadeThenMove());
                 }
 
             }
+        }
+
+        private IEnumerator FadeThenFinish()
+        {
+            yield return StartCoroutine(FadeCanvas(motionOverlay.GetComponent<CanvasGroup>(), 1.0f, 0.0f, fadeTime));
+            teleportEnabled = true;
+
+            motionOverlay.SetActive(false);
+
+            target.transform.parent.transform.GetComponent<DestinationActions>().onArrive();
+        }
+
+        private IEnumerator FadeThenMove()
+        {
+            teleportEnabled = false;
+
+            float time = 1.0f * Vector3.Distance(transform.position, target.transform.position) / speed;
+            rotateSpeed = Quaternion.Angle(transform.rotation, target.transform.rotation) / time;
+
+            yield return StartCoroutine(FadeCanvas(motionOverlay.GetComponent<CanvasGroup>(), 0.0f, 1.0f, fadeTime));
+
+            teleporting = true;
+        }
+
+        private IEnumerator FadeCanvas(CanvasGroup canvas, float startAlpha, float endAlpha, float duration)
+        {
+            // keep track of when the fading started, when it should finish, and how long it has been running&lt;/p&gt; &lt;p&gt;&a
+            var startTime = Time.time;
+            var endTime = Time.time + duration;
+            var elapsedTime = 0f;
+
+            // set the canvas to the start alpha – this ensures that the canvas is ‘reset’ if you fade it multiple times
+            canvas.alpha = startAlpha;
+            motionOverlay.SetActive(true);
+            // loop repeatedly until the previously calculated end time
+            while (Time.time <= endTime)
+            {
+                elapsedTime = Time.time - startTime; // update the elapsed time
+                var percentage = 1 / (duration / elapsedTime); // calculate how far along the timeline we are
+                if (startAlpha > endAlpha) // if we are fading out/down 
+                {
+                    canvas.alpha = startAlpha - percentage; // calculate the new alpha
+                }
+                else // if we are fading in/up
+                {
+                    canvas.alpha = startAlpha + percentage; // calculate the new alpha
+                }
+
+                yield return new WaitForEndOfFrame(); // wait for the next frame before continuing the loop
+            }
+            canvas.alpha = endAlpha; // force the alpha to the end alpha before finishing – this is here to mitigate any rounding errors, e.g. leaving the alpha at 0.01 instead of 0
         }
 
         private bool IsTeleportButtonDown(Hand hand)
@@ -184,14 +224,10 @@ namespace Valve.VR.InteractionSystem
 
         public void TeleportTo(GameObject destination) 
         {
-            Debug.Log("teleporting to " + destination.name);
-            teleporting = true;
-            motionOverlay.SetActive(true);
             target = destination;
+            targetPosition = new Vector3(target.transform.position.x, target.transform.position.y - 1.5f, target.transform.position.z);
 
-            float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
-            targetPosition = target.transform.position;
+            StartCoroutine(FadeThenMove());
         }
     }
 }
