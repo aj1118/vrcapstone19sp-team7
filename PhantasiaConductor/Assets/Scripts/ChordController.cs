@@ -22,8 +22,12 @@ namespace Valve.VR.InteractionSystem
         private CustomSpawnAndAttachToHand spawning;
         private int beatIndex = -1;
         private int targetIndex = 0; 
-        private GameObject leftObj;
-        private GameObject rightObj;
+        private GameObject leftThrowable;
+        private GameObject rightThrowable;
+        private GameObject leftSphere;
+        private GameObject rightSphere;
+
+
 
         private bool[] completed;
         private bool waitForLoop = false;

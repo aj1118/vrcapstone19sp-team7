@@ -18,37 +18,47 @@ namespace Valve.VR.InteractionSystem
         public bool MOUSE_DEBUG = false;
 
         private CustomSpawnAndAttachToHand spawn;
-        private GameObject leftObj;
-        private GameObject rightObj;
+        private GameObject leftThrowable = null;
+        private GameObject rightThrowable = null;
+        private Renderer leftRenderer;
+        private Renderer rightRenderer;
 
         void Start() 
         {
             spawn = GetComponent<CustomSpawnAndAttachToHand>();
-            leftObj = null;
-            rightObj = null;
+            //leftRenderer = leftHand.transform.Find("LeftHandSphere").GetComponent<Renderer>();
+            //rightRenderer = rightHand.transform.Find("RightHandSphere").GetComponent<Renderer>();
         }
 
         void FixedUpdate()
         {
             if (throwEnabled)
             {
-                if (leftObj == null && IsButtonDown(leftHand))
+                if (leftThrowable == null && IsButtonDown(leftHand))
                 {
-                    leftObj = spawn.SpawnAndAttach(leftHand);
+                    leftThrowable = spawn.SpawnAndAttach(leftHand);
+                    //leftRenderer.enabled = false;
+                } else
+                {
+                   // leftRenderer.enabled = true;
                 }
-                if (rightObj == null && IsButtonDown(rightHand))
+                if (rightThrowable == null && IsButtonDown(rightHand))
                 {
-                    rightObj = spawn.SpawnAndAttach(rightHand);
+                    rightThrowable = spawn.SpawnAndAttach(rightHand);
+                    //rightRenderer.enabled = false;
+                } else
+                {
+                    //rightRenderer.enabled = true;
                 }
                 if (WasButtonReleased(leftHand))
                 {
-                    leftHand.DetachObject(leftObj);
-                    leftObj = null;
+                    leftHand.DetachObject(leftThrowable);
+                    leftThrowable = null;
                 }
                 if (WasButtonReleased(rightHand))
                 {
-                    rightHand.DetachObject(rightObj);
-                    rightObj = null;
+                    rightHand.DetachObject(rightThrowable);
+                    rightThrowable = null;
                 }
             }
         }
