@@ -18,7 +18,7 @@ public class BeatBlinkController : MonoBehaviour
     void Awake()
     {
         blink = GetComponent<Blink>();
-        originalPos = transform.position;
+        originalPos = transform.localPosition;
     }
 
     public void Unlock()
@@ -38,11 +38,6 @@ public class BeatBlinkController : MonoBehaviour
         bool isHit = beatInfo.beats[beatCount];
         bool isNextHit = beatInfo.beats[(beatCount + 1) % beatInfo.beats.Length];
         
-
-        if (beatInfo.offsets.Length > 0)
-        {
-            transform.position += beatInfo.offsets[0];
-        }
 
         if (unlocked)
         {
@@ -90,8 +85,8 @@ public class BeatBlinkController : MonoBehaviour
             {
                 hitCount = 0;
             }
-            transform.position = originalPos + beatInfo.offsets[hitCount];
-            
+            transform.localPosition = originalPos + beatInfo.offsets[hitCount];
+            Debug.Log(beatInfo.offsets[hitCount]);
         }
     }
 
