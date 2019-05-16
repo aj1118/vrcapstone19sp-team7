@@ -61,7 +61,7 @@ public class Target_hit : MonoBehaviour
         }
         set
         {
-            canHit = value;
+            complete = value;
         }
     }
 }
