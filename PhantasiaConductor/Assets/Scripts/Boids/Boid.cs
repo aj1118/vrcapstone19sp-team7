@@ -16,7 +16,7 @@ public class Boid : MonoBehaviour
 
     public float minScale = 1;
     public float maxScale = 1;
-    
+
     public Color[] colors;
     private GameObject chasee;
 
@@ -34,13 +34,22 @@ public class Boid : MonoBehaviour
         // float scale = Random.Range(minScale, maxScale);
         transform.localScale = new Vector3(Random.Range(minScale, maxScale), Random.Range(minScale, maxScale), Random.Range(minScale, maxScale));
 
-        if (colors.Length > 0) {
-            int i = Random.Range(0, colors.Length);
-            Color color = colors[(int) i];
+        Color color;
 
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.material.color = color;
+        // if (colors.Length > 0)
+        // {
+        //     int i = Random.Range(0, colors.Length);
+        //     color = colors[(int)i];
+        // }
+        // else
+        {
+            color = ColorGenerator.GenerateColor();
         }
+
+        float alpha = Random.Range(0.35f, .9f);
+        color.a = alpha;
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.material.color = color;
 
         // rigidBody = GetComponent<Rigidbody>();
         // if (rigidBody == null)
@@ -90,7 +99,7 @@ public class Boid : MonoBehaviour
 
         var noise = Mathf.PerlinNoise(Time.time, noiseOffset) * 2.0f - 1.0f;
         var speed = flock.flockSpeed * (1.0f + noise);
-        
+
 
         var separation = Vector3.zero;
         // flock alignment
