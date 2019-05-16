@@ -6,10 +6,9 @@ public class ColorGenerator
 {
     static Color[] namedColors = { Color.red, Color.blue, Color.green, Color.yellow, Color.cyan };
 
-    ColorGenerator()
-    {
-
-
+    public static Color GenerateColor() {
+        Color[] colors = GenerateColors(1);
+        return colors[0];
     }
 
     public static Color[] GenerateColorsHsv(int n)
