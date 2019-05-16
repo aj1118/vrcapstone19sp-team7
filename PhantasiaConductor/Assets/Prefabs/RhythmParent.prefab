@@ -440,8 +440,7 @@ MonoBehaviour:
   hitClip: {fileID: 8300000, guid: b6d08d737477e1a47ae68de4d2498900, type: 3}
   loopClip: {fileID: 8300000, guid: 27fcf9ee46b764f41bb0dd29d9ff60a0, type: 3}
   hitsToUnlock: 2
-  hitAnim: {fileID: 0}
-  loopAnim: {fileID: 0}
+  unlockMaterial: {fileID: 2100000, guid: 6db66adb191f4b94d904c517cfc0eebd, type: 2}
 --- !u!114 &5605145439435445701
 MonoBehaviour:
   m_ObjectHideFlags: 0

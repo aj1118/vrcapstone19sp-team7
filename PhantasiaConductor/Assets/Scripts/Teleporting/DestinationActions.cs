@@ -35,7 +35,6 @@ namespace Valve.VR.InteractionSystem
             if (puzzleObj != null)
             {
                 // Make instruments colorful
-                /*
                 for (int i = 0; i < makeColorful.Length; i++)
                 {
                     Color orig = colorMaterials[i].color;
@@ -44,7 +43,7 @@ namespace Valve.VR.InteractionSystem
                     newMaterial.color = newColor;
 
                     makeColorful[i].GetComponent<Renderer>().material = newMaterial;
-                } */
+                }
 
                 OnDepart.Invoke();
             }

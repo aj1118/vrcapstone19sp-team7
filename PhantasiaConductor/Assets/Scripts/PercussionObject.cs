@@ -9,12 +9,11 @@ public class PercussionObject : MonoBehaviour
     public AudioClip loopClip;
 
     public uint hitsToUnlock;
-    public Animation hitAnim;
-    public Animation loopAnim;
+    public Material unlockMaterial;
     // Start is called before the first frame update
 
     
-    
+    private Renderer hitRenderer;
     private BeatBlinkController beatBlinkController;
     private AudioSource hitSource;
     private AudioSource loopSource;
@@ -28,6 +27,7 @@ public class PercussionObject : MonoBehaviour
   	
         hitSource = transform.Find("HitSource").GetComponent<AudioSource>();
         loopSource = transform.Find("LoopSource").GetComponent<AudioSource>();
+        hitRenderer = transform.Find("HitAnimation").GetComponent<Renderer>();
         loopSource.pitch = loopClip.length / MasterLoop.loopTime;
         
         //adds 3d(ish) sound
@@ -58,9 +58,12 @@ public class PercussionObject : MonoBehaviour
     public void Unlock()
     {
     	Invoke("LoopSourceOn", hitClip.length + .1f);
+        hitRenderer.material = unlockMaterial;
+        Debug.Log(GetComponent<MeshRenderer>().material);
     }
 
-    void LoopSourceOn(){
+    void LoopSourceOn()
+    {
     	loopSource.volume = 1.0f;
     }
 
