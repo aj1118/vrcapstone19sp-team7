@@ -39,12 +39,19 @@ public class GameController : MonoBehaviour
 
     public void SetNextActive()
     {
-        for (int i = 0; i < numActive[activeIndex]; i++)
+        if (activeIndex == numActive.Length)
         {
-            puzzleOrder[puzzleIndex].SetActive(true);
-            puzzleIndex++;
+            onPuzzlesComplete.Invoke();
         }
-        activeIndex++;
+        else
+        {
+            for (int i = 0; i < numActive[activeIndex]; i++)
+            {
+                puzzleOrder[puzzleIndex].SetActive(true);
+                puzzleIndex++;
+            }
+            activeIndex++;
+        }
     }
 
     public void FadeInAll()
