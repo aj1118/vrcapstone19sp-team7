@@ -33,6 +33,7 @@ public class WallPlacer : MonoBehaviour
             ColorPulse cp = wall.GetComponent<ColorPulse>();
             masterLoop.onNewLoop.AddListener(delegate ()
             {
+                Debug.Log("new loop");
                 cp.NewLoop();
             });
         }
