@@ -15,7 +15,6 @@ public class HarmonyDestinationActions : MonoBehaviour
 
     public void Depart()
     {
-        transform.position = new Vector3(10, 10, 10);
         StartCoroutine(DelayDepart());
     }
 
