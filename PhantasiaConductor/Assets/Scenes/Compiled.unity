@@ -230,7 +230,7 @@ PrefabInstance:
     - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
         type: 3}
       propertyPath: OnDepart.m_PersistentCalls.m_Calls.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
         type: 3}
@@ -592,6 +592,36 @@ PrefabInstance:
       propertyPath: OnDepart.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
+        type: 3}
+      propertyPath: OnDepart.m_PersistentCalls.m_Calls.Array.data[6].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
+        type: 3}
+      propertyPath: OnDepart.m_PersistentCalls.m_Calls.Array.data[6].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
+        type: 3}
+      propertyPath: OnDepart.m_PersistentCalls.m_Calls.Array.data[6].m_Target
+      value: 
+      objectReference: {fileID: 616760784}
+    - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
+        type: 3}
+      propertyPath: OnDepart.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
+        type: 3}
+      propertyPath: OnDepart.m_PersistentCalls.m_Calls.Array.data[6].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
+        type: 3}
+      propertyPath: OnDepart.m_PersistentCalls.m_Calls.Array.data[6].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 441327812120867267, guid: 118106622eff7584caf82d1f0da89503, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 118106622eff7584caf82d1f0da89503, type: 3}
@@ -629,6 +659,7 @@ Transform:
   - {fileID: 914941094}
   - {fileID: 1739563932}
   - {fileID: 719990100}
+  - {fileID: 1510475305}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -645,9 +676,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzleOrder:
-  - {fileID: 1144734736}
   - {fileID: 1395807031}
   - {fileID: 885904890}
+  - {fileID: 1144734736}
   numActive: 010000000100000001000000
   fadeObjects:
   - {fileID: 1560075252}
@@ -668,6 +699,17 @@ MonoBehaviour:
       - m_Target: {fileID: 616760784}
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 0
+      - m_Target: {fileID: 1510475306}
+        m_MethodName: ConfettiOn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2696,7 +2738,7 @@ PrefabInstance:
     - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
         type: 3}
       propertyPath: OnDepart.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_BoolArgument
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 118106622eff7584caf82d1f0da89503, type: 3}
@@ -3521,6 +3563,31 @@ PrefabInstance:
       propertyPath: OnDepart.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
+        type: 3}
+      propertyPath: LoadPuzzle.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
+        type: 3}
+      propertyPath: LoadPuzzle.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
+        type: 3}
+      propertyPath: LoadPuzzle.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+      value: 
+      objectReference: {fileID: 1510475306}
+    - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
+        type: 3}
+      propertyPath: LoadPuzzle.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+      value: ConfettiOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630393060951285137, guid: 118106622eff7584caf82d1f0da89503,
+        type: 3}
+      propertyPath: LoadPuzzle.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 441327812120867267, guid: 118106622eff7584caf82d1f0da89503, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 118106622eff7584caf82d1f0da89503, type: 3}
@@ -3549,7 +3616,7 @@ PrefabInstance:
     - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
         type: 3}
       propertyPath: flockSize
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
         type: 3}
@@ -4898,6 +4965,49 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8047d5f71dc0a3498d345b99c62ae1d, type: 3}
+--- !u!1 &1510475304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510475305}
+  - component: {fileID: 1510475306}
+  m_Layer: 0
+  m_Name: ConfettiController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1510475305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510475304}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.7695312, y: 0.8866625, z: -0.26081276}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 130850543}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1510475306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510475304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71c720e115aef24fb3cab48d8025635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1560075252
 GameObject:
   m_ObjectHideFlags: 0
@@ -5516,7 +5626,7 @@ PrefabInstance:
     - target: {fileID: 1617252973569462142, guid: cadb5e4850a2d124a9928d7659861958,
         type: 3}
       propertyPath: flockSize
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 124335380267662659, guid: cadb5e4850a2d124a9928d7659861958,
         type: 3}
