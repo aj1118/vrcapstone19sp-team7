@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
 
     public void SetNextActive()
     {
-        if (activeIndex == numActive.Length)
+        if (puzzleIndex == puzzleOrder.Length)
         {
             onPuzzlesComplete.Invoke();
         }

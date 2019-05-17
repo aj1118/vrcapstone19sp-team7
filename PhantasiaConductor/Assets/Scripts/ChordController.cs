@@ -167,13 +167,13 @@ namespace Valve.VR.InteractionSystem
             targets[index].GetComponent<Target_hit>().CanHit = false;
             if (!completed[index]) {
                 waitForLoop = true;
+            } else if (index == targetIndex)
+            {
+                    targetIndex++;
             }
             notePlaying = false;
 
-            if (index == targetIndex)
-            {
-                targetIndex++;
-            }
+            
         }
 
         public void ResetTargets()
