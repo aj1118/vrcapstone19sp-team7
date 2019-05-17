@@ -5,6 +5,7 @@ using UnityEngine;
 public class HitAnimation : MonoBehaviour
 {
     public float speed;
+
     public string animationName;
     Animation anim;
 

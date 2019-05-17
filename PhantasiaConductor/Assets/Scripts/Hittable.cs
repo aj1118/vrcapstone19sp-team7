@@ -72,16 +72,7 @@ public class Hittable : MonoBehaviour
         }
     }
 
-
-    void OnAlive()
-    {
-        // CanHit = true;
-    }
-
-    void OnDead()
-    {
-        // CanHit = false;
-    }
+    
 
     public void StopHit()
     {
@@ -105,7 +96,7 @@ public class Hittable : MonoBehaviour
     {
         if (hitCount != 0)
         {
-            //Play miss sound?
+            //Play miss sound quietly?
         }
         if (!HitFlag)
         {

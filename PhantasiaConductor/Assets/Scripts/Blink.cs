@@ -12,9 +12,19 @@ public class Blink : MonoBehaviour
     public UnityEvent onBlinkOnToOff;
     public UnityEvent onBlinkOffToOn;
 
+    public bool isPiano = false;
+
     // true is on, false is off
     private bool blinkState = true;
     private bool unlocked = false;
+
+    private void Start()
+    {
+        if (isPiano) { 
+            GetComponent<Collider>().enabled = true;
+        }
+        GetComponent<Renderer>().enabled = false;
+    }
 
 
     public void BlinkOnOnce()
@@ -29,14 +39,17 @@ public class Blink : MonoBehaviour
 
 
             GetComponent<Renderer>().enabled = true;
+            if (isPiano)
+            {
+                GetComponent<Collider>().enabled = true;
+            }
+        
             onBlinkOn.Invoke();
-            // pObj.SendMessage(onEventName, SendMessageOptions.DontRequireReceiver);
         }
     }
 
     public void BlinkOffOnce()
     {
-        
         if (blinkState)
         {
             onBlinkOnToOff.Invoke();
@@ -44,9 +57,12 @@ public class Blink : MonoBehaviour
         blinkState = false;
 
         GetComponent<Renderer>().enabled = false;
+        if (isPiano)
+        {
+            GetComponent<Collider>().enabled = false;
+        }
 
         onBlinkOff.Invoke();
-        // pObj.SendMessage(offEventName, SendMessageOptions.DontRequireReceiver);
     }
 
 
