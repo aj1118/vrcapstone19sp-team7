@@ -7,42 +7,52 @@ using UnityEngine.Events;
 
 namespace Valve.VR.InteractionSystem
 {
-    [RequireComponent (typeof(CustomSpawnAndAttachToHand))]
+    [RequireComponent(typeof(CustomSpawnAndAttachToHand))]
     public class ChordController : MonoBehaviour
     {
-        public GameObject[] targets;
-
-        public Material targetOn;
-        public Material targetOff;
+        public GameObject[] beatInfos;
+        public AudioClip[] clips;
 
         public UnityEvent onCompleteChord;
-
+        
         private AudioSource loopSource;
         private BeatInfo beatInfo;
         private CustomSpawnAndAttachToHand spawning;
-        private int beatIndex = -1;
-        private int targetIndex = 0; 
         private GameObject leftThrowable;
         private GameObject rightThrowable;
-        private GameObject leftSphere;
-        private GameObject rightSphere;
 
-
-
-        private bool[] completed;
-        private bool waitForLoop = false;
-        private bool notePlaying = false;
         private bool complete = false;
         private bool invokeComplete = false;
 
+
+        public int numUnlocked = 0;
+
+
+        
         private void Awake()
         {
-            loopSource = loopSource = transform.Find("LoopSource").GetComponent<AudioSource>();
-            beatInfo = transform.Find("BeatInfo").GetComponent<BeatInfo>();
-            spawning = GetComponent<CustomSpawnAndAttachToHand>();
-            completed = new bool[targets.Length];
+            beatInfo = GetComponent<BeatInfo>();
+            int puzzleIndex = 0;
+            for (int i = 0; i < beatInfo.beats.Length; i++) {
+                if (beatInfo.beats[i])
+                {
+                    beatInfos[puzzleIndex].GetComponent<BeatInfo>().beats[i] = true;
+                    puzzleIndex++;
+                    Debug.Log("III");
+                }
+            }
         }
 
+        public void NewUnlock()
+        {
+            numUnlocked++;
+            if (numUnlocked == beatInfos.Length)
+            {
+                onCompleteChord.Invoke();
+            }
+        }
+
+        /*
         private void OnEnable()
         {
             waitForLoop = true;
@@ -55,6 +65,8 @@ namespace Valve.VR.InteractionSystem
         {
             CancelInvoke();
         }
+
+        
 
         public void NewLoop()
         {
@@ -175,6 +187,6 @@ namespace Valve.VR.InteractionSystem
                 targets[targetIndex].GetComponent<Target_hit>().CanHit = false;
                 completed[targetIndex] = true;
             }
-        }
+        }*/
     }
 }
