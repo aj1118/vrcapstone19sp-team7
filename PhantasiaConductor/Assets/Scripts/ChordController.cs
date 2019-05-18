@@ -10,13 +10,13 @@ namespace Valve.VR.InteractionSystem
     [RequireComponent(typeof(CustomSpawnAndAttachToHand))]
     public class ChordController : MonoBehaviour
     {
-        public GameObject[] beatInfos;
+        public GameObject[] puzzles;
+        public int[] puzzleBeats; // maps puzzles to their hit time, puzzles[i] has a hit at puzzleBeats[i]
         public AudioClip[] clips;
 
         public UnityEvent onCompleteChord;
         
         private AudioSource loopSource;
-        private BeatInfo beatInfo;
         private CustomSpawnAndAttachToHand spawning;
         private GameObject leftThrowable;
         private GameObject rightThrowable;
@@ -31,22 +31,20 @@ namespace Valve.VR.InteractionSystem
         
         private void Awake()
         {
-            beatInfo = GetComponent<BeatInfo>();
+            Debug.Assert(puzzles.Length == puzzleBeats.Length && puzzles.Length == clips.Length);
             int puzzleIndex = 0;
-            for (int i = 0; i < beatInfo.beats.Length; i++) {
-                if (beatInfo.beats[i])
-                {
-                    beatInfos[puzzleIndex].GetComponent<BeatInfo>().beats[i] = true;
-                    puzzleIndex++;
-                    Debug.Log("III");
-                }
+            for (int i = 0; i < puzzles.Length; i++) {
+                puzzles[i].GetComponent<BeatInfo>().beats[puzzleBeats[i]] = true;
+                puzzles[i].GetComponent<AudioSource>().clip = clips[i];
+                puzzleIndex++;
+                
             }
         }
 
         public void NewUnlock()
         {
             numUnlocked++;
-            if (numUnlocked == beatInfos.Length)
+            if (numUnlocked == puzzles.Length)
             {
                 onCompleteChord.Invoke();
             }

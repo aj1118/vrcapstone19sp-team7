@@ -23,6 +23,7 @@ namespace Valve.VR.InteractionSystem
         [Tooltip("Hide the skeleton part of the hand on attachment and show on detach")]
         public bool hideSkeletonOnAttach = false;
 
+
         [Tooltip("Hide the controller part of the hand on attachment and show on detach")]
         public bool hideControllerOnAttach = false;
 

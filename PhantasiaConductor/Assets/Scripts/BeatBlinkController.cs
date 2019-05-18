@@ -31,15 +31,15 @@ public class BeatBlinkController : MonoBehaviour
     public void NewLoop()
     {
         beatCount = -1;
-        RunBeat();
+        NewBeat();
     }
- 
-    void RunBeat()
+
+    void NewBeat()
     {
         beatCount++;
         bool isHit = beatInfo.beats[beatCount];
         bool isNextHit = beatInfo.beats[(beatCount + 1) % beatInfo.beats.Length];
-        
+
 
         if (unlocked)
         {
@@ -47,7 +47,6 @@ public class BeatBlinkController : MonoBehaviour
             {
                 updateOffset();
                 onHitUnlocked.Invoke();
-                
             }
         }
         else
@@ -64,7 +63,7 @@ public class BeatBlinkController : MonoBehaviour
 
         if (beatCount < beatInfo.beats.Length - 1)
         {
-            Invoke("RunBeat", beatInfo.beatTime);
+            Invoke("NewBeat", beatInfo.beatTime);
         }
     }
     

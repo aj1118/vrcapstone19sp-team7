@@ -8,9 +8,9 @@ public class PercussionObject : MonoBehaviour
     public AudioClip hitClip;
     public AudioClip loopClip;
     public Material unlockMaterial;
-    public bool useLoop = true; //if false, will play hitclip on loop instead
     public uint hitsToUnlock = 4;
     public bool unlocked = false;
+    public bool isPiano = false;
 
     private Renderer hitRenderer;
     private BeatBlinkController beatBlinkController;
@@ -23,28 +23,28 @@ public class PercussionObject : MonoBehaviour
     void Awake()
     {
         beatBlinkController = GetComponent<BeatBlinkController>();
-
-        hitSource = transform.Find("HitSource").GetComponent<AudioSource>();
         hitRenderer = transform.Find("HitAnimation").GetComponent<Renderer>();
+        
 
-
-        //adds 3d(ish) sound
-
-        hitSource.spatialBlend = 1.0f;
-        hitSource.clip = hitClip;
-
-        if (useLoop)
+        if (isPiano)
         {
+            hitSource = GetComponent<AudioSource>();
+            beatInfo = GetComponent<BeatInfo>();
+        } else
+        {
+
+            hitSource = transform.Find("HitSource").GetComponent<AudioSource>();
+            hitSource.spatialBlend = 1.0f;
+            hitSource.clip = hitClip;
             loopSource = transform.Find("LoopSource").GetComponent<AudioSource>();
             loopSource.pitch = loopClip.length / MasterLoop.loopTime;
             loopSource.spatialBlend = 1.0f;
             loopSource.clip = loopClip;
+            beatInfo = transform.Find("BeatInfo").GetComponent<BeatInfo>(); 
         }
 
         hittable = GetComponent<Hittable>();
-
-        beatInfo = transform.Find("BeatInfo").GetComponent<BeatInfo>();
-
+        
         hittable.hitsToUnlock = hitsToUnlock;
         beatBlinkController.beatInfo = beatInfo;
     }
@@ -54,7 +54,7 @@ public class PercussionObject : MonoBehaviour
         if (gameObject.activeInHierarchy)
         {
             beatBlinkController.NewLoop();
-            if (useLoop)
+            if (!isPiano)
             {
                 loopSource.Play();
             }
@@ -71,7 +71,7 @@ public class PercussionObject : MonoBehaviour
 
     public void HitOnce()
     {
-        if (!unlocked || !useLoop)
+        if (!unlocked || !isPiano)
         {
             hitSource.Play();
         }
