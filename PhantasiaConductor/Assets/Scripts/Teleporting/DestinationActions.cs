@@ -12,6 +12,10 @@ namespace Valve.VR.InteractionSystem
         public Material[] colorMaterials;
         public float loadDelay = 2f;
 
+        public Hand leftHand;
+        public Hand rightHand;
+        public GameObject handObject;
+
         public UnityEvent LoadPuzzle;
         public UnityEvent OnDepart;
 
@@ -25,10 +29,12 @@ namespace Valve.VR.InteractionSystem
             if (puzzleObj != null) 
             {
                 gameController.FadeOutAll();
-
+              
                 Player.instance.GetComponent<PerspectiveShift>().teleportEnabled = false;
                 StartCoroutine(DelayedLoad());
-            } 
+            }
+            leftHand.SetRenderModel(handObject);
+            rightHand.SetRenderModel(handObject);
         }
 
         public void onPrepareToLeave() {
@@ -47,6 +53,8 @@ namespace Valve.VR.InteractionSystem
 
                 OnDepart.Invoke();
             }
+            leftHand.SetRenderModel(null);
+            rightHand.SetRenderModel(null);
         }
 
         private IEnumerator DelayedLoad()

@@ -13,6 +13,7 @@ namespace Valve.VR.InteractionSystem
        
         public Hand leftHand;
         public Hand rightHand;
+        public GameObject emptyHandPrefab;
         public Camera playerCamera;
 
         public float speed;
@@ -153,6 +154,8 @@ namespace Valve.VR.InteractionSystem
 
         private IEnumerator FadeCanvas(CanvasGroup canvas, float startAlpha, float endAlpha, float duration)
         {
+            leftHand.renderModelPrefab = emptyHandPrefab;
+            Debug.Log(leftHand.renderModelPrefab);
             // keep track of when the fading started, when it should finish, and how long it has been running&lt;/p&gt; &lt;p&gt;&a
             var startTime = Time.time;
             var endTime = Time.time + duration;
@@ -210,6 +213,7 @@ namespace Valve.VR.InteractionSystem
         {
             if (string.Equals(e.target.tag, "teleportDest"))
             {
+                e.target.gameObject.GetComponent<Pulse>().enablePulse = false;
                 e.target.gameObject.GetComponent<Glow>().GlowOn();
             }
         }
@@ -219,6 +223,7 @@ namespace Valve.VR.InteractionSystem
             if (string.Equals(e.target.tag, "teleportDest"))
             {
                 e.target.gameObject.GetComponent<Glow>().GlowOff();
+                e.target.gameObject.GetComponent<Pulse>().enablePulse = true;
             }
         }
 
