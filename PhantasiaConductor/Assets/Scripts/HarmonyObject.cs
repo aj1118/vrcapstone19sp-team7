@@ -102,9 +102,12 @@ public class HarmonyObject : MonoBehaviour
 	}
 
 	public void NewLoop(){
-		loopSource.Play();
-		beatCount = 0;
-		Invoke("EarlyRunBeat", beatTime - (beatTime * earlyStart));
+        if (gameObject.activeInHierarchy)
+        {
+            loopSource.Play();
+            beatCount = 0;
+            Invoke("EarlyRunBeat", beatTime - (beatTime * earlyStart));
+        }
 	}
 
 	public void OnTriggerEnter()

@@ -45,9 +45,6 @@ namespace Valve.VR.InteractionSystem
                 puzzles[i].SetActive(false);
             }
         }
-        
-       
-        
 
         public void NextPuzzle() {
             winSource.Play();
