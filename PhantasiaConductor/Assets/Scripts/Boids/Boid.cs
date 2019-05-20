@@ -6,9 +6,9 @@ public class Boid : MonoBehaviour
 {
     Flock flock;
 
-    public float minVelocity;
+    // public float minVelocity;
 
-    public float maxVelocity;
+    // public float maxVelocity;
 
     public float randomness;
 
@@ -16,6 +16,8 @@ public class Boid : MonoBehaviour
 
     public float minScale = 1;
     public float maxScale = 1;
+
+    public float steeringScale = 1.0f;
 
     public Color[] colors;
     private GameObject chasee;
@@ -114,19 +116,19 @@ public class Boid : MonoBehaviour
         var nearbyBoids = Physics.OverlapSphere(currentPos, flock.neighborRadius, flock.searchLayer);
 
         // no need for custom case
-        if (false)
-        // if (nearbyBoids.Length == 1)
-        {
-            var t = nearbyBoids[0].transform;
-            if (Vector3.Distance(chasee.transform.position, t.position) > 25)
-            // if (Vector3.Distance(flock.transform.position, t.position) > 25)
-            {
-                // alignment = (flock.transform.position - t.position).normalized;
-                alignment = (chasee.transform.position - t.position).normalized;
-            }
-            // Debug.Log("boid is alone");
-        }
-        else
+        // if (false)
+        // // if (nearbyBoids.Length == 1)
+        // {
+        //     var t = nearbyBoids[0].transform;
+        //     if (Vector3.Distance(chasee.transform.position, t.position) > 25)
+        //     // if (Vector3.Distance(flock.transform.position, t.position) > 25)
+        //     {
+        //         // alignment = (flock.transform.position - t.position).normalized;
+        //         alignment = (chasee.transform.position - t.position).normalized;
+        //     }
+        //     // Debug.Log("boid is alone");
+        // }
+        // else
         {
             foreach (var boid in nearbyBoids)
             {
@@ -144,8 +146,8 @@ public class Boid : MonoBehaviour
         cohesion *= avg;
         cohesion = (cohesion - currentPos).normalized;
 
-        var direction = separation + alignment + cohesion;
-        // var direction = separation + alignment + cohesion + (steering * 20);
+        // var direction = separation + alignment + cohesion;
+        var direction = separation + alignment + cohesion + (steering * steeringScale);
         var rotation = Quaternion.FromToRotation(Vector3.forward, direction.normalized);
         if (rotation != currentRot)
         {
@@ -175,8 +177,8 @@ public class Boid : MonoBehaviour
     {
         this.flock = flock;
 
-        minVelocity = flock.minVelocity;
-        maxVelocity = flock.maxVelocity;
+        // minVelocity = flock.minVelocity;
+        // maxVelocity = flock.maxVelocity;
 
         randomness = flock.randomness;
         chasee = flock.chasee;
