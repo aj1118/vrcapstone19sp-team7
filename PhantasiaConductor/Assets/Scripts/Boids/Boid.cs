@@ -52,13 +52,6 @@ public class Boid : MonoBehaviour
         color.a = alpha;
         Renderer renderer = GetComponent<Renderer>();
         renderer.material.color = color;
-
-        // rigidBody = GetComponent<Rigidbody>();
-        // if (rigidBody == null)
-        // {
-        //     Debug.Log("boid needs rigidbody");
-        // }
-        // StartCoroutine("Steering");
     }
 
     Vector3 GetSeparationVector(Transform target)
@@ -69,30 +62,6 @@ public class Boid : MonoBehaviour
         var scaler = Mathf.Clamp01(1.0f - diffLen / flock.neighborRadius);
         return diff * (scaler / diffLen);
     }
-
-    // IEnumerator Steering()
-    // {
-    //     while (true)
-    //     {
-    //         if (inited)
-    //         {
-    //             rigidBody.velocity = rigidBody.velocity + Calc() * Time.deltaTime;
-
-    //             float speed = rigidBody.velocity.magnitude;
-    //             if (speed > maxVelocity)
-    //             {
-    //                 rigidBody.velocity = rigidBody.velocity.normalized * maxVelocity;
-    //             }
-    //             else if (speed < minVelocity)
-    //             {
-    //                 rigidBody.velocity = rigidBody.velocity.normalized * minVelocity;
-    //             }
-    //         }
-
-    //         float waitTime = Random.Range(0.3f, 0.5f);
-    //         yield return new WaitForSeconds(waitTime);
-    //     }
-    // }
 
     void Update()
     {
@@ -105,30 +74,26 @@ public class Boid : MonoBehaviour
 
         var separation = Vector3.zero;
         // flock alignment
-        // var alignment = flock.transform.forward;
-        var alignment = chasee.transform.position - transform.position;
+
+        // these both work pretty well
+        // var alignment = transform.forward;
+        var alignment = flock.transform.forward;
         // var alignment = flock.flockAlignment;
+        // var alignment = chasee.transform.position - transform.position;
+        // var alignment = Vector3.zero;
+        
         // flock center of mass
         var cohesion = flock.transform.position;
+        // var cohesion = flock.flockCenter;
+        // var cohesion = transform.position;
         // var cohesion = chasee.transform.position;
+        // var cohesion = Vector3.zero;
+
+        // target steering
         var steering = (chasee.transform.position - transform.position).normalized;
 
         var nearbyBoids = Physics.OverlapSphere(currentPos, flock.neighborRadius, flock.searchLayer);
 
-        // no need for custom case
-        // if (false)
-        // // if (nearbyBoids.Length == 1)
-        // {
-        //     var t = nearbyBoids[0].transform;
-        //     if (Vector3.Distance(chasee.transform.position, t.position) > 25)
-        //     // if (Vector3.Distance(flock.transform.position, t.position) > 25)
-        //     {
-        //         // alignment = (flock.transform.position - t.position).normalized;
-        //         alignment = (chasee.transform.position - t.position).normalized;
-        //     }
-        //     // Debug.Log("boid is alone");
-        // }
-        // else
         {
             foreach (var boid in nearbyBoids)
             {
@@ -159,26 +124,9 @@ public class Boid : MonoBehaviour
 
     }
 
-    // Vector3 Calc()
-    // {
-    //     Vector3 randomize = new Vector3((Random.value * 2) - 1, (Random.value * 2) - 1, (Random.value * 2) - 1);
-    //     randomize.Normalize();
-
-    //     Vector3 flockCenter = flock.flockCenter;
-    //     Vector3 flockVelocity = flock.flockVelocity;
-    //     Vector3 follow = chasee.transform.localPosition;
-    //     Debug.Log(follow + " " + flockCenter + " " + flockVelocity);
-
-    //     return (flockCenter + flockVelocity + follow * 2 + randomize * randomness);
-    //     // Vector3 flockCenter = 
-    // }
-
     public void SetFlock(Flock flock)
     {
         this.flock = flock;
-
-        // minVelocity = flock.minVelocity;
-        // maxVelocity = flock.maxVelocity;
 
         randomness = flock.randomness;
         chasee = flock.chasee;
