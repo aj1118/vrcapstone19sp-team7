@@ -32,7 +32,6 @@ public class PercussionObject : MonoBehaviour
             beatInfo = GetComponent<BeatInfo>();
         } else
         {
-
             hitSource = transform.Find("HitSource").GetComponent<AudioSource>();
             hitSource.spatialBlend = 1.0f;
             hitSource.clip = hitClip;
@@ -44,7 +43,6 @@ public class PercussionObject : MonoBehaviour
         }
 
         hittable = GetComponent<Hittable>();
-        
         hittable.hitsToUnlock = hitsToUnlock;
         beatBlinkController.beatInfo = beatInfo;
     }
@@ -66,7 +64,8 @@ public class PercussionObject : MonoBehaviour
         unlocked = true;
         Invoke("LoopSourceOn", hitClip.length + .1f);
         hitRenderer.material = unlockMaterial;
-        Debug.Log(GetComponent<MeshRenderer>().material);
+        GetComponent<Renderer>().material = unlockMaterial;
+        Debug.Log("AA");
     }
 
     public void HitOnce()
