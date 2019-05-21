@@ -18,37 +18,59 @@ namespace Valve.VR.InteractionSystem
         public bool MOUSE_DEBUG = false;
 
         private CustomSpawnAndAttachToHand spawn;
+        private BeatInfo beatInfo;
         private GameObject leftThrowable = null;
         private GameObject rightThrowable = null;
-        private Renderer leftRenderer;
-        private Renderer rightRenderer;
+
+        private bool startup = true;
 
         void Start() 
         {
             spawn = GetComponent<CustomSpawnAndAttachToHand>();
-            //leftRenderer = leftHand.transform.Find("LeftHandSphere").GetComponent<Renderer>();
-            //rightRenderer = rightHand.transform.Find("RightHandSphere").GetComponent<Renderer>();
+            /* beatInfo = GetComponent<BeatInfo>();
+            if (throwEnabled)
+            {
+                leftThrowable = spawn.SpawnAndAttach(leftHand);
+                rightThrowable = spawn.SpawnAndAttach(rightHand);
+            }*/
+        }
+/*
+        public void NewLoop()
+        {
+            if (startup)
+            {
+                startup = false;
+                ReleaseOnBeat();
+            }
         }
 
+        private void ReleaseOnBeat()
+        {
+            if (throwEnabled)
+            {
+                Debug.Log(beatInfo.beatTime);
+                leftHand.DetachObject(leftThrowable);
+                rightHand.DetachObject(rightThrowable);
+                // leftThrowable = spawn.SpawnAndAttach(leftHand);
+                // rightThrowable = spawn.SpawnAndAttach(rightHand);
+            }
+            Debug.Log(beatInfo.beatTime);
+            Invoke("ReleaseOnBeat", beatInfo.beatTime);
+        }
+*/
         void FixedUpdate()
         {
             if (throwEnabled)
             {
+
+                
                 if (leftThrowable == null && IsButtonDown(leftHand))
                 {
                     leftThrowable = spawn.SpawnAndAttach(leftHand);
-                    //leftRenderer.enabled = false;
-                } else
-                {
-                   // leftRenderer.enabled = true;
-                }
+                } 
                 if (rightThrowable == null && IsButtonDown(rightHand))
                 {
                     rightThrowable = spawn.SpawnAndAttach(rightHand);
-                    //rightRenderer.enabled = false;
-                } else
-                {
-                    //rightRenderer.enabled = true;
                 }
                 if (WasButtonReleased(leftHand))
                 {
@@ -60,6 +82,7 @@ namespace Valve.VR.InteractionSystem
                     rightHand.DetachObject(rightThrowable);
                     rightThrowable = null;
                 }
+                
             }
         }
 
