@@ -45,6 +45,10 @@ public class Flock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        neighborRadius = 3;
+        searchLayer = LayerMask.GetMask("Boid");
+        rotationCoef = 6.0f;
+
         for (int i = 0; i < flockSize; i++)
         {
             SpawnBoid();

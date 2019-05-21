@@ -10,7 +10,7 @@ public class Boid : MonoBehaviour
 
     // public float maxVelocity;
 
-    public float randomness;
+    // public float randomness;
 
     // public Rigidbody rigidBody;
 
@@ -18,6 +18,7 @@ public class Boid : MonoBehaviour
     public float maxScale = 1;
 
     public float steeringScale = 1.0f;
+    public float alignmentScale = .5f;
 
     public Color[] colors;
     private GameObject chasee;
@@ -28,8 +29,9 @@ public class Boid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LayerMask mask = (1 << 4);
-        gameObject.layer = mask;
+        steeringScale = 2.0f;
+        // LayerMask mask = (1 << 4);
+        gameObject.layer = LayerMask.NameToLayer("Boid");
 
         noiseOffset = Random.value * 10.0f;
 
@@ -76,16 +78,16 @@ public class Boid : MonoBehaviour
         // flock alignment
 
         // these both work pretty well
-        // var alignment = transform.forward;
-        var alignment = flock.transform.forward;
+        var alignment = transform.forward;
+        // var alignment = flock.transform.forward;
         // var alignment = flock.flockAlignment;
         // var alignment = chasee.transform.position - transform.position;
         // var alignment = Vector3.zero;
         
-        // flock center of mass
-        var cohesion = flock.transform.position;
+        // center of mass
+        // var cohesion = flock.transform.position;
         // var cohesion = flock.flockCenter;
-        // var cohesion = transform.position;
+        var cohesion = transform.position;
         // var cohesion = chasee.transform.position;
         // var cohesion = Vector3.zero;
 
@@ -93,15 +95,24 @@ public class Boid : MonoBehaviour
         var steering = (chasee.transform.position - transform.position).normalized;
 
         var nearbyBoids = Physics.OverlapSphere(currentPos, flock.neighborRadius, flock.searchLayer);
+        // var nearbyBoids = Physics.OverlapSphere(currentPos, flock.neighborRadius);
 
+        bool alone = true;
         {
             foreach (var boid in nearbyBoids)
             {
                 if (boid.gameObject == gameObject) continue;
+
+                // Boid b = boid.GetComponent<Boid>();
+                // if (b == null) {
+                //     Debug.Log("wrong");
+                // }
+
                 var t = boid.transform;
                 separation += GetSeparationVector(t);
                 alignment += t.forward;
                 cohesion += t.position;
+                alone = false;
             }
         }
 
@@ -111,13 +122,20 @@ public class Boid : MonoBehaviour
         cohesion *= avg;
         cohesion = (cohesion - currentPos).normalized;
 
+        // if (alone && Vector3.Distance(transform.position, chasee.transform.position) > 40) {
+        //     Debug.Log("yeah " + alignment + " " + cohesion + " steering: " + steering + " sep: " + separation);
+        //     gameObject.name = "far away";
+        // }
+
+        var off = new Vector3(Random.Range(0.0f, 0.05f), Random.Range(0.0f, 0.05f), Random.Range(0.0f, 0.05f));
         // var direction = separation + alignment + cohesion;
-        var direction = separation + alignment + cohesion + (steering * steeringScale);
+        var direction = separation + alignment * alignmentScale + cohesion + (steering * steeringScale) + off;
         var rotation = Quaternion.FromToRotation(Vector3.forward, direction.normalized);
         if (rotation != currentRot)
         {
             var ip = Mathf.Exp(-flock.rotationCoef * Time.deltaTime);
             transform.rotation = Quaternion.Slerp(rotation, currentRot, ip);
+            // transform.rotation = rotation;
         }
 
         transform.position = currentPos + transform.forward * (speed * Time.deltaTime);
@@ -128,8 +146,7 @@ public class Boid : MonoBehaviour
     {
         this.flock = flock;
 
-        randomness = flock.randomness;
+        // randomness = flock.randomness;
         chasee = flock.chasee;
-
     }
 }
