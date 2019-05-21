@@ -160,14 +160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a2c8c870c88494b8c617c5f03554ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   newPosition: {x: 2, y: 1, z: -1}
   newRotation: {x: 0, y: 140, z: 0, w: 0}
   newScale: {x: 0.5, y: 0.5, z: 0.5}
@@ -390,6 +382,16 @@ PrefabInstance:
       propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: NewUnlock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acf1736c442e61143aeb3bba35d8d055, type: 3}
 --- !u!1 &6804143278594234727 stripped
@@ -481,6 +483,16 @@ PrefabInstance:
       propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: NewUnlock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acf1736c442e61143aeb3bba35d8d055, type: 3}
 --- !u!1 &6804143278753028073 stripped
@@ -572,6 +584,16 @@ PrefabInstance:
       propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: NewUnlock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acf1736c442e61143aeb3bba35d8d055, type: 3}
 --- !u!1 &6804143278766027617 stripped
@@ -663,6 +685,16 @@ PrefabInstance:
       propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: NewUnlock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acf1736c442e61143aeb3bba35d8d055, type: 3}
 --- !u!1 &6804143278922328593 stripped
@@ -734,6 +766,16 @@ PrefabInstance:
       propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: NewUnlock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acf1736c442e61143aeb3bba35d8d055, type: 3}
 --- !u!1 &6804143279599754615 stripped
@@ -825,6 +867,16 @@ PrefabInstance:
       propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: NewUnlock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acf1736c442e61143aeb3bba35d8d055, type: 3}
 --- !u!1 &6804143279633047054 stripped
@@ -891,6 +943,16 @@ PrefabInstance:
       propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 5837641069144768308}
+    - target: {fileID: 5565707658774724481, guid: acf1736c442e61143aeb3bba35d8d055,
+        type: 3}
+      propertyPath: onUnlock.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: NewUnlock
+      objectReference: {fileID: 0}
     - target: {fileID: 5565707658774724493, guid: acf1736c442e61143aeb3bba35d8d055,
         type: 3}
       propertyPath: onHitUnlocked.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

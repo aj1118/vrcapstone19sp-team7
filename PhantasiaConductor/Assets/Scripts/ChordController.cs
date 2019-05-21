@@ -44,6 +44,7 @@ namespace Valve.VR.InteractionSystem
         public void NewUnlock()
         {
             numUnlocked++;
+            onCompleteChord.Invoke();
             if (numUnlocked == puzzles.Length)
             {
                 onCompleteChord.Invoke();

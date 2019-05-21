@@ -24,14 +24,11 @@ public class UnlockAction : MonoBehaviour
 				}
 			}
 		}
-	}s
+	}
 
 	public void Unlock(){
 		GameObject center = GameObject.Find("/CenterArea");
 		transform.SetParent(center.transform);
 		unlocked = true;
 	}
-
-s
-
 }

@@ -78,7 +78,10 @@ public class PercussionObject : MonoBehaviour
     }
     void LoopSourceOn()
     {
-    	loopSource.volume = 1.0f;
+        if (loopSource != null)
+        {
+            loopSource.volume = 1.0f;
+        }
     }
 
     
