@@ -10,6 +10,8 @@ public class MasterLoop : MonoBehaviour
     public static float standardLoopTime = 4f; //The 'default' time for one loop (audio rendered at this tempo)
     public static float delay = 0;
 
+    public static int loopCount = 0;
+
     //Alternate idea - store map of points in time to events, check every update (would allow arbitrary tempo changes mid loop)
 
     private void OnEnable()
@@ -20,6 +22,7 @@ public class MasterLoop : MonoBehaviour
     void NewLoop()
     {
         onNewLoop.Invoke();
+        loopCount++;
         Invoke("NewLoop", loopTime);
     }
 }

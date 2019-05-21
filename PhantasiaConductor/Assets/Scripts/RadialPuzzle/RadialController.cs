@@ -7,6 +7,8 @@ public class RadialController : MonoBehaviour
 
     public float radius = 10f;
 
+    public float heightOffset = 0f;
+
     public GameObject objPrefab;
 
     private GameObject obj;
@@ -30,7 +32,7 @@ public class RadialController : MonoBehaviour
             ray.origin = transform.position;
             Vector3 pos = ray.origin + (ray.direction * radius);
 
-            obj.transform.position = new Vector3(pos.x, transform.position.y, pos.z);
+            obj.transform.position = new Vector3(pos.x, transform.position.y + heightOffset, pos.z);
         }
 
     }
