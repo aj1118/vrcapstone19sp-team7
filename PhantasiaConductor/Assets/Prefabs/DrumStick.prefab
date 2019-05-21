@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7324811398375612035}
   - component: {fileID: 7324811398375612032}
   - component: {fileID: 7324811398375612033}
-  - component: {fileID: 1918165227655206192}
+  - component: {fileID: 7657372419954545987}
   m_Layer: 0
   m_Name: DrumStick
   m_TagString: Untagged
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7324811398375612038}
-  m_LocalRotation: {x: -0.45451957, y: -0.54167503, z: 0.54167557, w: -0.45451924}
-  m_LocalPosition: {x: -0.020253075, y: -0.060543917, z: 0.5316537}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.46, z: -0.1}
   m_LocalScale: {x: 0.90817, y: 1, z: 0.90817}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &7324811398375612032
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d48ec04860db1c94d96f4c132388508e, type: 2}
+  - {fileID: 2100000, guid: 0aa368fd2ed2c654380358d820c89ec7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,16 +78,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1918165227655206192
-BoxCollider:
+--- !u!136 &7657372419954545987
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7324811398375612038}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.015028786, y: 0.40946734, z: 0.015028756}
+  m_Radius: 0.01
+  m_Height: 0.40946734
+  m_Direction: 1
   m_Center: {x: -0.000000025370106, y: 0.118252195, z: -0.5105277}

@@ -13,7 +13,6 @@ namespace Valve.VR.InteractionSystem
        
         public Hand leftHand;
         public Hand rightHand;
-        public GameObject emptyHandPrefab;
         public Camera playerCamera;
 
         public float speed;
@@ -22,6 +21,8 @@ namespace Valve.VR.InteractionSystem
 
         // to prevent motion sickness
         public GameObject motionOverlay;
+
+        public UnityEvent onLeavePodium;
 
         private bool teleporting;
         private float rotateSpeed;
@@ -125,6 +126,8 @@ namespace Valve.VR.InteractionSystem
                     Debug.Log("hit " + hit.collider.gameObject.name);
 
                     StartCoroutine(FadeThenMove());
+
+                    onLeavePodium.Invoke();
                 }
 
             }
@@ -154,8 +157,6 @@ namespace Valve.VR.InteractionSystem
 
         private IEnumerator FadeCanvas(CanvasGroup canvas, float startAlpha, float endAlpha, float duration)
         {
-            leftHand.renderModelPrefab = emptyHandPrefab;
-            Debug.Log(leftHand.renderModelPrefab);
             // keep track of when the fading started, when it should finish, and how long it has been running&lt;/p&gt; &lt;p&gt;&a
             var startTime = Time.time;
             var endTime = Time.time + duration;
