@@ -439,8 +439,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitClip: {fileID: 8300000, guid: b6d08d737477e1a47ae68de4d2498900, type: 3}
   loopClip: {fileID: 8300000, guid: 27fcf9ee46b764f41bb0dd29d9ff60a0, type: 3}
-  hitsToUnlock: 2
   unlockMaterial: {fileID: 2100000, guid: 6db66adb191f4b94d904c517cfc0eebd, type: 2}
+  hitsToUnlock: 2
+  unlocked: 0
+  isPiano: 0
 --- !u!114 &5605145439435445701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,6 +538,17 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7035984104821453377}
+        m_MethodName: Unlock
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -690,6 +703,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  isPiano: 0
 --- !u!114 &5605145439435445707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,6 +732,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  useLoop: 0
   beatInfo: {fileID: 8615102722194774919}
   unlocked: 0
 --- !u!1 &7728000566945804249
@@ -729,6 +744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1714766202605959495}
+  - component: {fileID: 7035984104821453377}
   m_Layer: 0
   m_Name: RhythmParent
   m_TagString: Untagged
@@ -751,6 +767,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7035984104821453377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728000566945804249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a6eaa763fd8af4da7e32fa4a6fe3a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  centerPosition: {x: 0, y: 0, z: 0}
+  unlocked: 0
+  inCenter: 0
 --- !u!1 &8796248160273329932
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,11 +839,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4026090742114099901}
     m_Modifications:
-    - target: {fileID: 2716767855825998476, guid: 6fd7dcac2d2a86e49bbf78f9c24a9fa7,
-        type: 3}
-      propertyPath: m_Name
-      value: BoidEmitter
-      objectReference: {fileID: 0}
     - target: {fileID: 2716767855825998474, guid: 6fd7dcac2d2a86e49bbf78f9c24a9fa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -867,6 +893,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716767855825998476, guid: 6fd7dcac2d2a86e49bbf78f9c24a9fa7,
+        type: 3}
+      propertyPath: m_Name
+      value: BoidEmitter
       objectReference: {fileID: 0}
     - target: {fileID: 2716767855825998477, guid: 6fd7dcac2d2a86e49bbf78f9c24a9fa7,
         type: 3}

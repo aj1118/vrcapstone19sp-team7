@@ -57,5 +57,11 @@ namespace Valve.VR.InteractionSystem
                 onPuzzleComplete.Invoke();
             }
         }
+
+        public void NewLoop(){
+        		for (int i = 0; i < puzzles.Length; i++) {
+        			puzzles[i].transform.Find("RhythmObject").GetComponent<PercussionObject>().NewLoop();
+        		}
+        }
     }
 }
