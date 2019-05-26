@@ -14,6 +14,8 @@ permissions and limitations under the License.
 
 using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Controls the player's movement in virtual reality.
